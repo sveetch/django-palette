@@ -1,0 +1,13 @@
+{% extends "django_palette/base.html" %}
+
+{% block content %}
+<h1>Index form</h1>
+
+
+<div class="row">
+    <form enctype="multipart/form-data" method="post" action=".">{% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit">
+    </form>
+</div>
+{% endblock content %}

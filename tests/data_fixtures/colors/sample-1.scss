@@ -1,0 +1,14 @@
+// Some colors
+.foo{
+    color: #ff8702;
+}
+
+.bar{
+    font-size: 1rem;
+    color: #6676a2;
+    background-color: rgb(0, 255, 55);
+
+    &::after{
+        color: #4c4c92;
+    }
+}

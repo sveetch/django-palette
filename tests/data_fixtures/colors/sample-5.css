@@ -1,0 +1,11 @@
+// No colors here
+.ping{
+    font-size: 1rem;
+}
+
+.pong{
+    font-size: 2rem;
+    color: #222;
+    line-height: 1;
+}
+

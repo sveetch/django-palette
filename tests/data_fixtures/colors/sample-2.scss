@@ -1,0 +1,12 @@
+// No colors here
+.pika{
+    font-size: 1rem;
+}
+
+.chu{
+    line-height: 1;
+
+    &::after{
+        width: calc(100% - 2rem);
+    }
+}

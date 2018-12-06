@@ -1,0 +1,2 @@
+# Dummy file for finder extensions finding
+color: #ff0000;
