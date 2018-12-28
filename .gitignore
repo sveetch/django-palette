@@ -48,8 +48,5 @@ node_modules
 # SASS
 .sass-cache
 
-# logs
-yarn-error.log
-
 # Exported strings & generated translation templates
 *.pot

@@ -1,5 +1,6 @@
-<html>
-    <body>
-    {% block content %}{% endblock content %}
-    </body>
-</html>
+{% extends "skeleton.html" %}
+{% load static %}
+
+{% block foot_base_js %}
+    <script src="{% static "django-palette/js/app.js" %}"></script>
+{% endblock %}

@@ -1,10 +1,23 @@
-<!DOCTYPE html><html>{% spaceless %}
-<head>
+{% load i18n static %}<!DOCTYPE html>
+<!--[if IE 8]> <html class="no-js lt-ie9" lang="{{ LANGUAGE_CODE }}"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="{{ LANGUAGE_CODE }}"> <!--<![endif]-->
+<head>{% spaceless %}
     <meta charset="utf-8">
-    <title>{% block head_title %}Sample site{% endblock %}</title>{% block head_assets %}
-{% endblock %}
-</head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block head_title %}Sample site{% endblock %}</title>
+    {% comment %}{% block head_base_links %}
+        <link rel="stylesheet" href="{{ ASSET_URL }}">
+    {% endblock %}{% endcomment %}
+{% endspaceless %}</head>
 
-{% endspaceless %}<body>
-{% block base_content %}{% endblock %}</body>{% spaceless %}
-</html>{% endspaceless %}
+<body>{% spaceless %}
+
+{% block base_content %}
+    {% block content %}
+    {% endblock %}
+{% endblock %}
+
+    {% block foot_base_js %}{% endblock %}
+{% endspaceless %}
+</body>
+</html>

@@ -3,6 +3,9 @@ Base Django settings for sandbox
 """
 import os
 
+from sandbox.settings import add_to_tuple
+
+
 BASE_DIR = os.path.join(
     os.path.dirname(os.path.abspath(__file__)),
     "..",
@@ -93,16 +96,25 @@ STATIC_URL = '/static/'
 """
 NOTE:
     * Every things above comes from default generated settings file (from Django startproject);
-    * Every things below are needed settings for sandbox;
+    * Every things below are needed settings for sandbox applications;
     * Don't edit default generated settings, instead override them below;
 """
 
 # Absolute filesystem path to the directory that contain tests fixtures files
 TESTS_FIXTURES_DIR = os.path.join('..', 'tests', 'data_fixtures')
 
-INSTALLED_APPS = INSTALLED_APPS+(
+# Enabled applications, keep the whitenoise one at the top (before staticfiles)
+INSTALLED_APPS = ('whitenoise.runserver_nostatic',) + INSTALLED_APPS + (
     'django_palette',
 )
+
+# Enable whitenoise middleware to the right position
+MIDDLEWARE = add_to_tuple(MIDDLEWARE,
+                'whitenoise.middleware.WhiteNoiseMiddleware',
+                after='django.middleware.security.SecurityMiddleware')
+
+# Use compression, unique names and cache for statics with whitenoise
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 MEDIA_ROOT = os.path.join(DATA_DIR, "media")

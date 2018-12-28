@@ -3,11 +3,14 @@
 {% block content %}
 <h1>Index form</h1>
 
-
 <div class="row">
+    <div id="app"></div>
+
+    {% comment %}<hr>
+
     <form enctype="multipart/form-data" method="post" action=".">{% csrf_token %}
         {{ form.as_p }}
         <input type="submit">
-    </form>
+    </form>{% endcomment %}
 </div>
 {% endblock content %}

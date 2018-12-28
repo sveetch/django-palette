@@ -15,8 +15,12 @@ help:
 	@echo ""
 	@echo "  clean               -- to clean EVERYTHING"
 	@echo "  clean-pycache       -- to remove all __pycache__, this is recursive from current directory"
-	@echo "  clean-install       -- to clean installation"
+	@echo "  clean-install       -- to clean Python side installation"
+	@echo "  clean-frontend      -- to clean Frontend side installation"
 	@echo "  clean-data          -- to clean data (uploaded medias, database, etc..)"
+	@echo ""
+	@echo "  frontend            -- to build frontend into app static dir"
+	@echo "  watch-frontend      -- to launch webpack in watch mode to rebuild frontend on each change"
 	@echo ""
 	@echo "  run                 -- to run Django development server"
 	@echo "  migrate             -- to apply demo database migrations"
@@ -34,11 +38,15 @@ clean-install:
 	rm -Rf $(PACKAGE_NAME).egg-info
 .PHONY: clean-install
 
+clean-frontend:
+	rm -Rf node_modules
+.PHONY: clean-frontend
+
 clean-data:
 	rm -Rf data
 .PHONY: clean-data
 
-clean: clean-install clean-pycache clean-data
+clean: clean-install clean-frontend clean-pycache clean-data
 .PHONY: clean
 
 venv:
@@ -60,10 +68,19 @@ superuser:
 .PHONY: superuser
 
 install: venv
-	mkdir -p data
+	mkdir -p data/static
 	$(PIP) install -e .[dev]
+	npm install
 	${MAKE} migrate
 .PHONY: install
+
+frontend:
+	npm run-script build
+.PHONY: frontend
+
+watch-frontend:
+	npm run-script watch
+.PHONY: watch-frontend
 
 run:
 	@DJANGO_SECRET_KEY=$(DEMO_DJANGO_SECRET_KEY) \
