@@ -17,6 +17,7 @@ PALETTEITEM_BASE_CHOICES = [
 
 HEXADECIMAL_REGEX = re.compile(r'^#(?:[0-9a-fA-F]{3}){1,2}$')
 
+
 def formset_data_helper(source_data, fields=True, initials=False):
     """
     From given SourceForm data return base data dict for formset with
@@ -40,7 +41,7 @@ def formset_data_helper(source_data, fields=True, initials=False):
 
         {
             "#f0f0f0": [("gray94", "#f0f0f0")],
-            "#ff0000": [("red1", "#ff0000")],
+            "#ff0000": [("red1", "#ff0000"), ("firered", "#ff0000")],
             "#000000": [("black", "#000000")]
         }
 
@@ -52,9 +53,14 @@ def formset_data_helper(source_data, fields=True, initials=False):
             "form-MAX_NUM_FORMS": "",
             "form-0-color": "#f0f0f0",
             "form-0-name": "gray94",
+            "form-1-color": "#ff0000",
+            "form-1-name": "red1",
+            "form-2-color": "#000000",
+            "form-2-name": "black",
             ...
         }
 
+    Note how this helper only matter about first name choices from source_data.
     """
     output = {
         "form-TOTAL_FORMS": len(source_data),
@@ -81,10 +87,7 @@ def formset_data_helper(source_data, fields=True, initials=False):
 
 class PaletteItemFormSet(forms.BaseFormSet):
     """
-    This formset is particular because it needs to have dynamic choices to
-    correctly build the 'name' field.
-
-    These choices have to be passed in "form_kwargs" formset argument.
+    Formset to perform save on every form
     """
     def save(self, *args, **kwargs):
         return [f.save() for f in self.forms]

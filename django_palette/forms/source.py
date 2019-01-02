@@ -47,14 +47,29 @@ class SourceForm(forms.Form):
 
             if not colors:
                 raise ValidationError(
-                    _('Source does not contain any valid color value'),
+                    _("Source does not contain any valid color value"),
                     code='invalid',
                 )
 
-        namer = ColorNames()
-        namer.load()
-        # Store named colors from registry
-        self.colors = self.store_colors(namer.batch_names(colors))
+            # Ensure hex colors lengths
+            length_errors = []
+            for item in colors:
+                if item.startswith("#"):
+                    if len(item[1:]) > 3 and len(item[1:]) < 6:
+                        length_errors.append(item)
+            if length_errors:
+                errors = ", ".join(sorted(length_errors))
+                raise ValidationError(
+                    _("Source does contain some invalid color values, ensure "
+                      "they are all on 3 or 6 hex digit: {}").format(errors),
+                    code='invalid',
+                )
+
+            namer = ColorNames()
+            namer.load()
+            # Store named colors from registry
+            self.colors = self.store_colors(namer.batch_names(colors))
+
 
         return source
 

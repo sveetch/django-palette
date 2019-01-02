@@ -6,6 +6,7 @@ from django.views.generic.edit import FormMixin
 from django_palette.forms.source import SourceForm
 from django_palette.views import JsonResponseBadRequest, JsonFormPost
 
+
 class IndexView(TemplateView):
     """
     Just display the SourceForm but does not accept POST request.
@@ -18,7 +19,7 @@ class IndexView(TemplateView):
         #return context
 
 
-class SourceFormView(JsonFormPost, FormMixin, View):
+class SourceFormView(FormMixin, View):
     """
     Dedicated view to receive SourceForm POST request.
     """

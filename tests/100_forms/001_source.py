@@ -35,22 +35,51 @@ def test_required_fields(data, expected):
     assert expected == f.is_valid()
 
 
-def test_error_message():
+@pytest.mark.parametrize('data,expected', [
+    # source does not contain any valid color value
+    (
+        {'source': 'bar'},
+        [
+            {
+                "code": "invalid",
+                "message": "Source does not contain any valid color value"
+            }
+        ],
+    ),
+    # one invalid hexadecimal length
+    (
+        {'source': '#ffffff #4444'},
+        [
+            {
+                "code": "invalid",
+                "message":  ("Source does contain some invalid color values, "
+                             "ensure they are all on 3 or 6 hex "
+                             "digit: #4444")
+            }
+        ],
+    ),
+    # many invalid hexadecimal length
+    (
+        {'source': '#1 #22 #333 #4444 #55555 #666666'},
+        [
+            {
+                "code": "invalid",
+                "message":  ("Source does contain some invalid color values, "
+                             "ensure they are all on 3 or 6 hex "
+                             "digit: #4444, #55555")
+            }
+        ],
+    ),
+])
+def test_error_message(data, expected):
     """
-    test returned message error
+    test returned source field error
     """
-    f = SourceForm({'source': 'bar'})
+    f = SourceForm(data)
     f.is_valid()
 
     errors = json.loads(f.errors.as_json())
     msg = errors.get('source', None)
-
-    expected = [
-        {
-            "code": "invalid",
-            "message": "Source does not contain any valid color value"
-        }
-    ]
 
     assert expected == msg
 
