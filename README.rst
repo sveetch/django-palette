@@ -1,6 +1,6 @@
 A Django app to build a palette with named color from given source.
 
-It's a mixin of Django for backend part and Vue.js for frontend part.
+It's a mixin of Django for backend and Vue.js for frontend.
 
 Explanations
 ============

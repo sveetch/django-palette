@@ -1,5 +1,5 @@
 """
-A Django app to build a palette with named color
+A Django+Vue.js app to build a palette with named color
 """
 from __future__ import absolute_import, unicode_literals
 
