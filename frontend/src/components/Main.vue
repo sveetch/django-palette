@@ -7,11 +7,11 @@
 
 
 <script>
-import SourceForm from './SourceForm.vue';
-import PaletteForm from './PaletteForm.vue';
+import SourceForm from "./SourceForm.vue";
+import PaletteForm from "./PaletteFormset.vue";
 
 export default {
-    name: 'main-container',
+    name: "main-container",
     components: {
         SourceForm,
         PaletteForm
@@ -19,7 +19,7 @@ export default {
     created() {
         // Allways starts with source form
         this.$store.commit({
-            type: 'enable_component_parts',
+            type: "enable_component_parts",
             parts: ["source"]
         });
     }

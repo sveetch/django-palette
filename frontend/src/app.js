@@ -21,6 +21,7 @@ axios.interceptors.request.use((config) => {
     // Send every POST request as urlencoded values since it does not seems to
     // have any proper way for Django to receive form data from
     // 'application/json' (it seems to works but fail django test client)
+    // TODO: Issue #1
     config.headers['content-type'] = 'application/x-www-form-urlencoded';
 
     return config

@@ -1,6 +1,6 @@
-import qs from 'qs';
+import qs from "qs";
 
-import { build_error_initials } from '../../utils/forms.js'
+import { build_error_initials } from "../../utils/forms.js"
 
 
 // Available SourceForm fields
@@ -22,33 +22,33 @@ const actions = {
     // Reset source form states
     resetErrors ({ commit }, payload){
         commit({
-            type: 'reset_errors'
+            type: "reset_errors"
         });
     },
 
     // Perform source POST request to backend
     sendForm ({ commit, dispatch }, payload){
         dispatch({
-            type: 'resetErrors'
+            type: "resetErrors"
         });
 
         // Post with axios instance
-        this._vm.axios.post('/source/', qs.stringify({
+        this._vm.axios.post("/source/", qs.stringify({
             source: payload.source
         }))
         .then(
             response => {
                 console.log("Post request succeed from store");
 
-                // Transmit return name proposals from given source
-                commit({
-                    type: 'palette/update_proposals',
+                // Transmit returned name proposals from given source
+                dispatch({
+                    type: "palette/receiveProposals",
                     data: response.data.data,
                 }, { root: true });
 
                 // Enable palette part
                 commit({
-                    type: 'enable_component_parts',
+                    type: "enable_component_parts",
                     parts: ["palette"],
                 }, { root: true });
             }
@@ -58,12 +58,12 @@ const actions = {
                 console.log("Post request failed from store");
                 // Back to source form part
                 commit({
-                    type: 'disable_component_parts',
+                    type: "disable_component_parts",
                     parts: ["palette"],
                 }, { root: true });
 
                 dispatch({
-                    type: 'error_logger',
+                    type: "error_logger",
                     fields: ALLOWED_FIELDNAMES,
                     errorObject: error,
                     module: "source"
@@ -79,9 +79,10 @@ const mutations = {
     reset_errors (state, payload) {
         state.errors = build_error_initials(ALLOWED_FIELDNAMES);
     },
+
     update_errors (state, payload) {
         // Global slot
-        if(payload.fields.hasOwnProperty('global')){
+        if(payload.fields.hasOwnProperty("global")){
             state.errors["_global"] = payload.fields.global;
         }
         // Iterate through given fields except reserved global slot

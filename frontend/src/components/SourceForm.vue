@@ -29,32 +29,38 @@
 
 <script>
 export default {
-    name: 'source-part',
+    name: "source-part",
     data() {
         return {
-            source: '#000000\n#ffffff'
+            // TODO: Should be empty after final development stage
+            source: "#000000\n#ffffff"
         };
     },
     computed: {
         global_errors: function () {
-            return this.$store.state.source.errors['_global'];
+            return this.$store.state.source.errors["_global"];
         },
         source_errors: function () {
-            return this.$store.state.source.errors['source'];
+            return this.$store.state.source.errors["source"];
         },
     },
     methods: {
-        /* Reset form fields and errors */
+        //
+        // Reset form fields and errors
+        //
         resetForm: function () {
-            this.source = '';
+            this.source = "";
             this.$store.dispatch({
-                type: 'source/resetErrors'
+                type: "source/resetErrors"
             });
         },
-        /* Submit source to form validation */
+
+        //
+        // Submit source to form validation
+        //
         submitForm: function () {
             this.$store.dispatch({
-                type: 'source/sendForm',
+                type: "source/sendForm",
                 source: this.source
             });
         }
