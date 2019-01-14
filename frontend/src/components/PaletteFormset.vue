@@ -15,8 +15,8 @@
                                v-bind:source="form_data.source"
                                v-bind:choices="form_data.choices"
                                v-bind:initialselected="form_data.selected"
-                               v-bind:errors="form_data.errors"
-            ></name-choice-input>
+                               v-bind:errors="form_data.errors">
+            </name-choice-input>
 
             <h3>Formset</h3>
             <pre>{{ formset }}</pre>

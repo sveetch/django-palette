@@ -55,7 +55,6 @@ const actions = {
         )
         .catch(
             error => {
-                console.log("Post request failed from store");
                 // Back to source form part
                 commit({
                     type: "disable_component_parts",

@@ -4,14 +4,13 @@ import Vue from "vue";
 import { build_error_initials } from "../../utils/forms.js"
 
 
-// Available SourceForm fields
+// Available fields. Since formset is dynamic and depends from SourceForm
+// return, there is no initial field
 const ALLOWED_FIELDNAMES = [];
 
 
 const state = {
-    // Errors
-    // NOTE: This cant be static since it depends from received proposals,
-    // move it to a getter ?
+    // Initial error structure
     errors: build_error_initials(ALLOWED_FIELDNAMES),
     // Color name proposals extracted and returned by source form
     proposals: {},
@@ -65,8 +64,6 @@ const actions = {
     // Send PaletteFormset to API
     //
     sendForm ({ state, commit, dispatch }, payload){
-        console.log("Send palette form");
-
         dispatch({
             type: "resetErrors"
         });
@@ -85,9 +82,6 @@ const actions = {
         )
         .catch(
             error => {
-                console.log("Post palette request failed from store");
-                // Back to source form part
-
                 dispatch({
                     type: "error_logger",
                     fields: ALLOWED_FIELDNAMES,
@@ -120,8 +114,6 @@ const mutations = {
     // This should be allways used after 'reset_formset' mutation
     //
     create_formset_form (state, payload) {
-        console.log("create_formset_form!");
-
         let choices = [];
         for (let k in payload.choices) {
             choices.push({
@@ -164,11 +156,16 @@ const mutations = {
     //
     reset_errors (state, payload) {
         state.errors = build_error_initials(ALLOWED_FIELDNAMES);
+
+        for (let key in state.formset) {
+            Vue.set(state.formset[key], "errors", {});
+        }
     },
 
+    //
+    // Store returned formset errors
+    //
     update_errors (state, payload) {
-        console.log("palette:update_errors");
-
         // Global slot
         if(payload.fields.hasOwnProperty("global")){
             //state.errors["_global"] = payload.fields.global;
@@ -178,7 +175,6 @@ const mutations = {
         // Iterate through given fields except reserved 'global' slot
         for (let key in payload.fields) {
             if(key != "_global" && key != "global"){
-                console.log("field: %s", key);
                 let pack = payload.fields[key],
                     name_errors = pack.hasOwnProperty("name") ? pack["name"] : null,
                     color_errors = pack.hasOwnProperty("color") ? pack["color"] : null;

@@ -43,6 +43,9 @@ export default new Vuex.Store({
         //
         // Common HTTP error logger.
         //
+        // TODO: Make 'console.log' conditionnal to development environment or
+        //       at least remove every ones.
+        //
         // From given axios error response, manage different error kind to
         // component store.
         //
