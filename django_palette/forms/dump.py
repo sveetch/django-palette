@@ -5,6 +5,8 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
+from django_palette.dumps import build_dump
+
 
 DUMP_FORMATS_CHOICES = [(k, v["name"]) for k,v in settings.PALETTE_DUMP_FORMATS.items()]
 
@@ -32,7 +34,7 @@ class DumpForm(forms.Form):
         if palette:
             # Validate JSON syntax
             try:
-                data = json.loads(palette)
+                self.palette_data = json.loads(palette)
             except json.decoder.JSONDecodeError:
                 raise ValidationError(
                     _('Invalid JSON data.'),
@@ -40,14 +42,14 @@ class DumpForm(forms.Form):
                 )
             else:
                 # Validate data is not empty
-                if not data:
+                if not self.palette_data:
                     raise ValidationError(
                         _('This field is required.'),
                         code='invalid',
                     )
                 else:
                     # validate data is a list
-                    if not isinstance(data, list):
+                    if not isinstance(self.palette_data, list):
                         raise ValidationError(
                             _('Palette data structure is invalid.'),
                             code='invalid',
@@ -57,8 +59,8 @@ class DumpForm(forms.Form):
                     # Although validation logs some explicit errors it is
                     # not returned to avoid too long message error, keep it
                     # simple.
-                    structure_errors = self.validate_palette_structure(data)
-                    if structure_errors:
+                    errors = self.validate_palette_structure(self.palette_data)
+                    if errors:
                         raise ValidationError(
                             _('Palette data structure is invalid.'),
                             code='invalid',
@@ -81,12 +83,9 @@ class DumpForm(forms.Form):
         return errors
 
     def save(self, *args, **kwargs):
-        # TODO: From selected formats, build their dump from given palette
+        dumps = []
 
-        print(self.cleaned_data["formats"])
+        for key in self.cleaned_data["formats"]:
+            dumps.append(build_dump(key, self.palette_data))
 
-        for format_name in self.cleaned_data["formats"]:
-            format_opts = settings.PALETTE_DUMP_FORMATS[format_name]
-            print(format_opts["template"])
-
-        return "todo"
+        return dumps

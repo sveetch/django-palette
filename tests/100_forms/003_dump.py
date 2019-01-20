@@ -194,18 +194,61 @@ def test_validation_success(data):
     assert f.is_valid() == True
 
 
-#@pytest.mark.parametrize("data", [
-    ## valid single element
-    #{
-        #"palette": ("""[{"color":"#ffffff", "name": "white"},"""
-                    #"""{"color":"#000000", "name": "black"}]"""),
-        #"formats": ["json"],
-    #},
-#])
-#def test_save(data):
-    #"""
-    #test validation
-    #"""
-    #f = DumpForm(data)
-    #assert f.is_valid() == True
-    #assert f.save() == None
+@pytest.mark.parametrize("data,expected", [
+    # single format
+    (
+        {
+            "palette": ("""[{"color":"#ffffff", "name": "white"},"""
+                        """{"color":"#000000", "name": "black"}]"""),
+            "formats": ["json"],
+        },
+        [
+            {
+                'key': 'json',
+                'name': 'JSON',
+                'content': (
+                    "{\n"
+                    "    \"white\": \"#ffffff\",\n"
+                    "    \"black\": \"#000000\"\n"
+                    "}\n"
+                ),
+            },
+        ]
+    ),
+    # multiple format
+    (
+        {
+            "palette": ("""[{"color":"#ffffff", "name": "white"},"""
+                        """{"color":"#000000", "name": "black"}]"""),
+            "formats": ["json", "scss-vars"],
+        },
+        [
+            {
+                'key': 'json',
+                'name': 'JSON',
+                'content': (
+                    "{\n"
+                    "    \"white\": \"#ffffff\",\n"
+                    "    \"black\": \"#000000\"\n"
+                    "}\n"
+                ),
+            },
+            {
+                'key': 'scss-vars',
+                'name': 'Scss variables',
+                'content': (
+                    "// Colors\n"
+                    "$white: #ffffff;\n"
+                    "$black: #000000;\n\n"
+                ),
+            },
+        ]
+    ),
+])
+def test_save(data, expected):
+    """
+    test validation
+    """
+    f = DumpForm(data)
+    assert f.is_valid() == True
+    assert f.save() == expected

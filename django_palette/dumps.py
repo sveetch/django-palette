@@ -1,19 +1,24 @@
+from django.conf import settings
 from django.template import RequestContext, loader
 
 
-def build_dump(key, format_opts, data, extra_context={}):
+def build_dump(key, data, opts=None, extra_context={}):
     """
     Build dump format from given data
     """
-    output = ""
+    opts = opts or settings.PALETTE_DUMP_FORMATS[key]
 
     context = {
         "format_key": key,
-        "format_name": format_opts["name"],
+        "format_name": opts["name"],
         "palette": data,
     }
     context.update(extra_context)
 
-    template = loader.get_template(format_opts["template"])
+    template = loader.get_template(opts["template"])
 
-    return template.render(context)
+    return {
+        "key": key,
+        "name": opts["name"],
+        "content": template.render(context),
+    }
