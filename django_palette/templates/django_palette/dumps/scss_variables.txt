@@ -1,0 +1,3 @@
+// Colors
+{% for item in palette %}${{ item.name }}: {{ item.color }};
+{% endfor %}

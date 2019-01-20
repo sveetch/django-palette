@@ -1,0 +1,23 @@
+<style>
+.djangopalette-dump{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.djangopalette-dump .item{
+    flex: 1 0 20%;
+    max-width: 20%;
+    padding: 8px;
+}
+.djangopalette-dump .item .color{
+    width: 100%;
+    height: 48px;
+}
+</style>
+<div class="djangopalette-dump">
+  {% for item in palette %}<div class="item">
+    <div class="color" style="background-color: {{ item.color }};"></div>
+    <p class="code">{{ item.color }}</p>
+    <p class="name">{{ item.name }}</p>
+  </div>{% endfor %}
+</div>
