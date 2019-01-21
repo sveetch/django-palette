@@ -1,5 +1,3 @@
-import qs from "qs";
-
 import Vue from "vue";
 import { build_error_initials } from "../../utils/forms.js"
 
@@ -74,7 +72,7 @@ const actions = {
         });
 
         // Post with axios instance
-        this._vm.axios.post("/palette/", qs.stringify(payload.data))
+        this._vm.axios.post("/palette/", payload.data)
         .then(
             response => {
                 console.log("Post palette request succeed from store");

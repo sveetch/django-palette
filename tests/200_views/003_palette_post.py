@@ -55,7 +55,8 @@ def test_post_error(client, data, expected):
 
     response = client.post(
         url,
-        data
+        json.dumps(data),
+        content_type="application/json"
     )
 
     assert response.status_code == 400
@@ -90,7 +91,8 @@ def test_post_success(client, data, expected):
 
     response = client.post(
         url,
-        data
+        json.dumps(data),
+        content_type="application/json"
     )
 
     assert response.status_code == 200

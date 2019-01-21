@@ -37,9 +37,6 @@ vue-template-compiler
     which does not install it itself.
 axios
     Library for a HTTP client to perform requests with *Promise* support.
-qs
-    Library to stringifying data, required to send form POST with content type
-    ``application/x-www-form-urlencoded``.
 webpack
     Common tool to manage assets and build scripts.
 @babel/core

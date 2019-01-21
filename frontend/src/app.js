@@ -18,11 +18,6 @@ axios.interceptors.request.use((config) => {
     // This is not reactive, if token is updated from further forms, it won't
     // be bubbled up to axios header
     config.headers['X-CSRFToken'] = vm.$cookie.get('csrftoken');
-    // Send every POST request as urlencoded values since it does not seems to
-    // have any proper way for Django to receive form data from
-    // 'application/json' (it seems to works but fail django test client)
-    // TODO: Issue #1
-    config.headers['content-type'] = 'application/x-www-form-urlencoded';
 
     return config
 });

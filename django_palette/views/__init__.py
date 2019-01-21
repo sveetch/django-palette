@@ -21,7 +21,7 @@ class JsonFormPost:
     DEPRECATED: When used with django test client raise:
 
         django.http.request.RawPostDataException: You cannot access body after
-        reading from request's data stream
+        reading from request"s data stream
 
     Because client seems to read request body before this mixin. I was unable
     to find a solution.
@@ -29,10 +29,9 @@ class JsonFormPost:
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
 
-        if self.request.method in ('POST', 'PUT'):
-            data = self.request.body.decode('utf-8')
-
-            kwargs['data'] = json.loads(data)
+        if self.request.method in ("POST", "PUT"):
+            data = self.request.body.decode("utf-8")
+            kwargs["data"] = json.loads(data)
 
         return kwargs
 

@@ -1,6 +1,5 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import qs from "qs";
 
 import { build_error_initials } from "../utils/forms.js"
 import source from "./modules/source"

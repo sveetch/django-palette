@@ -7,10 +7,10 @@ from django.views.generic.edit import FormMixin
 
 from django_palette.forms.palette import (PaletteItemFormSet,
                                           PaletteItemForm)
-from django_palette.views import JsonResponseBadRequest
+from django_palette.views import JsonResponseBadRequest, JsonFormPost
 
 
-class PaletteFormView(FormMixin, View):
+class PaletteFormView(JsonFormPost, FormMixin, View):
     """
     Dedicated view to receive palette formset POST request.
     """

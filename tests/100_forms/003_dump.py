@@ -204,9 +204,9 @@ def test_validation_success(data):
         },
         [
             {
-                'key': 'json',
-                'name': 'JSON',
-                'content': (
+                "key": "json",
+                "name": "JSON",
+                "content": (
                     "{\n"
                     "    \"white\": \"#ffffff\",\n"
                     "    \"black\": \"#000000\"\n"
@@ -224,9 +224,9 @@ def test_validation_success(data):
         },
         [
             {
-                'key': 'json',
-                'name': 'JSON',
-                'content': (
+                "key": "json",
+                "name": "JSON",
+                "content": (
                     "{\n"
                     "    \"white\": \"#ffffff\",\n"
                     "    \"black\": \"#000000\"\n"
@@ -234,9 +234,9 @@ def test_validation_success(data):
                 ),
             },
             {
-                'key': 'scss-vars',
-                'name': 'Scss variables',
-                'content': (
+                "key": "scss-vars",
+                "name": "Scss variables",
+                "content": (
                     "// Colors\n"
                     "$white: #ffffff;\n"
                     "$black: #000000;\n\n"

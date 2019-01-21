@@ -210,8 +210,8 @@ def test_formset_build():
         [
             {},
             {
-                'name': ['This field is required.'],
-                'color': ['This field is required.'],
+                "name": ["This field is required."],
+                "color": ["This field is required."],
             }
         ],
     ),
@@ -230,7 +230,7 @@ def test_formset_build():
         [
             {},
             {
-                'color': ['RGB(A) values are not supported'],
+                "color": ["RGB(A) values are not supported"],
             }
         ],
     ),
@@ -250,13 +250,13 @@ def test_formset_build():
         False,
         [
             {
-                'color': ['Invalid Hexadecimal code'],
+                "color": ["Invalid Hexadecimal code"],
             },
             {
-                'color': ['Invalid Hexadecimal code'],
+                "color": ["Invalid Hexadecimal code"],
             },
             {
-                'color': ['Invalid Hexadecimal code'],
+                "color": ["Invalid Hexadecimal code"],
             },
         ],
     ),
@@ -276,13 +276,13 @@ def test_formset_build():
         False,
         [
             {
-                'name': ['Color name must only contain alphabetic characters'],
+                "name": ["Color name must only contain alphabetic characters"],
             },
             {
-                'name': ['Color name must only contain alphabetic characters'],
+                "name": ["Color name must only contain alphabetic characters"],
             },
             {
-                'name': ['Color name must only contain alphabetic characters'],
+                "name": ["Color name must only contain alphabetic characters"],
             },
         ],
     ),
@@ -316,12 +316,12 @@ def test_formset_field_errors(data, is_valid, errors):
         },
         [
             {
-                'color': '#fff',
-                'name': 'white'
+                "color": "#fff",
+                "name": "white"
             },
             {
-                'color': 'yellow',
-                'name': 'yellow'
+                "color": "yellow",
+                "name": "yellow"
             },
         ],
     ),

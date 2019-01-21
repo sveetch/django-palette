@@ -1,5 +1,3 @@
-import qs from "qs";
-
 import { build_error_initials } from "../../utils/forms.js"
 
 
@@ -33,9 +31,9 @@ const actions = {
         });
 
         // Post with axios instance
-        this._vm.axios.post("/source/", qs.stringify({
+        this._vm.axios.post("/source/", {
             source: payload.source
-        }))
+        })
         .then(
             response => {
                 console.log("Post request succeed from store");
