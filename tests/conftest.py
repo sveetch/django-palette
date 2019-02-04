@@ -8,7 +8,7 @@ import django_palette
 
 
 class FixturesSettingsTestMixin(object):
-    """Mixin containing some basic settings"""
+    """Mixin containing some basic settings for tests"""
     def __init__(self):
         # Base fixture datas directory
         self.tests_dir = 'tests'
@@ -31,6 +31,6 @@ class FixturesSettingsTestMixin(object):
 
 
 @pytest.fixture(scope="module")
-def settings():
+def testsettings():
     """Initialize and return settings (mostly paths) for fixtures (scope at module level)"""
     return FixturesSettingsTestMixin()

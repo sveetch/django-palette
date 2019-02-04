@@ -6,14 +6,7 @@ from django.core.exceptions import ValidationError
 from django.forms import formset_factory, BaseFormSet
 from django.utils.translation import ugettext_lazy as _
 
-
-# Value to watch for custom name input
-PALETTE_NAME_CUSTOM = "other"
-
-# Base choices contains required items that allways stand at the end of choices
-PALETTEITEM_BASE_CHOICES = [
-    (PALETTE_NAME_CUSTOM, _("Other")),
-]
+from ..choices import PALETTEITEM_BASE_CHOICES, DUMP_FORMATS_CHOICES
 
 HEXADECIMAL_REGEX = re.compile(r'^#(?:[0-9a-fA-F]{3}){1,2}$')
 
@@ -90,7 +83,10 @@ class PaletteItemFormSet(forms.BaseFormSet):
     Formset to perform save on every form
     """
     def save(self, *args, **kwargs):
-        return [f.save() for f in self.forms]
+        return {
+            'dump_formats': DUMP_FORMATS_CHOICES,
+            'palette': [f.save() for f in self.forms],
+        }
 
 
 class PaletteItemForm(forms.Form):

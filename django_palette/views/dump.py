@@ -1,34 +1,22 @@
 # -*- coding: utf-8 -*-
 from django.http import JsonResponse
-from django.views.generic.base import View, TemplateView
+from django.views.generic.base import View
 from django.views.generic.edit import FormMixin
 
-from django_palette.forms.source import SourceForm
+from django_palette.forms.dump import DumpForm
 from django_palette.views import JsonResponseBadRequest, JsonFormPost
 
 
-class IndexView(TemplateView):
+class DumpFormView(JsonFormPost, FormMixin, View):
     """
-    Just display the SourceForm but does not accept POST request.
+    Dedicated view to receive DumpForm POST request.
     """
-    template_name = "django_palette/index.html"
-
-    #def get_context_data(self, **kwargs):
-        #context = super().get_context_data(**kwargs)
-        #context["form"] = SourceForm()
-        #return context
-
-
-class SourceFormView(JsonFormPost, FormMixin, View):
-    """
-    Dedicated view to receive SourceForm POST request.
-    """
-    form_class = SourceForm
+    form_class = DumpForm
     http_method_names = ["post", "head", "options"]
 
     def form_valid(self, form):
         """
-        Return JSON from SourceForm.save()
+        Return JSON from DumpForm.save()
         """
         return JsonResponse({"data": form.save()})
 

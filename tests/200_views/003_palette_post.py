@@ -66,7 +66,7 @@ def test_post_error(client, data, expected):
     assert content_json.get('data') == expected
 
 
-@pytest.mark.parametrize("data,expected", [
+@pytest.mark.parametrize("data,expected_palette", [
     (
         {
             "form-TOTAL_FORMS": "2",
@@ -83,7 +83,7 @@ def test_post_error(client, data, expected):
         ],
     ),
 ])
-def test_post_success(client, data, expected):
+def test_post_success(client, data, expected_palette):
     """
     On success, palette post view should return JSON with named colors
     """
@@ -99,4 +99,6 @@ def test_post_success(client, data, expected):
 
     content_json = json.loads(response.content.decode('utf-8'))
 
-    assert content_json.get('data') == expected
+    assert (len(content_json["data"]["dump_formats"]) > 0) == True
+
+    assert content_json["data"]["palette"] == expected_palette

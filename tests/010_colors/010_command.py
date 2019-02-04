@@ -12,7 +12,7 @@
 #from sveetoy_cli.cli.console_script import cli_frontend
 
 
-#def test_empty(caplog, settings):
+#def test_empty(caplog, testsettings):
     #"""Invoked without required arguments"""
     #runner = CliRunner()
 
@@ -28,7 +28,7 @@
         #assert result.exit_code == 2
 
 
-#def test_doesnotexists(caplog, settings):
+#def test_doesnotexists(caplog, testsettings):
     #"""Invoked without required arguments"""
     #runner = CliRunner()
 
@@ -43,7 +43,7 @@
         #assert result.exit_code == 2
 
 
-#def test_source_as_file(caplog, settings):
+#def test_source_as_file(caplog, testsettings):
     #"""Invoked with a file path as source argument"""
     #runner = CliRunner()
 
@@ -73,7 +73,7 @@
         #]
 
 
-#def test_source_as_directory(caplog, settings):
+#def test_source_as_directory(caplog, testsettings):
     #"""Invoked with a directory path as source argument"""
     #runner = CliRunner()
 
@@ -103,11 +103,11 @@
         #]
 
 
-#def test_sample1_as_file(caplog, settings):
+#def test_sample1_as_file(caplog, testsettings):
     #"""
     #Searching color in sample-1 and write results to a JSON file
     #"""
-    #basedir = settings.colors_path
+    #basedir = testsettings.colors_path
 
     #fixture_filename = "sample-1.scss"
     #fixture_filepath = Path(basedir) / fixture_filename
@@ -136,12 +136,12 @@
         #]
 
 
-#def test_all_fixtures(caplog, settings):
+#def test_all_fixtures(caplog, testsettings):
     #"""
     #Searching color in every fixtures files and returning results as JSON
     #string in output
     #"""
-    #basedir = settings.colors_path
+    #basedir = testsettings.colors_path
 
     #runner = CliRunner()
 

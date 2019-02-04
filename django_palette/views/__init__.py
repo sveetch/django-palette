@@ -17,14 +17,6 @@ class JsonFormPost:
     This is required to receive form data from "application/json" requests
     instead of "application/x-www-form-urlencoded" that is the only one
     supported content type to send form datas.
-
-    DEPRECATED: When used with django test client raise:
-
-        django.http.request.RawPostDataException: You cannot access body after
-        reading from request"s data stream
-
-    Because client seems to read request body before this mixin. I was unable
-    to find a solution.
     """
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()

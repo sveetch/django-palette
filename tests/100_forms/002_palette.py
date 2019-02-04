@@ -303,7 +303,7 @@ def test_formset_field_errors(data, is_valid, errors):
     assert formset.errors == errors
 
 
-@pytest.mark.parametrize("data,expected", [
+@pytest.mark.parametrize("data,expected_palette", [
     (
         {
             "form-TOTAL_FORMS": "2",
@@ -326,7 +326,7 @@ def test_formset_field_errors(data, is_valid, errors):
         ],
     ),
 ])
-def test_results(data, expected):
+def test_results(data, expected_palette):
     factory = formset_factory(
         PaletteItemForm,
         extra=0,
@@ -339,4 +339,5 @@ def test_results(data, expected):
 
     results = formset.save()
 
-    assert expected == results
+    assert (len(results["dump_formats"]) > 0) == True
+    assert expected_palette == results["palette"]

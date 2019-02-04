@@ -57,9 +57,9 @@ from django_palette.colors.finder import ColorFinder
         []
     ),
 ])
-def test_get_files(settings, extensions, expected):
+def test_get_files(testsettings, extensions, expected):
     """Search for colors in file"""
-    basedir = settings.colors_path
+    basedir = testsettings.colors_path
 
     finder = ColorFinder(extensions=extensions)
     found = finder.get_files(basedir)
@@ -187,9 +187,9 @@ def test_find_hexacode(source, expected):
         ['#222']
     ),
 ])
-def test_read_file(settings, filepath, expected):
+def test_read_file(testsettings, filepath, expected):
     """Open and read file"""
-    basedir = settings.colors_path
+    basedir = testsettings.colors_path
 
     path = basedir / Path(filepath)
 
@@ -222,9 +222,9 @@ def test_read_file(settings, filepath, expected):
         ['#222', '#8461a1', '#00ff00']
     ),
 ])
-def test_search_recursive_dir(settings, dirpath, extensions, expected):
+def test_search_recursive_dir(testsettings, dirpath, extensions, expected):
     """Search color through files from dir"""
-    basedir = settings.colors_path
+    basedir = testsettings.colors_path
 
     path = basedir / Path(dirpath)
 
@@ -248,9 +248,9 @@ def test_search_recursive_dir(settings, dirpath, extensions, expected):
         []
     ),
 ])
-def test_search_from_file(settings, filepath, expected):
+def test_search_from_file(testsettings, filepath, expected):
     """Search color through a single file"""
-    basedir = settings.colors_path
+    basedir = testsettings.colors_path
 
     path = basedir / Path(filepath)
 

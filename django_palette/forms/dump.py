@@ -5,10 +5,8 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
-from django_palette.dumps import build_dump
-
-
-DUMP_FORMATS_CHOICES = [(k, v["name"]) for k,v in settings.PALETTE_DUMP_FORMATS.items()]
+from ..choices import DUMP_FORMATS_CHOICES
+from ..dumps import build_dump
 
 
 class DumpForm(forms.Form):

@@ -23,7 +23,7 @@ class PaletteFormView(JsonFormPost, FormMixin, View):
 
     def form_valid(self, form):
         """
-        Return JSON from PaletteItemFormSet.save
+        Return JSON from PaletteItemFormSet.save()
         """
         return JsonResponse({'data': form.save()})
 
