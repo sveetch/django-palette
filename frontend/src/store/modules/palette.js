@@ -76,6 +76,18 @@ const actions = {
         .then(
             response => {
                 console.log("Post palette request succeed from store");
+
+                // Transmit returned name proposals from given source
+                dispatch({
+                    type: "dump/receive",
+                    data: response.data.data,
+                }, { root: true });
+
+                // Enable dump part
+                commit({
+                    type: "enable_component_parts",
+                    parts: ["dump"],
+                }, { root: true });
             }
         )
         .catch(

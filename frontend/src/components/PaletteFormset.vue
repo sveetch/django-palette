@@ -2,7 +2,7 @@
     <form id="palette-form">
         <h2>Name them</h2>
 
-        <ul class="global error" v-if="global_errors">
+        <ul class="global error" v-if="global_errors.length">
             <li v-for="item in global_errors">
                 {{ item }}
             </li>
@@ -18,13 +18,13 @@
                                v-bind:errors="form_data.errors">
             </name-choice-input>
 
-            <h3>Formset</h3>
+            <!-- <h3>Formset</h3>
             <pre>{{ formset }}</pre>
-            <hr />
+            <hr /> -->
 
-            <h3>Payload</h3>
+            <!-- <h3>Payload</h3>
             <pre>{{ payload }}</pre>
-            <hr />
+            <hr /> -->
         </div>
 
         <div class="holder buttons">

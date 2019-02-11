@@ -85,7 +85,7 @@ def test_palette_structure_validation(data, is_valid):
     # formats is empty
     (
         {
-            "palette": """[{"color":"#ffffff", "name": "white"}]""",
+            "palette": [{"color":"#ffffff", "name": "white"}],
             "formats": [],
         },
         {
@@ -103,40 +103,30 @@ def test_palette_structure_validation(data, is_valid):
             "palette": ["This field is required."]
         },
     ),
-    # palette is invalid JSON
+    # given palette is empty list
     (
         {
-            "palette": "nope",
-            "formats": ["json"],
-        },
-        {
-            "palette": ["Invalid JSON data."]
-        },
-    ),
-    # given palette is empty JSON data
-    (
-        {
-            "palette": "[]",
+            "palette": [],
             "formats": ["json"],
         },
         {
             "palette": ["This field is required."]
         },
     ),
-    # given palette is not a JSON list
+    # given palette is not a list
     (
         {
-            "palette": """{"yop": "glop"}""",
+            "palette": {"yop": "glop"},
             "formats": ["json"],
         },
         {
             "palette": ["Palette data structure is invalid."]
         },
     ),
-    # palette is given and valid JSON data but invalid expected structure
+    # palette is given but invalid expected structure
     (
         {
-            "palette": """[{"foo":"#ffffff", "name": "white"}]""",
+            "palette": [{"foo":"#ffffff", "name": "white"}],
             "formats": ["json"],
         },
         {
@@ -146,7 +136,7 @@ def test_palette_structure_validation(data, is_valid):
     # all given format are not valid choices
     (
         {
-            "palette": """[{"color":"#ffffff", "name": "white"}]""",
+            "palette": [{"color":"#ffffff", "name": "white"}],
             "formats": ["foo", "bar"],
         },
         {
@@ -156,7 +146,7 @@ def test_palette_structure_validation(data, is_valid):
     # one of given formats is not a valid choice
     (
         {
-            "palette": """[{"color":"#ffffff", "name": "white"}]""",
+            "palette": [{"color":"#ffffff", "name": "white"}],
             "formats": ["json", "bar"],
         },
         {
@@ -176,13 +166,13 @@ def test_validation_errors(data, errors):
 @pytest.mark.parametrize("data", [
     # valid single element
     {
-        "palette": """[{"color":"#ffffff", "name": "white"}]""",
+        "palette": [{"color":"#ffffff", "name": "white"}],
         "formats": ["json"],
     },
     # multiple valid elements
     {
-        "palette": ("""[{"color":"#ffffff", "name": "white"},"""
-                    """{"color":"#000000", "name": "black"}]"""),
+        "palette": [{"color":"#ffffff", "name": "white"},
+                    {"color":"#000000", "name": "black"}],
         "formats": ["json", "python-dict"],
     },
 ])
@@ -198,8 +188,8 @@ def test_validation_success(data):
     # single format
     (
         {
-            "palette": ("""[{"color":"#ffffff", "name": "white"},"""
-                        """{"color":"#000000", "name": "black"}]"""),
+            "palette": [{"color":"#ffffff", "name": "white"},
+                        {"color":"#000000", "name": "black"}],
             "formats": ["json"],
         },
         [
@@ -218,8 +208,8 @@ def test_validation_success(data):
     # multiple format
     (
         {
-            "palette": ("""[{"color":"#ffffff", "name": "white"},"""
-                        """{"color":"#000000", "name": "black"}]"""),
+            "palette": [{"color":"#ffffff", "name": "white"},
+                        {"color":"#000000", "name": "black"}],
             "formats": ["json", "scss-vars"],
         },
         [

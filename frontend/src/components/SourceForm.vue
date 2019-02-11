@@ -2,7 +2,7 @@
     <div class="source-part">
         <h2>Fill your colors</h2>
         <form id="source-form">
-            <ul class="global error" v-if="global_errors">
+            <ul class="global error" v-if="global_errors.length">
                 <li v-for="item in global_errors">
                     {{ item }}
                 </li>
@@ -11,7 +11,7 @@
             <div class="holder textarea">
                 <p>Paste some hexadecimal codes</p>
                 <textarea v-model="source" placeholder="Give me some source" required></textarea>
-                <p class="error" v-if="source_errors">
+                <p class="error" v-if="source_errors.length">
                     <span v-for="item in source_errors">
                         {{ item }}
                     </span>

@@ -26,5 +26,3 @@ class JsonFormPost:
             kwargs["data"] = json.loads(data)
 
         return kwargs
-
-

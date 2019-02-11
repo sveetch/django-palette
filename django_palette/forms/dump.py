@@ -12,8 +12,12 @@ from ..dumps import build_dump
 class DumpForm(forms.Form):
     """
     Form to build dumps from given palette and according to selected formats
+
+    ``palette`` field is just a basic ``forms.Field`` since it just a JSON
+    payload passed as is and we don't want it to be "stringified" (which lead
+    to invalid single quoted JSON).
     """
-    palette = forms.CharField(
+    palette = forms.Field(
         label=_("Palette data"),
         required=True,
     )
@@ -27,42 +31,32 @@ class DumpForm(forms.Form):
         """
         Validate named color is a name
         """
-        palette = self.cleaned_data.get("palette")
+        palette = self.cleaned_data.get("palette", None)
 
-        if palette:
-            # Validate JSON syntax
-            try:
-                self.palette_data = json.loads(palette)
-            except json.decoder.JSONDecodeError:
+        # Validate data is not empty
+        if not palette:
+            raise ValidationError(
+                _('This field is required.'),
+                code='invalid',
+            )
+        else:
+            # validate data must be a list
+            if not isinstance(palette, list):
                 raise ValidationError(
-                    _('Invalid JSON data.'),
+                    _('Palette data structure is invalid.'),
                     code='invalid',
                 )
-            else:
-                # Validate data is not empty
-                if not self.palette_data:
-                    raise ValidationError(
-                        _('This field is required.'),
-                        code='invalid',
-                    )
-                else:
-                    # validate data is a list
-                    if not isinstance(self.palette_data, list):
-                        raise ValidationError(
-                            _('Palette data structure is invalid.'),
-                            code='invalid',
-                        )
 
-                    # Validate structure
-                    # Although validation logs some explicit errors it is
-                    # not returned to avoid too long message error, keep it
-                    # simple.
-                    errors = self.validate_palette_structure(self.palette_data)
-                    if errors:
-                        raise ValidationError(
-                            _('Palette data structure is invalid.'),
-                            code='invalid',
-                        )
+            # Validate structure
+            # Although validation logs some explicit errors it is
+            # not returned to avoid too long message error, keep it
+            # simple.
+            errors = self.validate_palette_structure(palette)
+            if errors:
+                raise ValidationError(
+                    _('Palette data structure is invalid.'),
+                    code='invalid',
+                )
 
         return palette
 
@@ -83,7 +77,9 @@ class DumpForm(forms.Form):
     def save(self, *args, **kwargs):
         dumps = []
 
-        for key in self.cleaned_data["formats"]:
-            dumps.append(build_dump(key, self.palette_data))
+        # Output dump formats respecting PALETTE_DUMP_FORMATS order
+        for key, opts in settings.PALETTE_DUMP_FORMATS.items():
+            if key in self.cleaned_data["formats"]:
+                dumps.append(build_dump(key, self.cleaned_data.get("palette")))
 
         return dumps

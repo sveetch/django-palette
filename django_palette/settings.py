@@ -4,10 +4,6 @@ from django.utils.translation import ugettext_lazy as _
 
 
 PALETTE_DUMP_FORMATS = OrderedDict([
-    ("scss-vars", {
-        "name": _("Scss variables"),
-        "template": "django_palette/dumps/scss_variables.txt",
-    }),
     ("json", {
         "name": _("JSON"),
         "template": "django_palette/dumps/json.txt",
@@ -15,6 +11,10 @@ PALETTE_DUMP_FORMATS = OrderedDict([
     ("python-dict", {
         "name": _("Python dictionnary"),
         "template": "django_palette/dumps/python_dict.txt",
+    }),
+    ("scss-vars", {
+        "name": _("Scss variables"),
+        "template": "django_palette/dumps/scss_variables.txt",
     }),
     ("html-snippet", {
         "name": _("HTML snippet"),

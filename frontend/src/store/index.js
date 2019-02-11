@@ -4,6 +4,8 @@ import Vuex from "vuex";
 import { build_error_initials } from "../utils/forms.js"
 import source from "./modules/source"
 import palette from "./modules/palette"
+import dump from "./modules/dump"
+import output from "./modules/output"
 
 
 Vue.use(Vuex);
@@ -16,7 +18,9 @@ export default new Vuex.Store({
     // Enabled component stores
     modules: {
         source,
-        palette
+        palette,
+        dump,
+        output
     },
 
     // Where stored datas will live

@@ -35,30 +35,20 @@ def test_get_notallowed(client):
             'palette': ['This field is required.'],
         }
     ),
-    # Palette JSON is an empty list
+    # Palette is an empty list
     (
         {
-            "palette": "[]",
+            "palette": [],
             "formats": ["json"],
         },
         {
             'palette': ['This field is required.'],
         }
     ),
-    # Palette JSON is invalid JSON
-    (
-        {
-            "palette": "nope",
-            "formats": ["json"],
-        },
-        {
-            'palette': ['Invalid JSON data.'],
-        }
-    ),
     # Palette JSON is invalid structure (dict instead of list)
     (
         {
-            "palette": json.dumps({"color": "bar", "name": "bar"}),
+            "palette": {"color": "bar", "name": "bar"},
             "formats": ["json"],
         },
         {
@@ -68,7 +58,7 @@ def test_get_notallowed(client):
     # Palette items have invalid structure (missing fields)
     (
         {
-            "palette": json.dumps([{"color": "bar"}]),
+            "palette": [{"color": "bar"}],
             "formats": ["json"],
         },
         {
@@ -78,7 +68,7 @@ def test_get_notallowed(client):
     # Format value got a single invalid value
     (
         {
-            "palette": json.dumps([{"color": "bar", "name": "foo"}]),
+            "palette": [{"color": "bar", "name": "foo"}],
             "formats": ["nope"],
         },
         {
@@ -89,7 +79,7 @@ def test_get_notallowed(client):
     # Format value got invalid value in many choices
     (
         {
-            "palette": json.dumps([{"color": "bar", "name": "foo"}]),
+            "palette": [{"color": "bar", "name": "foo"}],
             "formats": ["boo", "json"],
         },
         {
@@ -120,7 +110,7 @@ def test_post_error(client, data, expected):
 @pytest.mark.parametrize("data,expected_palette", [
     (
         {
-            "palette": json.dumps([{"color": "bar", "name": "foo"}]),
+            "palette": [{"color": "bar", "name": "foo"}],
             "formats": ["json"],
         },
         {
