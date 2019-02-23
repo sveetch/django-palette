@@ -6,9 +6,11 @@ from django.core.exceptions import ValidationError
 from django.forms import formset_factory, BaseFormSet
 from django.utils.translation import ugettext_lazy as _
 
+from django_palette.colors.naming import validate_name
+
 from ..choices import PALETTEITEM_BASE_CHOICES, DUMP_FORMATS_CHOICES
 
-HEXADECIMAL_REGEX = re.compile(r'^#(?:[0-9a-fA-F]{3}){1,2}$')
+HEXADECIMAL_REGEX = re.compile(r"^#(?:[0-9a-fA-F]{3}){1,2}$")
 
 
 def formset_data_helper(source_data, fields=True, initials=False):
@@ -84,8 +86,8 @@ class PaletteItemFormSet(forms.BaseFormSet):
     """
     def save(self, *args, **kwargs):
         return {
-            'dump_formats': DUMP_FORMATS_CHOICES,
-            'palette': [f.save() for f in self.forms],
+            "dump_formats": DUMP_FORMATS_CHOICES,
+            "palette": [f.save() for f in self.forms],
         }
 
 
@@ -115,21 +117,21 @@ class PaletteItemForm(forms.Form):
             # Allways lowercase color
             code = code.lower()
 
-            if code.startswith('rgb'):
+            if code.startswith("rgb"):
                 raise ValidationError(
-                    _('RGB(A) values are not supported'),
-                    code='invalid',
+                    _("RGB(A) values are not supported"),
+                    code="invalid",
                 )
-            elif code.startswith('#'):
+            elif code.startswith("#"):
                 if not HEXADECIMAL_REGEX.search(code):
                     raise ValidationError(
-                        _('Invalid Hexadecimal code'),
-                        code='invalid',
+                        _("Invalid Hexadecimal code"),
+                        code="invalid",
                     )
             elif not code.isalpha():
                 raise ValidationError(
-                    _('Named color must only contain alphabetic characters'),
-                    code='invalid',
+                    _("Color name must only contain alphabetic characters"),
+                    code="invalid",
                 )
 
         return code
@@ -144,10 +146,10 @@ class PaletteItemForm(forms.Form):
             # Allways lowercase name
             name = name.lower()
 
-            if not name.isalpha():
+            if not validate_name(name):
                 raise ValidationError(
-                    _('Color name must only contain alphabetic characters'),
-                    code='invalid',
+                    _("Invalid color name"),
+                    code="invalid",
                 )
 
         return name

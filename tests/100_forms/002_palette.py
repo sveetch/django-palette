@@ -260,29 +260,32 @@ def test_formset_build():
             },
         ],
     ),
-    # Wrong names
+    # Both valid and invalid names
     (
         {
-            "form-TOTAL_FORMS": "3",
-            "form-INITIAL_FORMS": "3",
+            "form-TOTAL_FORMS": "4",
+            "form-INITIAL_FORMS": "4",
             "form-MAX_NUM_FORMS": "",
             "form-0-color": "#ffffff",
             "form-0-name": "foo bar",
             "form-1-color": "#000000",
             "form-1-name": "foo-bar",
             "form-2-color": "#f0f0f0",
-            "form-2-name": "foo4bar",
+            "form-2-name": "-foobar",
+            "form-3-color": "#f0f0f0",
+            "form-3-name": "_foobar",
         },
         False,
         [
             {
-                "name": ["Color name must only contain alphabetic characters"],
+                "name": ["Invalid color name"],
+            },
+            {},
+            {
+                "name": ["Invalid color name"],
             },
             {
-                "name": ["Color name must only contain alphabetic characters"],
-            },
-            {
-                "name": ["Color name must only contain alphabetic characters"],
+                "name": ["Invalid color name"],
             },
         ],
     ),
@@ -306,13 +309,15 @@ def test_formset_field_errors(data, is_valid, errors):
 @pytest.mark.parametrize("data,expected_palette", [
     (
         {
-            "form-TOTAL_FORMS": "2",
-            "form-INITIAL_FORMS": "2",
+            "form-TOTAL_FORMS": "3",
+            "form-INITIAL_FORMS": "3",
             "form-MAX_NUM_FORMS": "",
             "form-0-color": "#FFF",
             "form-0-name": "white",
             "form-1-color": "Yellow",
             "form-1-name": "Yellow",
+            "form-2-color": "#404040",
+            "form-2-name": "gray25",
         },
         [
             {
@@ -322,6 +327,10 @@ def test_formset_field_errors(data, is_valid, errors):
             {
                 "color": "yellow",
                 "name": "yellow"
+            },
+            {
+                "color": "#404040",
+                "name": "gray25"
             },
         ],
     ),

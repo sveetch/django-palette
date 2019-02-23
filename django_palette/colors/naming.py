@@ -3,6 +3,7 @@
 * When a color name is used more than one time, increment names with "_[+1]" for all other identic names;
 """
 import json, os, re
+from string import ascii_lowercase, digits
 
 from pathlib import Path
 
@@ -11,6 +12,31 @@ from colour import Color
 from django_palette.colors import toColourRGB, toCssRGB
 from django_palette.colors.registry import ColorRegistry
 from django_palette.colors.dumper import ColorDump
+
+
+ALLOWED_COLORNAME_CHARACTERS = ascii_lowercase + digits + "_-"
+
+
+def validate_name(content):
+    """
+    Validate a color name.
+
+    Only ascii lowercase alphabet characters, digits, ``_`` and ``-``.
+
+    Args:
+        content (str): Name to validate.
+
+    Returns:
+        bool: ``True`` if name is valid else ``False``.
+    """
+    if content.startswith("_") or content.startswith("-"):
+        return False
+
+    for item in content:
+        if item not in ALLOWED_COLORNAME_CHARACTERS:
+            return False
+
+    return True
 
 
 class ColorNames(ColorDump, ColorRegistry):
