@@ -1,0 +1,89 @@
+////
+/// @group spaces
+////
+
+
+///
+/// Includes properties to apply vertical/horizontal spacing on an
+/// element for various breakpoints
+///
+/// @arg {Map} $definitions [null]
+///   space sizes map which define at least the keyword name from '$default'.
+///
+/// @arg {String} $axis [vertical]
+///   axis to apply spaces, can ben either 'horizontal' or 'vertical'.
+///
+/// @arg {String} $default [small]
+///   Breakpoint name to use as as default class spacing. Won't be included in
+///   media queries.
+///
+/// @arg {List} $sides [("start", "end")]
+///   Sides to apply spacing depending from $axis, 'start' means 'top' or
+///   'left' and 'end' means 'right' or 'bottom'. Both sides are enabled by
+///   default.
+///
+/// @arg {String} $prop [padding]
+///   Property name to define, default is 'padding' but it can be 'margin' also.
+///
+/// @arg {Bool} $important [false]
+///   If set to `true`, property values will include `!important` mark.
+///
+/// @example scss
+///   $sample-sizes: (
+///       small: 0.5rem,
+///       medium: 0.75rem,
+///       large: 1rem,
+///       xlarge: 1.5rem,
+///   );
+///
+///   div{
+///       @include sv-apply-spaces($sample-sizes);
+///   }
+///
+///
+@mixin sv-apply-spaces(
+    $definitions,
+    $axis: "vertical",
+    $default: "small",
+    $sides: ("start", "end"),
+    $prop: "padding",
+    $important: false
+) {
+    $space-start: top;
+    $space-end: bottom;
+    @if $axis == "horizontal" {
+        $space-start: left;
+        $space-end: right;
+    }
+
+    $important-mark: if($important, !important, null);
+
+    @if $definitions != null {
+        @if map-get($definitions, $default) == null {
+            @error "Given space definition must contain at least the '#{$default}' key";
+        }
+
+        // Default size comes from 'small'
+        @if index($sides, "start"){
+            #{$prop}-#{$space-start}: map-get($definitions, $default) $important-mark;
+        }
+        @if index($sides, "end"){
+            #{$prop}-#{$space-end}: map-get($definitions, $default) $important-mark;
+        }
+
+        // Breakpoints
+        @each $name, $size in $definitions {
+            // Ignore default size, also dont try to use an unknowed breakpoint
+            @if $name != $default and map-get($sv-breakpoints, $name){
+                @media #{map-get($sv-breakpoints, $name)} {
+                    @if index($sides, "start"){
+                        #{$prop}-#{$space-start}: $size $important-mark;
+                    }
+                    @if index($sides, "end"){
+                        #{$prop}-#{$space-end}: $size $important-mark;
+                    }
+                }
+            }
+        }
+    }
+}

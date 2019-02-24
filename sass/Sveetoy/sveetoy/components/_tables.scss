@@ -1,0 +1,25 @@
+/*
+ * Tables
+ */
+////
+/// @group tables
+////
+
+
+/// Enable table classes creation when `tables` component is imported.
+///
+/// @type Bool
+///
+$include-sv-tables: $include-sv-classes !default;
+
+
+@if $include-sv-tables {
+    table{
+        //
+        // Enable table to take full width
+        //
+        &.expand{
+            width: 100%;
+        }
+    }
+}

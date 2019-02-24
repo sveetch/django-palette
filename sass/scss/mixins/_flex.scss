@@ -1,0 +1,80 @@
+///
+/// Shortcut for rules to center content which is a stretched element
+///
+/// @arg {String} $inner-element [.inner]
+///   Class name for inner element.
+///
+/// Examples:
+///
+/// <div>
+///     <div class="inner">
+///         content
+///     </div>
+/// </div>
+///
+@mixin content-centered($inner-selector: ".inner") {
+    display: flex;
+    flex-direction: column;
+
+    #{$inner-selector}{
+        @include sv-flex(1, 0, auto);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+
+
+///
+/// Shortcut for rules to push content to the bottom in a stretched element
+///
+/// @arg {String} $inner-element [.inner]
+///   Class name for inner element.
+///
+/// Supported HTML:
+///
+/// <div>
+///     <div class="inner">
+///         content
+///     </div>
+/// </div>
+///
+@mixin content-bottom($inner-element: ".inner") {
+    display: flex;
+    flex-direction: column;
+
+    #{$inner-element}{
+        @include sv-flex(1, 0, auto);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+}
+
+
+///
+/// Shortcut for rules to put shared space between top level children
+///
+/// @arg {String} $inner-element [.inner]
+///   Class name for inner element.
+///
+/// Supported HTML:
+///
+/// <div>
+///     <div class="inner">
+///         content
+///     </div>
+/// </div>
+///
+@mixin content-divided($inner-element: ".inner") {
+    display: flex;
+    flex-direction: column;
+
+    #{$inner-element}{
+        @include sv-flex(1, 0, auto);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+}

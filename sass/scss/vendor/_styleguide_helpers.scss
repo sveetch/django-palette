@@ -1,0 +1,187 @@
+/* Helper functions from py-css-styleguide==0.4.0 */
+
+///
+/// Convert a list to a string
+/// Copied from https://hugogiraudel.com/2013/08/08/advanced-sass-list-functions/
+///
+/// @arg {List} $list [null]
+///   A list.
+///
+/// @arg {String} $glue ['']
+///   A string used to join elements.
+///
+/// @arg {Bool} $is-nested [false]
+///   A pointer used when function does call itself.
+///
+@function to-string($list, $glue: '', $is-nested: false) {
+    $result: null;
+
+    @if length($list) > 0{
+        @for $i from 1 through length($list) {
+            $e: nth($list, $i);
+
+            @if type-of($e) == list {
+                $result: $result#{to-string($e, $glue, true)};
+            } @else {
+                $result: if(
+                    $i != length($list) or $is-nested,
+                    $result#{$e}#{$glue},
+                    $result#{$e}
+                );
+            }
+        }
+    }
+
+    @return $result;
+}
+
+
+///
+/// Convert a list to a JSON list
+///
+/// @arg {List} $list [null]
+///   A list.
+///
+/// @arg {Bool} $is-nested [false]
+///   A pointer used when function does call itself.
+///
+@function list-to-json($list) {
+    $glue: '", "';
+    $result: to-string($list, $glue);
+
+    @return '["#{$result}"]';
+}
+
+///
+/// Get key names from a map to return a string of key names separated by
+/// an empty space.
+///
+/// @arg {Map} $map [null]
+///   A map.
+///
+/// @arg {String} $prefix ['']
+///   A string to preprend to each item.
+///
+@function get-names($map, $prefix: "") {
+    $values: ();
+    @each $name in map-keys($map) {
+        $values: append($values, $prefix+$name);
+    }
+    @return to-string($values, $glue: ' ');
+}
+
+///
+/// Get key names from a map to return a JSON list of key names
+///
+/// @arg {Map} $map [null]
+///   A map.
+///
+/// @arg {String} $prefix ['']
+///   A string to preprend to each item.
+///
+@function get-names-to-json($map, $prefix: "") {
+    $values: ();
+    @each $name in map-keys($map) {
+        $values: append($values, $prefix+$name);
+    }
+    @return list-to-json($values);
+}
+
+///
+/// Get item values from a map to return a string of names separated by
+/// an empty space.
+///
+/// @arg {Map} $map [null]
+///   A map.
+///
+/// @arg {String} $prefix ['']
+///   A string to preprend to each item.
+///
+@function get-values($map, $prefix: "") {
+    $values: ();
+    @each $name in map-values($map) {
+        $values: append($values, $prefix+$name);
+    }
+    @return to-string($values, $glue: ' ');
+}
+
+///
+/// Get item values from a map to return a JSON list of names separated by
+/// an empty space.
+///
+/// @arg {Map} $map [null]
+///   A map.
+///
+/// @arg {String} $prefix ['']
+///   A string to preprend to each item.
+///
+@function get-values-to-json($map, $prefix: "") {
+    $values: ();
+    @each $name in map-values($map) {
+        $values: append($values, $prefix+$name);
+    }
+    @return list-to-json($values);
+}
+
+///
+/// Get property values from a map to return a string of values separated by
+/// an empty space.
+///
+/// @arg {Map} $map [null]
+///   A map.
+///
+/// @arg {String} $property [null]
+///   Property name to get.
+///
+/// @arg {String} $prefix ['']
+///   A string to preprend to each item.
+///
+@function get-props($map, $property, $prefix: "") {
+    $values: ();
+    @each $name, $scheme in $map {
+        $values: append($values, $prefix+map-get($scheme, $property));
+    }
+    @return to-string($values, $glue: ' ');
+}
+
+///
+/// Get property values from a map to return a JSON list of values.
+///
+/// @arg {Map} $map [null]
+///   A map.
+///
+/// @arg {String} $property [null]
+///   Property name to get.
+///
+/// @arg {String} $prefix ['']
+///   A string to preprend to each item.
+///
+@function get-props-to-json($map, $property, $prefix: "") {
+    $values: ();
+    @each $name, $scheme in $map {
+        $values: append($values, $prefix+map-get($scheme, $property));
+    }
+    @return list-to-json($values);
+}
+
+///
+/// Get numbers from a list to return a string of floor number separated by an
+/// empty space.
+///
+/// Floor number can so be used as valid class names, since decimals are not
+/// valid selector.
+///
+/// @arg {List} $list [null]
+///   A list of number.
+///
+/// @arg {String} $prefix ['']
+///   A string to preprend to each item.
+///
+@function floor-number-items($list, $prefix: "") {
+    $values: ();
+    @each $number in $list {
+        $number: floor($number);
+        $values: append($values, $prefix+$number);
+    }
+    @return to-string($values, $glue: ' ');
+}

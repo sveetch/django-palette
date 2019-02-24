@@ -1,0 +1,51 @@
+/*
+ *
+ * Base colors
+ *
+ */
+////
+/// @group colors
+////
+
+
+/// Enable base colors classes creation when `colors` component is imported.
+///
+/// @type Bool
+///
+$include-sv-colors: $include-sv-classes !default;
+
+
+/// Enabled background colors.
+///
+/// Each item create a CSS classes `.bg-NAME` classes where `NAME` is the
+/// item name. Background property is defined from item `background` value and
+/// optionnally add a `:hover` rule if item have a `hover-background` property.
+///
+/// It's usually a copy `$sv-colors-schemes` but you may use another value if
+/// some color schemes is not relevant to simple backgrounds.
+///
+/// @type Map
+///
+$sv-color-background-palette: $sv-colors-schemes !default;
+
+
+@if $include-sv-colors {
+    // Define 'bg-**' classes for every color scheme with a `background`
+    // property
+    @each $name, $scheme in $sv-color-background-palette {
+        $background: map-get($scheme, "background");
+        $hover-background: map-get($scheme, "hover-background");
+
+        @if $background{
+            &.bg-#{$name}{
+                background: $background !important;
+
+                @if $hover-background{
+                    &:hover{
+                        background: $hover-background !important;
+                    }
+                }
+            }
+        }
+    }
+}

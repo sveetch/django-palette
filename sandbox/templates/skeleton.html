@@ -1,23 +1,32 @@
-{% load i18n static %}<!DOCTYPE html>
+{% load i18n static utils_addons %}<!DOCTYPE html>
 <!--[if IE 8]> <html class="no-js lt-ie9" lang="{{ LANGUAGE_CODE }}"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="{{ LANGUAGE_CODE }}"> <!--<![endif]-->
 <head>{% spaceless %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block head_title %}Sample site{% endblock %}</title>
-    {% comment %}{% block head_base_links %}
-        <link rel="stylesheet" href="{{ ASSET_URL }}">
-    {% endblock %}{% endcomment %}
+    <title>{% block head_title %}Sample site{% endblock head_title %}</title>
+    {% block head_base_links %}
+        {% googlefont "Roboto:300,400,700"  %}
+        <link rel="stylesheet" href="{% static "css/app.css" %}">
+    {% endblock head_base_links %}
 {% endspaceless %}</head>
 
 <body>{% spaceless %}
 
-{% block base_content %}
-    {% block content %}
-    {% endblock %}
-{% endblock %}
+    {% block header %}
+    <div id="header-container" class="block black short">
+        <h1>Color scheme app</h1>
+    </div>
+    {% endblock header %}
 
-    {% block foot_base_js %}{% endblock %}
+    {% block base_content %}
+        {% block content %}
+        {% endblock %}
+    {% endblock %}
+
+    {% block footer %}{% endblock footer %}
+
+    {% block foot_base_js %}{% endblock foot_base_js %}
 {% endspaceless %}
 </body>
 </html>

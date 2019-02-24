@@ -1,28 +1,32 @@
 <template>
-    <div class="source-part">
-        <h2>Fill your colors</h2>
-        <form id="source-form">
-            <ul class="global error" v-if="global_errors.length">
-                <li v-for="item in global_errors">
-                    {{ item }}
-                </li>
-            </ul>
+    <div class="source-part block">
+        <div class="row">
+            <div class="columns small-12">
+                <h2 class="text-center v-space-short bottom-only">Fill your colors</h2>
+                <form>
+                    <ul class="global error" v-if="global_errors.length">
+                        <li v-for="item in global_errors">
+                            {{ item }}
+                        </li>
+                    </ul>
 
-            <div class="holder textarea">
-                <p>Paste some hexadecimal codes</p>
-                <textarea v-model="source" placeholder="Give me some source" required></textarea>
-                <p class="error" v-if="source_errors.length">
-                    <span v-for="item in source_errors">
-                        {{ item }}
-                    </span>
-                </p>
-            </div>
+                    <div class="holder textarea">
+                        <p class="v-divider-tiny">Paste some hexadecimal codes</p>
+                        <textarea v-model="source" placeholder="Give me some source" required></textarea>
+                        <p class="error" v-if="source_errors.length">
+                            <span v-for="item in source_errors">
+                                {{ item }}
+                            </span>
+                        </p>
+                    </div>
 
-            <div class="holder buttons">
-                <button type="button" v-on:click="resetForm">Reset</button>
-                <button type="button" v-on:click="submitForm">Submit</button>
+                    <div class="holder button-group right">
+                        <button class="button hollow alert" type="button" v-on:click="resetForm">Reset</button>
+                        <button class="button" type="button" v-on:click="submitForm">Submit</button>
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
     </div>
 </template>
 
@@ -33,7 +37,7 @@ export default {
     data() {
         return {
             // TODO: Should be empty after final development stage
-            source: "#000000\n#ffffff"
+            source: "#000000\n#ffffff\n#404040\n#fefefe\n#022e4b\n#0a507c\n#1689b9\n#edf8ff\n#38393d\n#b5b8c4\n#f3f5fb"
         };
     },
     computed: {

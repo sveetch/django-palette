@@ -1,6 +1,6 @@
 {% extends "skeleton.html" %}
 {% load static %}
 
-{% block foot_base_js %}
+{% block foot_base_js %}{{ block.super }}
     <script src="{% static "django-palette/js/app.js" %}"></script>
 {% endblock %}

@@ -57,7 +57,7 @@ venv:
 .PHONY: venv
 
 migrate:
-	mkdir -p data/db
+	@mkdir -p data/db
 	@DJANGO_SECRET_KEY=$(DEMO_DJANGO_SECRET_KEY) \
 	$(DJANGO_MANAGE) migrate
 .PHONY: migrate
@@ -68,11 +68,20 @@ superuser:
 .PHONY: superuser
 
 install: venv
-	mkdir -p data/static
 	$(PIP) install -e .[dev]
 	npm install
 	${MAKE} migrate
 .PHONY: install
+
+sass:
+	@mkdir -p data/static/css
+	$(BOUSSOLE) compile --config boussole.json
+.PHONY: sass
+
+watch-sass:
+	@mkdir -p data/static/css
+	$(BOUSSOLE) watch --config boussole.json
+.PHONY: watch-sass
 
 frontend:
 	npm run-script build

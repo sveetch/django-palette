@@ -1,0 +1,155 @@
+/*
+ * Page content component styles
+ */
+
+//
+// Horizontal rule
+//
+hr{
+    // Full width on default
+    max-width: 100%;
+}
+
+//
+// Top level frontend container
+//
+.app-root{
+    $cell-gutter: 0.5rem;
+
+    width: 100%;
+
+    // Source part
+    .source-part{
+        form{
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 45rem;
+        }
+    }
+
+    // Palette part
+    .palette-part{
+        .formset{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+
+            & > .form-item{
+                @include sv-flex($width: calc(20% - #{$cell-gutter * 2}));
+                margin: $cell-gutter;
+                border: 1px solid $black;
+
+                .tile{
+                    display: block;
+                    position: relative;
+                    width: 100%;
+                    height: 8rem;
+                    border-bottom: 1px solid $black;
+
+                    .code{
+                        display: block;
+                        position: absolute;
+                        top: 0.5rem;
+                        right: 0.5rem;
+                        background: rgba($black, 0.6);
+                        color: $white;
+                        padding: 0.3rem 0.4rem;
+                        line-height: 1;
+                        border-radius: 0.2rem;
+                    }
+                }
+
+                .error{
+                    font-size: 0.875rem;
+                    padding: 0.4rem;
+                    color: red;
+                }
+
+                label{
+                    display: flex;
+                    margin: 0;
+                    padding: 0.4rem;
+                    flex-direction: row;
+                    flex-wrap: nowrap;
+                    align-items: center;
+                    font-size: 0.875rem;
+                    line-height: 1.1;
+
+                    input[type="radio"]{
+                        @include sv-flex(0, 0, auto);
+                        margin: 0;
+                    }
+
+                    &.selection{
+                        .name{
+                            @include sv-flex(1, 0, auto);
+                            padding: 0 0.3rem;
+                        }
+
+                        .sample{
+                            @include sv-flex(0, 0, 1.5rem);
+                            display: inline-block;
+                            height: 1.5rem;
+                            border: 1px solid $black;
+                        }
+                    }
+
+                    &.custom{
+                        .name{
+                            display: none;
+                        }
+
+                        .custom-input{
+                            @include sv-flex(1, 0, calc(100% - 1.1rem));
+                            padding-left: 0.3rem;
+
+                            input{
+                                margin: 0;
+                                width: 100%;
+                                height: 2rem;
+                            }
+                        }
+                    }
+
+                    & + label,
+                    & + .error{
+                        border-top: 1px solid rgba($black, 0.8);
+                    }
+                }
+            }
+        }
+    }
+
+    // Formats selections
+    .dump-part{
+        form{
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 45rem;
+
+            .checkbox-choices{
+                .fields{
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+
+                    label{
+                        @include sv-flex(0, 0);
+                        margin: $cell-gutter;
+                        padding: 0.4rem;
+                        display: flex;
+                        flex-direction: row;
+                        flex-wrap: wrap;
+                        align-items: center;
+                        line-height: 1.1;
+                        border: 1px solid rgba($black, 0.8);
+
+                        input{
+                            margin: 0 0.3rem 0 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

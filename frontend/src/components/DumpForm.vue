@@ -1,34 +1,39 @@
 <template>
-    <div class="dump-part">
-        <h2>Dump them</h2>
-        <form id="dump-form">
-            <ul class="global error" v-if="global_errors.length || palette_errors.length">
-                <li v-for="item in global_errors">
-                    {{ item }}
-                </li>
-                <li v-for="item in palette_errors">
-                    {{ item }}
-                </li>
-            </ul>
+    <div class="dump-part block">
+        <div class="row">
+            <div class="columns small-12">
+                <h2 class="text-center v-space-short bottom-only">Select output formats</h2>
 
-            <div class="holder checkbox-choices">
-                <p>Select some dump formats</p>
-                <div class="fields">
-                    <label v-for="(choice, key) in available_formats" :key="key" style="display: block">
-                        <input type="checkbox" :value="choice[0]" v-on:input="changeChoice($event, key)">{{ choice[1] }}
-                    </label>
-                </div>
-                <p class="error" v-if="formats_errors.length">
-                    <span v-for="item in formats_errors">
-                        {{ item }}
-                    </span>
-                </p>
-            </div>
+                <form>
+                    <ul class="global error" v-if="global_errors.length || palette_errors.length">
+                        <li v-for="item in global_errors">
+                            {{ item }}
+                        </li>
+                        <li v-for="item in palette_errors">
+                            {{ item }}
+                        </li>
+                    </ul>
 
-            <div class="holder buttons">
-                <button type="button" v-on:click="submitForm">Submit</button>
+                    <div class="holder checkbox-choices">
+                        <div class="fields">
+                            <label v-for="(choice, key) in available_formats" :key="key">
+                                <input type="checkbox" :value="choice[0]" v-on:input="changeChoice($event, key)">
+                                <span class="name">{{ choice[1] }}</span>
+                            </label>
+                        </div>
+                        <p class="error" v-if="formats_errors.length">
+                            <span v-for="item in formats_errors">
+                                {{ item }}
+                            </span>
+                        </p>
+                    </div>
+
+                    <div class="holder button-group center">
+                        <button class="button large full" type="button" v-on:click="submitForm">Submit</button>
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
     </div>
 </template>
 

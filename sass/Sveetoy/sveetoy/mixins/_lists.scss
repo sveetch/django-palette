@@ -1,0 +1,91 @@
+////
+/// @group lists
+////
+
+
+///
+/// Include some rules to insert a pseudo element
+///
+/// This is mostly for usage within a pseudo element on list item to
+/// apply a custom bullet. Allways use absolute position, so its container
+/// should define a relative position.
+///
+///
+/// @arg {Number} $width [1rem]
+///   Pseudo element width.
+///
+/// @arg {Number} $top-position [0.75rem]
+///   Optional. If set, define top position.
+///
+/// @arg {Number} $left-position [0]
+///   Define left position.
+///
+/// @arg {Number} $font-size [null]
+///   Optional. Define font size.
+///
+/// @arg {Number} $font-weight [null]
+///   Optional. Define font weight.
+///
+/// @arg {String} $content [>]
+///   String to include as content.
+///
+/// @arg {Color} $content-color [null]
+///   Optional. Define font color.
+///
+/// @arg {Bool} $vertical-translate [true]
+///   Optional. Apply a vertical translation to enforce centered alignment.
+///
+/// @example scss
+///   li::before{
+///     @include sv-arrow-bullet();
+///   }
+///
+/// /* Render */
+///   li::before {
+///     position: absolute;
+///     top: 0.75rem;
+///     left: 0;
+///     width: 1rem;
+///     font-family: icomoon;
+///     content: ">";
+///     -webkit-transform: translate(0%, -50%);
+///     -moz-transform: translate(0%, -50%);
+///     -o-transform: translate(0%, -50%);
+///     -ms-transform: translate(0%, -50%);
+///     transform: translate(0%, -50%);
+///   }
+///
+@mixin sv-arrow-bullet(
+    $width: 1rem,
+    $top-position: 0.75rem,
+    $left-position: 0,
+    $font-size: null,
+    $font-weight: null,
+    $content: ">",
+    $content-color: null,
+    $vertical-translate: true,
+    $extended-icon: null
+) {
+    position: absolute;
+    @if $top-position {
+        top: $top-position;
+    }
+    left: $left-position;
+    width: $width;
+    font-family: "icomoon";
+    @if $font-size {
+        font-size: $font-size;
+    }
+    @if $font-weight {
+        font-weight: $font-weight;
+    }
+
+    content: $content;
+
+    @if $content-color {
+        color: $content-color;
+    }
+    @if $vertical-translate {
+        @include sveetranslate(0%, -50%);
+    }
+}

@@ -1,0 +1,149 @@
+////
+/// @group typography
+////
+
+///
+/// Define a title element (hX) properties.
+///
+/// This a copy of foundation typography code translated to be used as a mixin
+/// for a single element
+///
+/// @arg {String} $size [null]
+///   Breakpoint name.
+///
+/// @arg {String} $header [null]
+///   Header element name like 'h1'.
+///
+/// @arg {Map} $definitions [null]
+///   Map of defined property variables. Supported variables are 'font-size',
+///   'line-height', 'margin-top', 'margin-bottom'.
+///
+/// @arg {String} $font-family [null]
+///   Font family to apply.
+///
+/// @arg {Number} $default-lineheight [null]
+///   Defaut line height to fallback to when not defined from '$definitions'.
+///
+/// @arg {Number} $default-margin-bottom [null]
+///   Defaut bottom margin to fallback to when not defined from '$definitions'.
+///
+/// @arg {String} $floor-breakpoint [null]
+///   Lowest allowed breakpoint name, every other breakpoint will takes default
+///   property value.
+///
+@mixin sv-headtitle(
+    $size,
+    $header,
+    $definitions,
+    $font-family,
+    $default-lineheight,
+    $default-margin-bottom,
+    $floor-breakpoint
+) {
+    $font-size-temp: 1rem;
+
+    @if $font-family {
+        font-family: $font-family;
+    }
+
+    @if map-has-key($definitions, font-size) {
+        $font-size-temp: rem-calc(map-get($definitions, font-size));
+        font-size: $font-size-temp;
+    } @else if map-has-key($definitions, fs) {
+        $font-size-temp: rem-calc(map-get($definitions, fs));
+        font-size: $font-size-temp;
+    } @else if $size == $floor-breakpoint {
+        font-size: $font-size-temp;
+    }
+
+    @if map-has-key($definitions, line-height) {
+        line-height: unitless-calc(map-get($definitions, line-height), $font-size-temp);
+    } @else if map-has-key($definitions, lh) {
+        line-height: unitless-calc(map-get($definitions, lh), $font-size-temp);
+    } @else if $size == $floor-breakpoint and $default-lineheight {
+        line-height: unitless-calc($default-lineheight, $font-size-temp);
+    }
+
+    @if map-has-key($definitions, margin-top) {
+        margin-top: rem-calc(map-get($definitions, margin-top));
+    } @else if map-has-key($definitions, mt) {
+        margin-top: rem-calc(map-get($definitions, mt));
+    } @else if $size == $floor-breakpoint {
+        margin-top: 0;
+    }
+
+    @if map-has-key($definitions, margin-bottom) {
+        margin-bottom: rem-calc(map-get($definitions, margin-bottom));
+    } @else if map-has-key($definitions, mb) {
+        margin-bottom: rem-calc(map-get($definitions, mb));
+    } @else if $size == $floor-breakpoint and $default-margin-bottom {
+        margin-bottom: rem-calc($default-margin-bottom);
+    }
+}
+
+
+///
+/// Build every enabled title levels
+///
+/// @arg {Map} $header-styles [null]
+///   Map of breakpoints where to define title properties. And each breakpoint
+///   item contain a map of title element with some properties to define. See
+///   sample below for an example of this map. See Foundation6 documentation
+///   for more details:
+///   https://foundation.zurb.com/sites/docs/typography-base.html
+///
+/// @arg {Map} $floor-breakpoint [null]
+///   Lowest allowed breakpoint, every other breakpoint will takes default
+///   property value.
+///
+/// @arg {Map} $default-font-family [null]
+///   Default font family to apply.
+///
+/// @arg {Map} $default-lineheight [null]
+///   Defaut line height to fallback to when not defined from '$definitions'.
+///
+/// @arg {Map} $default-margin-bottom [null]
+///   Defaut bottom margin to fallback to when not defined from '$definitions'.
+///
+/// @example scss
+///   $header-styles: (
+///     small: (
+///       'h1': ('font-size': 24),
+///       'h2': ('font-size': 20),
+///       'h3': ('font-size': 19),
+///       'h4': ('font-size': 18),
+///       'h5': ('font-size': 17),
+///       'h6': ('font-size': 16),
+///     ),
+///     medium: (
+///       'h1': ('font-size': 48),
+///       'h2': ('font-size': 40),
+///       'h3': ('font-size': 31),
+///       'h4': ('font-size': 25),
+///       'h5': ('font-size': 20),
+///       'h6': ('font-size': 16),
+///     ),
+///   );
+///
+@mixin sv-headers($header-styles, $floor-breakpoint, $default-font-family: null, $default-lineheight: null, $default-margin-bottom: null) {
+    @each $size, $headers in $header-styles {
+        @include breakpoint($size) {
+            @each $header, $header-defs in $headers {
+                $font-size-temp: 1rem;
+
+                #{$header},
+                .title-#{str-slice($header, 2)} {
+                    @include sv-headtitle(
+                        $size,
+                        $header,
+                        $header-defs,
+                        $default-font-family,
+                        $default-lineheight,
+                        $default-margin-bottom,
+                        $floor-breakpoint
+                    );
+                }
+            }
+        }
+    }
+}

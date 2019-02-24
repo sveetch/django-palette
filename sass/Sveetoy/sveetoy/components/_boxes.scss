@@ -1,0 +1,90 @@
+@import "../mixins/colors";
+@import "../mixins/spaces";
+
+/*
+ *
+ * Boxes
+ *
+ */
+////
+/// @group boxes
+////
+
+
+/// Enable boxes classes creation when `boxes` component is imported.
+///
+/// @type Bool
+///
+$include-sv-boxes: $include-sv-classes !default;
+
+
+/// Enabled [`Thickness scheme model`](#models-variable-Thickness scheme model)
+/// items for boxes features
+///
+/// @type map
+///
+$sv-boxes-thickness: () !default;
+
+
+@if $include-sv-boxes {
+    .box{
+        @include sv-apply-spaces(map-get($sv-spaces, "normal"), $axis: "horizontal");
+        @include sv-apply-spaces(map-get($sv-spaces, "normal"), $axis: "vertical");
+
+        & > *{
+            &:first-child{
+                margin-top: 0;
+            }
+
+            &:last-child{
+                margin-bottom: 0;
+            }
+        }
+
+        @each $name, $definitions in $sv-spaces{
+            &.#{$name}{
+                @include sv-apply-spaces($definitions, $axis: "horizontal");
+                @include sv-apply-spaces($definitions, $axis: "vertical");
+            }
+        }
+
+        //
+        // Unpadded section or inner element
+        //
+        &.unpadded{
+            padding: 0;
+        }
+
+        //
+        // Default colors
+        //
+        @if $sv-colors-scheme-default != null {
+            &:not(.transparent){
+                @include sv-scheme-colors($sv-colors-scheme-default, $apply-border: true);
+            }
+        }
+
+        //
+        // Color variants
+        //
+        @each $name, $scheme in $sv-colors-schemes {
+            &.#{$name}:not(.transparent){
+                @include sv-scheme-colors($scheme, $apply-border: true);
+
+                &:hover{
+                    @include sv-scheme-colors($scheme, $apply-border: true, $prefix: "hover");
+                }
+            }
+        }
+
+        //
+        // Border thickness
+        //
+        @each $name, $definitions in $sv-boxes-thickness {
+            &.border-#{$name}{
+                border-style: map-get($definitions, "style");
+                border-width: map-get($definitions, "size");
+            }
+        }
+    }
+}

@@ -1,0 +1,33 @@
+/*
+ * TODO: Undocumented from demonstration
+ */
+////
+/// @group medias
+////
+
+
+/// Enable classes creation when `medias` component is imported.
+///
+/// @type Bool
+///
+$include-sv-medias: $include-sv-classes !default;
+
+
+@if $include-sv-medias {
+    //
+    // Image element
+    //
+    img{
+        // Center image as a block
+        &.centered{
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        // Expand image to 100% of its container
+        &.expanded{
+            width: 100%;
+            height: auto;
+        }
+    }
+}

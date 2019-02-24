@@ -1,0 +1,107 @@
+@import "../mixins/flexbox";
+
+/*
+ *
+ * Flexbox
+ *
+ */
+////
+/// @group flexbox
+////
+
+
+/// Enable flexbox classes creation when `flex` component is imported.
+///
+/// @type Bool
+///
+$include-sv-flex: $include-sv-classes !default;
+
+
+/// Enabled widths to create for flex-grid cells.
+///
+/// Each item is an unitless number which will be converted to a percentage.
+///
+/// Default value cover basic grid cell needs.
+///
+/// @type List
+///
+$sv-flex-grid-sizes: 25 33.3333 50 75 100 !default;
+
+
+///
+/// Grid gutter when `marged` class name is combined with `flex-grid`.
+///
+/// @type Number
+///
+$sv-flex-grid-gutter: 0.5rem !default;
+
+
+@if $include-sv-flex {
+    //
+    // Common flexbox grid
+    //
+    .flex-grid {
+        display: flex;
+        flex-wrap: wrap;
+        // Disable horizontal margins to avoid bad cell widths
+        margin-left: 0;
+        margin-right: 0;
+
+        & > .cell {
+            // Default cell takes 100%
+            @include sv-flex(1, 0, $width: 100%);
+            margin: 0;
+            list-style-type: none;
+
+            // Last element paragraph dont have bottom margin
+            & > p:last-child {
+                margin: 0;
+            }
+        }
+
+        //
+        // Responsive cell sizes
+        //
+        @each $name, $query in $sv-breakpoints{
+            @media #{$query} {
+                @include sv-flex-grid-classes($sv-flex-grid-sizes, $breakpoint: $name);
+            }
+        }
+
+        //
+        // Responsive margin on every contained cells
+        //
+        &.marged{
+            & > .cell{
+                @include sv-flex(1, 0, $width: calc(100% - (#{$sv-flex-grid-gutter} * 2)));
+                margin: $sv-flex-grid-gutter;
+            }
+
+            @each $name, $query in $sv-breakpoints{
+                @media #{$query} {
+                    @include sv-flex-grid-classes($sv-flex-grid-sizes, $breakpoint: $name, $gutter: $sv-flex-grid-gutter);
+                }
+            }
+        }
+
+        //
+        // Responsive directions
+        //
+        @include sv-flex-direction;
+        @each $name, $query in $sv-breakpoints{
+            @media #{$query} {
+                @include sv-flex-direction($breakpoint: $name);
+            }
+        }
+    }
+
+    //
+    // Vertical content alignments
+    //
+    @include sv-flex-vertical-alignment;
+    @each $name, $query in $sv-breakpoints{
+        @media #{$query} {
+            @include sv-flex-vertical-alignment($breakpoint: $name);
+        }
+    }
+}

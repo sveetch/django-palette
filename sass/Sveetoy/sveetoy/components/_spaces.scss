@@ -1,0 +1,146 @@
+@import "../mixins/spaces";
+
+/*
+ *
+ * Spaces
+ *
+ */
+////
+/// @group spaces
+////
+
+
+/// Enable spacing classes creation when `spaces` component is imported.
+///
+/// @type Bool
+///
+$include-sv-spaces: $include-sv-classes !default;
+
+
+/// Mark all spaces helpers with `!important` or not. Default is `true`.
+///
+/// @type Bool
+///
+$sv-spaces-helpers-important: true !default;
+
+
+/// Enabled size schemes
+///
+/// Each property is a map of a space size with its enabled breakpoint (which
+/// rely on breakpoints from `$sv-breakpoints`).
+///
+/// @type map
+///
+/// @example scss
+///   $sv-space-tiny: (
+///       small: 0.5rem,
+///       medium: 0.75rem,
+///       large: 1rem,
+///       xlarge: 1.5rem,
+///   );
+///   $sv-space-short: (
+///       small: 1rem,
+///       medium: 1.25rem,
+///       large: 2rem,
+///       xlarge: 2.5rem,
+///   );
+///   $sv-space-normal: (
+///       small: 1.5rem,
+///       medium: 2rem,
+///       large: 3rem,
+///       xlarge: 4rem,
+///   );
+///   $sv-space-large: (
+///       small: 2rem,
+///       medium: 3rem,
+///       large: 4rem,
+///       xlarge: 5rem,
+///   );
+///   $sv-space-wide: (
+///       small: 3rem,
+///       medium: 4.5rem,
+///       large: 6rem,
+///       xlarge: 8rem,
+///   );
+///
+///   $sv-spaces: (
+///       tiny: $sv-space-tiny,
+///       short: $sv-space-short,
+///       normal: $sv-space-normal,
+///       large: $sv-space-large,
+///       wide: $sv-space-wide,
+///   );
+$sv-spaces: () !default;
+
+
+@if $include-sv-spaces {
+    //
+    // Apply dividers
+    //
+    @each $name, $definitions in $sv-spaces{
+        .v-divider-#{$name}{
+            @include sv-apply-spaces($definitions, $axis: "vertical", $sides: ("end"), $prop: "margin", $important: $sv-spaces-helpers-important);
+        }
+
+        .h-divider-#{$name}{
+            @include sv-apply-spaces($definitions, $axis: "horizontal", $sides: ("end"), $prop: "margin", $important: $sv-spaces-helpers-important);
+        }
+    }
+
+    //
+    // Apply vertical spaces
+    //
+    @each $name, $definitions in $sv-spaces{
+        .v-space-#{$name}{
+            @include sv-apply-spaces($definitions, $axis: "vertical", $important: $sv-spaces-helpers-important);
+        }
+    }
+
+    //
+    // Apply horizontal spaces
+    //
+    @each $name, $definitions in $sv-spaces{
+        .h-space-#{$name}{
+            @include sv-apply-spaces($definitions, $axis: "horizontal", $important: $sv-spaces-helpers-important);
+        }
+    }
+
+    $important-mark: if($sv-spaces-helpers-important, !important, null);
+
+    // 'Top/Bottom only' for vertical spaces
+    [class^="v-space-"], [class*=" v-space-"]{
+        &.top-only{
+            padding-bottom: 0 $important-mark;
+        }
+
+        &.bottom-only{
+            padding-top: 0 $important-mark;
+        }
+    }
+
+    // 'Left/Right only' for horizontal spaces
+    [class^="h-space-"], [class*=" h-space-"]{
+        &.left-only{
+            padding-right: 0 $important-mark;
+        }
+
+        &.right-only{
+            padding-left: 0 $important-mark;
+        }
+    }
+
+    //
+    // Remove all margin
+    //
+    .unmarged {
+        margin: 0 !important;
+    }
+
+    //
+    // Remove all padding
+    //
+    .unpadded {
+        padding: 0 !important;
+    }
+
+}

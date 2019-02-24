@@ -278,14 +278,14 @@ def test_formset_build():
         False,
         [
             {
-                "name": ["Invalid color name"],
+                "name": ["Invalid name"],
             },
             {},
             {
-                "name": ["Invalid color name"],
+                "name": ["Invalid name"],
             },
             {
-                "name": ["Invalid color name"],
+                "name": ["Invalid name"],
             },
         ],
     ),

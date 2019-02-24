@@ -1,0 +1,429 @@
+////
+/// @group flexbox
+////
+
+
+///
+/// Shortand to define flex sizing behavior.
+///
+/// Since CSS 'flex' property shortand can cause issues with IE11 and calc,
+/// this helper ease to write 'flex' without to define each property.
+/// https://github.com/philipwalton/flexbugs#flexbug-8
+///
+/// @arg {Number} $grow [1]
+///   flex-grow value.
+///
+/// @arg {Number} $shrink [0]
+///   flex-shrink value.
+///
+/// @arg {Number} $width [auto]
+///   flex-basis value. Note that if you want to use calc() on this value, you
+///   need to force evaluation on non static value, see sample '.cell-marged'.
+///
+/// @arg {Boolean} $max [true]
+///   Enable max-width definition.
+///
+/// @example scss
+///   .cell-auto{
+///       @include sv-flex();
+///   }
+///   .cell-25{
+///       @include sv-flex(0, 1, 25%);
+///   }
+///   .cell-50{
+///       @include sv-flex($width: 50%);
+///   }
+///   .cell-50-relaxed{
+///       @include sv-flex($width: 50%, $max: false);
+///   }
+///   $foo: 15px;
+///   .cell-marged{
+///       @include sv-flex($width: calc(25% - #{$foo}));
+///   }
+///
+///   // Output
+///   .cell-auto{
+///       flex-grow: 1;
+///       flex-shrink: 0;
+///       flex-basis: auto;
+///   }
+///   .cell-25{
+///       flex-grow: 0;
+///       flex-shrink: 1;
+///       flex-basis: 25%;
+///       max-width: 25%;
+///   }
+///   .cell-50{
+///       flex-grow: 1;
+///       flex-shrink: 0;
+///       flex-basis: 50%;
+///       max-width: 50%;
+///   }
+///   .cell-50-relaxed{
+///       flex-grow: 1;
+///       flex-shrink: 0;
+///       flex-basis: 50%;
+///   }
+///   .cell-marged{
+///       flex-grow: 1;
+///       flex-shrink: 0;
+///       flex-basis: calc(25% - 15px);
+///       max-width: calc(25% - 15px);
+///   }
+///
+///
+@mixin sv-flex($grow: 1, $shrink: 0, $width: auto, $max: true) {
+    flex-grow: $grow;
+    flex-shrink: $shrink;
+    flex-basis: $width;
+    @if $max and $width != auto {
+        max-width: $width;
+    }
+}
+
+
+///
+/// Create flex cell properties.
+///
+/// A flex cell always have 'grow' property set to '1' and 'shrink' to '0' so
+/// they allways take given width space, not less or much.
+///
+/// @arg {Number} $width [null]
+///   Width for flex basis and max width.
+///
+/// @arg {Number} $less [null]
+///   If not null, width will be a `calc()` function where `$less` is
+///   substracted to `$width`.
+///
+/// @example scss
+///   div{
+///       @include sv-flex-cell-width(25%);
+///   }
+///
+///   // Output
+///   div{
+///       flex: 1 0 25%;
+///       max-width: 25%;
+///   }
+///
+/// @example scss
+///   div{
+///       @include sv-flex-cell-width(25%, $less: 10px);
+///   }
+///
+///   // Output CSS
+///   div{
+///       flex: 1 0 calc(25% - 10px);
+///       max-width: calc(25% - 10px);
+///   }
+///
+@mixin sv-flex-cell-width($width, $less: null) {
+    @if $less == null {
+        @include sv-flex(1, 0, $width);
+    } @else {
+        @include sv-flex(1, 0, calc(#{$width} - #{$less}));
+    }
+}
+
+
+///
+/// Create direct child selectors for responsive flex width classes.
+///
+/// @arg {List} $sizes [null]
+///   List of unitless number to create various flex cell widths. Value can be
+///   a float number but class name will ignore everything after decimal such
+///   as `33.333` will produce `33`.
+///
+/// @arg {String} $breakpoint [small]
+///   Breakpoint name to prefix produced class names.
+///
+/// @arg {Number} $gutter [null]
+///   Gutter to apply around width. Value is multiplied by two then
+///   substracted to each size.
+///
+/// @example scss
+///   div{
+///       @each $size in 25 33.3333 50 {
+///           @include sv-flex-grid-classes($size);
+///       }
+///   }
+///
+///   // Output CSS
+///   div > .small-25{
+///       flex: 1 0 25%;
+///       max-width: 25%;
+///   }
+///   div > .small-33{
+///       flex: 1 0 33.3333%;
+///       max-width: 33.3333%;
+///   }
+///   div > .small-50{
+///       flex: 1 0 50%;
+///       max-width: 50%;
+///   }
+///
+@mixin sv-flex-grid-classes($sizes, $breakpoint: small, $gutter: null) {
+    $gutter-substraction: null;
+
+    @if $gutter != null {
+        $gutter-substraction: $gutter*2;
+    }
+
+    @each $size in $sizes {
+        $width: percentage($size / 100);
+        $name: floor($size);
+
+        // Will name it like "&.small-50"
+        & > .#{$breakpoint}-#{$name} {
+            @include sv-flex-cell-width($width, $less: $gutter-substraction);
+        }
+    }
+}
+
+
+///
+/// Create a CSS class for a flex display rule with optionnal breakpoint name
+/// as suffix.
+///
+/// @arg {String} $breakpoint [null]
+///   Optional breakpoint name to suffix class name.
+///
+///
+/// @example scss
+///   div.foo{
+///       @include sv-flex-display();
+///   }
+///   div.bar{
+///       @include sv-flex-display(small);
+///   }
+///
+///   // Output CSS
+///   div.foo .flex{
+///       display: flex;
+///   }
+///   div.bar .small-flex{
+///       display: flex;
+///   }
+///
+@mixin sv-flex-display($breakpoint: null) {
+    $suffix: if($breakpoint, "#{$breakpoint}-", "");
+
+    .#{$suffix}flex {
+        display: flex;
+    }
+}
+
+
+///
+/// Create CSS classes for flex direction rules with optionnal responsive
+/// suffix.
+///
+/// @arg {String} $breakpoint [null]
+///   Optional suffix to add to class names.
+///
+///
+/// @example scss
+///   div.foo{
+///       @include sv-flex-direction();
+///   }
+///   div.bar{
+///       @include sv-flex-direction(small);
+///   }
+///
+///   // Output CSS
+///   div.foo .direction{
+///       display: flex;
+///   }
+///   div.foo .direction-row{
+///       flex-direction: row;
+///   }
+///   div.foo .direction-row-reverse{
+///       flex-direction: row-reverse;
+///   }
+///   div.foo .direction-column{
+///       flex-direction: column;
+///   }
+///   div.foo .direction-column-reverse{
+///       flex-direction: column-reverse;
+///   }
+///
+///   div.bar .small-direction{
+///       display: flex;
+///   }
+///   div.bar .small-direction-row{
+///       flex-direction: row;
+///   }
+///   div.bar .small-direction-row-reverse{
+///       flex-direction: row-reverse;
+///   }
+///   div.bar .small-direction-column{
+///       flex-direction: column;
+///   }
+///   div.bar .small-direction-column-reverse{
+///       flex-direction: column-reverse;
+///   }
+///
+@mixin sv-flex-direction($breakpoint: null) {
+    $suffix: if($breakpoint, "#{$breakpoint}-", "");
+
+    &.#{$suffix}direction {
+        display: flex;
+    }
+
+    &.#{$suffix}direction-row{
+        flex-direction: row;
+    }
+
+    &.#{$suffix}direction-row-reverse{
+        flex-direction: row-reverse;
+    }
+
+    &.#{$suffix}direction-column{
+        flex-direction: column;
+    }
+
+    &.#{$suffix}direction-column-reverse{
+        flex-direction: column-reverse;
+    }
+}
+
+
+///
+/// Create CSS classes to apply vertical alignments through flex rules
+///
+/// @arg {String} $breakpoint [null]
+///   Optional suffix to add to class names.
+///
+/// @arg {String} $parent [null]
+///   Optional prefix to attach to class selectors.
+///
+///
+/// @example scss
+///   div.foo{
+///       @include sv-flex-vertical-alignment();
+///   }
+///   div.suffixed{
+///       @include sv-flex-vertical-alignment(small);
+///   }
+///   div.prexixed-n-suffixed{
+///       @include sv-flex-vertical-alignment(small, '.ping');
+///   }
+///
+///   // Output CSS
+///   div.foo .v-align-start {
+///       display: flex;
+///       flex-direction: column;
+///       justify-content: flex-start;
+///   }
+///   div.foo .v-align-end {
+///       display: flex;
+///       flex-direction: column;
+///       justify-content: flex-end;
+///   }
+///   div.foo .v-align-center {
+///       display: flex;
+///       flex-direction: column;
+///       justify-content: center;
+///   }
+///   div.foo .v-align-around {
+///       display: flex;
+///       flex-direction: column;
+///       justify-content: space-around;
+///   }
+///   div.foo .v-align-between {
+///       display: flex;
+///       flex-direction: column;
+///       justify-content: space-between;
+///   }
+///
+///   div.suffixed .small-v-align-start {
+///       display: flex;
+///       flex-direction: column;
+///       justify-content: flex-start;
+///   }
+///   div.suffixed .small-v-align-end {
+///       display: flex;
+///       flex-direction: column;
+///       justify-content: flex-end;
+///   }
+///   div.suffixed .small-v-align-center {
+///       display: flex;
+///       flex-direction: column;
+///       justify-content: center;
+///   }
+///   div.suffixed .small-v-align-around {
+///       display: flex;
+///       flex-direction: column;
+///       justify-content: space-around;
+///   }
+///   div.suffixed .small-v-align-between {
+///       display: flex;
+///       flex-direction: column;
+///       justify-content: space-between;
+///   }
+///
+///   div.prexixed-n-suffixed .ping.small-v-align-start {
+///       display: flex;
+///       flex-direction: column;
+///       justify-content: flex-start;
+///   }
+///   div.prexixed-n-suffixed .ping.small-v-align-end {
+///       display: flex;
+///       flex-direction: column;
+///       justify-content: flex-end;
+///   }
+///   div.prexixed-n-suffixed .ping.small-v-align-center {
+///       display: flex;
+///       flex-direction: column;
+///       justify-content: center;
+///   }
+///   div.prexixed-n-suffixed .ping.small-v-align-around {
+///       display: flex;
+///       flex-direction: column;
+///       justify-content: space-around;
+///   }
+///   div.prexixed-n-suffixed .ping.small-v-align-between {
+///       display: flex;
+///       flex-direction: column;
+///       justify-content: space-between;
+///   }
+///
+@mixin sv-flex-vertical-alignment($breakpoint: null, $parent: null) {
+    $suffix: if($breakpoint, "#{$breakpoint}-", "");
+    $parentsel: if($parent, "{$parent}", "");
+
+    // All container elements are vertically stacked on center
+    #{$parent}.#{$suffix}v-align-start{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    // All container elements are vertically stacked on center
+    #{$parent}.#{$suffix}v-align-end{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+
+    // All container elements are vertically stacked on center
+    #{$parent}.#{$suffix}v-align-center{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    // All container elements are stacked with space around
+    #{$parent}.#{$suffix}v-align-around{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    // All container elements are stacked with space between
+    #{$parent}.#{$suffix}v-align-between{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+}

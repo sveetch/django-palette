@@ -1,0 +1,257 @@
+@charset "UTF-8";
+
+// Base settings
+@import "settings";
+// Foundation default settings
+@import "foundation";
+
+// We don't want any of sveetoy classes to be writed as CSS
+$include-sv-classes: false;
+
+// Sveetoy stuff and settings
+@import "sveetoy";
+
+// py-css-styleguide helpers
+@import "vendor/styleguide_helpers";
+
+// Enable every available reference
+.styleguide-metas-references{
+    --auto: "true";
+}
+
+// 1. Vocabulary
+// -------------
+
+// Available thickness vocabulary words from $sv-underline-thickness map item names
+.styleguide-reference-vocabulary_thickness{
+    --structure: "list";
+    --items: "#{get-names($sv-underline-thickness)}";
+}
+
+// Available distance vocabulary words from $sv-underline-distances map item names
+.styleguide-reference-vocabulary_distance{
+    --structure: "list";
+    --items: "#{get-names($sv-underline-distances)}";
+}
+
+// Available space vocabulary words from $sv-spaces map item names
+.styleguide-reference-vocabulary_spaces{
+    --structure: "list";
+    --items: "#{get-names($sv-spaces)}";
+}
+
+// Available breakpoints from $sv-breakpoints map item names
+.styleguide-reference-breakpoints{
+    --structure: "list";
+    --items: "#{get-names($sv-breakpoints)}";
+}
+
+
+// 2. Colors
+// ---------
+
+// Every used colors, using $sv-color-background-palette map where color is in
+// item property 'background'
+.styleguide-reference-palette{
+    --structure: "flat";
+    --splitter: "json-list";
+    --keys: '#{get-names-to-json($sv-color-background-palette)}';
+    --values: '#{get-props-to-json($sv-color-background-palette, "background")}';
+}
+
+
+// 3. Typography
+// -------------
+
+// Enabled text colors, using $sv-color-text-palette flat map
+.styleguide-reference-text_colors{
+    --structure: "flat";
+    --keys: "#{get-names($sv-color-text-palette)}";
+    --values: "#{get-values($sv-color-text-palette)}";
+}
+
+// Enabled text thickness, builded on some variable existence since they are
+// not regrouped in list or map
+.styleguide-reference-text_thickness{
+    $names: ();
+    $values: ();
+
+    @if $global-weight-thin != null {
+        $names: append($names, "thin");
+        $values: append($values, $global-weight-thin);
+    }
+
+    @if $global-weight-normal != null {
+        $names: append($names, "normal");
+        $values: append($values, $global-weight-normal);
+    }
+
+    @if $global-weight-bold != null {
+        $names: append($names, "bold");
+        $values: append($values, $global-weight-bold);
+    }
+
+    @if $global-weight-strong != null {
+        $names: append($names, "strong");
+        $values: append($values, $global-weight-strong);
+    }
+
+    --structure: "flat";
+    --keys: "#{to-string($names, $glue: ' ')}";
+    --values: "#{to-string($values, $glue: ' ')}";
+}
+
+// Available small sizes from $sv-smalls map item names
+.styleguide-reference-smalls{
+    --structure: "list";
+    --items: "#{get-names($sv-smalls)}";
+}
+
+// Available underline widths using from $sv-underline-widths map item names
+.styleguide-reference-underline_widths{
+    --structure: "list";
+    --items: "#{get-names($sv-underline-widths)}";
+}
+
+// Available underline thickness using from $sv-underline-thickness map item names
+.styleguide-reference-underline_thickness{
+    --structure: "list";
+    --items: "#{get-names($sv-underline-thickness)}";
+}
+
+// Available underline distances using from $sv-underline-distances map item names
+.styleguide-reference-underline_distances{
+    --structure: "list";
+    --items: "#{get-names($sv-underline-distances)}";
+}
+
+// Enabled underline colors, using $sv-underline-colors flat map
+.styleguide-reference-underline_colors{
+    --structure: "flat";
+    --keys: "#{get-names($sv-underline-colors)}";
+    --values: "#{get-values($sv-underline-colors)}";
+}
+
+// Available hr thickness using from $sv-hr-thickness map item names
+.styleguide-reference-hr_thickness{
+    --structure: "list";
+    --items: "#{get-names($sv-hr-thickness)}";
+}
+
+// Available hr distances using from $sv-hr-distances map item names
+.styleguide-reference-hr_distances{
+    --structure: "list";
+    --items: "#{get-names($sv-hr-distances)}";
+}
+
+// Enabled hr colors, using $sv-hr-colors flat map
+@if length(map_keys($sv-hr-colors)) > 0 {
+    .styleguide-reference-hr_colors{
+        --structure: "flat";
+        --keys: "#{get-names($sv-hr-colors)}";
+        --values: "#{get-values($sv-hr-colors)}";
+    }
+}
+
+
+// 4. Spaces
+// ---------
+
+// Available space widths using $sv-spaces map item names
+.styleguide-reference-space_widths{
+    --structure: "list";
+    --items: "#{get-names($sv-spaces)}";
+}
+
+
+// 5. Buttons
+// ----------
+
+// Enabled button color schemes, using $sv-button-colors-schemes map where color is in
+// item property 'background', every other scheme properties are not exposed
+.styleguide-reference-button_colors{
+    --structure: "nested";
+    --splitter: "json-list";
+    --keys: '#{get-names-to-json($sv-button-colors-schemes)}';
+    --selector: '#{get-names-to-json($sv-button-colors-schemes, ".")}';
+    --background: '#{get-props-to-json($sv-button-colors-schemes, "background")}';
+}
+
+// Enabled button modest padding, using $sv-button-modests map item names
+.styleguide-reference-button_paddings{
+    --structure: "list";
+    --items: "#{get-names($sv-button-modests)}";
+}
+
+
+// 6. Blocks and boxes
+// -------------
+
+// Enabled block color schemes, using $sv-colors-schemes map where color is in
+// item property 'background'
+.styleguide-reference-block_colors{
+    --structure: "flat";
+    --splitter: "json-list";
+    --keys: '#{get-names-to-json($sv-colors-schemes)}';
+    --values: '#{get-props-to-json($sv-colors-schemes, "background")}';
+}
+
+// Enabled box color schemes, using $sv-colors-schemes map where color is in
+// item property 'background'
+.styleguide-reference-box_colors{
+    --structure: "flat";
+    --splitter: "json-list";
+    --keys: '#{get-names-to-json($sv-colors-schemes)}';
+    --values: '#{get-props-to-json($sv-colors-schemes, "background")}';
+}
+
+// Available underline thickness using from $sv-boxes-thickness map item names
+.styleguide-reference-box_thickness{
+    --structure: "list";
+    --items: "#{get-names($sv-boxes-thickness, $prefix: 'border-')}";
+}
+
+
+// 7. Flexbox
+// ----------
+
+// Available Flexbox grid cell widths from $sv-flex-grid-sizes list items
+.styleguide-reference-flex_grid_sizes{
+    --structure: "flat";
+    --keys: "#{floor-number-items($sv-flex-grid-sizes)}";
+    --values: "#{to-string($sv-flex-grid-sizes, $glue: ' ')}";
+}
+
+// Available Flexbox vertical content alignments, hardcoded since they don't
+// belong to a variable
+.styleguide-reference-flex_vertical_alignments{
+    --structure: "list";
+    --items: "start end center around between";
+}
+
+// Available Flexbox directions, hardcoded since hardcoded since they don't
+// belong to a variable
+.styleguide-reference-flex_directions{
+    --structure: "list";
+    --items: "row row-reverse column column-reverse";
+}
+
+
+// 8.
+// -------------
+
+// Foundation grid row + Sveetoy larger row
+.styleguide-reference-row_widths{
+    --keys: "default larger";
+    --rem: "#{$grid-row-width} #{$sv-row-larger-width}";
+    --pixel: "#{unitless-calc($grid-row-width)} #{unitless-calc($sv-row-larger-width)}";
+}
+
+// Enabled color schemes, using $sv-colors-schemes map where color is in
+// item property 'background', every other scheme properties are not exposed
+.styleguide-reference-color_schemes{
+    --splitter: "json-list";
+    --keys: '#{get-names-to-json($sv-colors-schemes)}';
+    --selector: '#{get-names-to-json($sv-colors-schemes, ".")}';
+    --background: '#{get-props-to-json($sv-colors-schemes, "background")}';
+}

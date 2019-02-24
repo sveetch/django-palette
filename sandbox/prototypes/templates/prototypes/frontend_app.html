@@ -1,0 +1,297 @@
+{% extends "prototypes/base.html" %}
+
+{% block content %}
+<div class="app-root">
+
+
+    <div class="source-part block">
+        <div class="row">
+            <div class="columns small-12">
+                <h2 class="text-center v-space-short bottom-only">Fill your colors</h2>
+                <form>
+
+                    <div class="holder textarea">
+                        <p class="v-divider-tiny">Paste some hexadecimal codes</p>
+                        <textarea placeholder="Give me some source" required="required"></textarea>
+
+                    </div>
+                    <div class="holder button-group right">
+                        <button type="button" class="button hollow alert">Reset</button>
+                        <button type="button" class="button">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="palette-part block">
+        <div class="row">
+            <div class="columns small-12">
+                <h2 class="text-center v-space-short bottom-only">Name them</h2>
+                <form>
+
+                    <div class="formset">
+                        <div class="form-item">
+                            <div class="tile" style="background-color: rgb(243, 245, 251);"><span class="code">#f3f5fb</span></div>
+                            <label class="selection">
+                                <input type="radio" value="whitesmoke"> <span class="name">whitesmoke</span> <span class="sample" style="background-color: rgb(245, 245, 245);"></span></label>
+                            <label class="custom">
+                                <input type="radio" value="custom"> <span class="name">custom</span> <span class="custom-input"><input type="text" placeholder="Custom"></span></label>
+                        </div>
+                        <div class="form-item">
+                            <div class="tile" style="background-color: rgb(237, 248, 255);"><span class="code">#edf8ff</span></div>
+                            <label class="selection">
+                                <input type="radio" value="aliceblue"> <span class="name">aliceblue</span> <span class="sample" style="background-color: rgb(240, 248, 255);"></span></label>
+                            <label class="custom">
+                                <input type="radio" value="custom"> <span class="name">custom</span> <span class="custom-input"><input type="text" placeholder="Custom"></span></label>
+
+
+                        </div>
+                        <div class="form-item">
+                            <div class="tile" style="background-color: rgb(0, 0, 0);"><span class="code">#000000</span></div>
+                            <label class="selection">
+                                <input type="radio" value="black"> <span class="name">black</span> <span class="sample" style="background-color: rgb(0, 0, 0);"></span></label>
+                            <label class="custom">
+                                <input type="radio" value="custom"> <span class="name">custom</span> <span class="custom-input"><input type="text" placeholder="Custom"></span></label>
+
+
+                        </div>
+                        <div class="form-item">
+                            <div class="tile" style="background-color: rgb(56, 57, 61);"><span class="code">#38393d</span></div>
+                            <label class="selection">
+                                <input type="radio" value="gray22"> <span class="name">gray22</span> <span class="sample" style="background-color: rgb(56, 56, 56);"></span></label>
+                            <label class="custom">
+                                <input type="radio" value="custom"> <span class="name">custom</span> <span class="custom-input"><input type="text" placeholder="Custom"></span></label>
+
+
+                        </div>
+                        <div class="form-item">
+                            <div class="tile" style="background-color: rgb(255, 255, 255);"><span class="code">#ffffff</span></div>
+                            <label class="selection">
+                                <input type="radio" value="white"> <span class="name">white</span> <span class="sample" style="background-color: rgb(255, 255, 255);"></span></label>
+                            <label class="custom">
+                                <input type="radio" value="custom"> <span class="name">custom</span> <span class="custom-input"><input type="text" placeholder="Custom"></span></label>
+
+
+                        </div>
+                        <div class="form-item">
+                            <div class="tile" style="background-color: rgb(10, 80, 124);"><span class="code">#0a507c</span></div>
+                            <label class="selection">
+                                <input type="radio" value="dodgerblue4"> <span class="name">dodgerblue4</span> <span class="sample" style="background-color: rgb(16, 78, 139);"></span></label>
+                            <label class="custom">
+                                <input type="radio" value="custom"> <span class="name">custom</span> <span class="custom-input"><input type="text" placeholder="Custom"></span></label>
+
+
+                        </div>
+                        <div class="form-item">
+                            <div class="tile" style="background-color: rgb(181, 184, 196);"><span class="code">#b5b8c4</span></div>
+                            <label class="selection">
+                                <input type="radio" value="gray72"> <span class="name">gray72</span> <span class="sample" style="background-color: rgb(184, 184, 184);"></span></label>
+                            <label class="custom">
+                                <input type="radio" value="custom"> <span class="name">custom</span> <span class="custom-input"><input type="text" placeholder="Custom"></span></label>
+
+
+                        </div>
+                        <div class="form-item">
+                            <div class="tile" style="background-color: rgb(2, 46, 75);"><span class="code">#022e4b</span></div>
+                            <label class="selection">
+                                <input type="radio" value="gray18"> <span class="name">gray18</span> <span class="sample" style="background-color: rgb(46, 46, 46);"></span></label>
+                            <label class="custom">
+                                <input type="radio" value="custom"> <span class="name">custom</span> <span class="custom-input"><input type="text" placeholder="Custom"></span></label>
+
+
+                        </div>
+                        <div class="form-item">
+                            <div class="tile" style="background-color: rgb(254, 254, 254);"><span class="code">#fefefe</span></div>
+                            <label class="selection">
+                                <input type="radio" value="white"> <span class="name">white</span> <span class="sample" style="background-color: rgb(255, 255, 255);"></span></label>
+                            <label class="custom">
+                                <input type="radio" value="custom"> <span class="name">custom</span> <span class="custom-input"><input type="text" placeholder="Custom"></span></label>
+
+
+                        </div>
+                        <div class="form-item">
+                            <div class="tile" style="background-color: rgb(22, 137, 185);"><span class="code">#1689b9</span></div>
+                            <label class="selection">
+                                <input type="radio" value="dodgerblue3"> <span class="name">dodgerblue3</span> <span class="sample" style="background-color: rgb(24, 116, 205);"></span></label>
+                            <label class="custom">
+                                <input type="radio" value="custom"> <span class="name">custom</span> <span class="custom-input"><input type="text" placeholder="Custom"></span></label>
+
+
+                        </div>
+                        <div class="form-item">
+                            <div class="tile" style="background-color: rgb(64, 64, 64);"><span class="code">#404040</span></div>
+                            <label class="selection">
+                                <input type="radio" value="gray25"> <span class="name">gray25</span> <span class="sample" style="background-color: rgb(64, 64, 64);"></span></label>
+                            <label class="custom">
+                                <input type="radio" value="custom"> <span class="name">custom</span> <span class="custom-input"><input type="text" placeholder="Custom"></span></label>
+
+
+                        </div>
+                    </div>
+                    <div class="holder button-group center">
+                        <button type="button" class="button large full">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="dump-part block">
+        <div class="row">
+            <div class="columns small-12">
+                <h2 class="text-center v-space-short bottom-only">Select output formats</h2>
+                <form>
+
+                    <div class="holder checkbox-choices">
+                        <div class="fields">
+                            <label>
+                                <input type="checkbox" value="json"> <span class="name">JSON</span></label>
+                            <label>
+                                <input type="checkbox" value="python-dict"> <span class="name">Python dictionnary</span></label>
+                            <label>
+                                <input type="checkbox" value="scss-vars"> <span class="name">Scss variables</span></label>
+                            <label>
+                                <input type="checkbox" value="html-snippet"> <span class="name">HTML snippet</span></label>
+                        </div>
+
+                    </div>
+                    <div class="holder button-group center">
+                        <button type="button" class="button large full">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="output-part block">
+        <div class="row">
+            <div class="columns small-12">
+                <h2 class="text-center v-space-short bottom-only">Outputs</h2>
+                <div class="fragments flex-grid marged">
+                    <div class="item cell large-50 json">
+                        <h3>JSON</h3>
+                        <pre class="box tiny black">{
+    "whitesmoke": "#f3f5fb",
+    "aliceblue": "#edf8ff",
+    "black": "#000000",
+    "gray22": "#38393d",
+    "white": "#ffffff",
+    "dodgerblue4": "#0a507c",
+    "gray72": "#b5b8c4",
+    "gray18": "#022e4b",
+    "white": "#fefefe",
+    "dodgerblue3": "#1689b9",
+    "gray25": "#404040"
+}</pre>
+                    </div>
+                    <div class="item cell large-50 python-dict">
+                        <h3>Python dictionnary</h3>
+                        <pre class="box tiny black">palette = {
+    "whitesmoke": "#f3f5fb",
+    "aliceblue": "#edf8ff",
+    "black": "#000000",
+    "gray22": "#38393d",
+    "white": "#ffffff",
+    "dodgerblue4": "#0a507c",
+    "gray72": "#b5b8c4",
+    "gray18": "#022e4b",
+    "white": "#fefefe",
+    "dodgerblue3": "#1689b9",
+    "gray25": "#404040"
+}</pre>
+                    </div>
+                    <div class="item cell large-50 scss-vars">
+                        <h3>Scss variables</h3>
+                        <pre class="box tiny black">// Colors
+$whitesmoke: #f3f5fb;
+$aliceblue: #edf8ff;
+$black: #000000;
+$gray22: #38393d;
+$white: #ffffff;
+$dodgerblue4: #0a507c;
+$gray72: #b5b8c4;
+$gray18: #022e4b;
+$white: #fefefe;
+$dodgerblue3: #1689b9;
+$gray25: #404040;
+</pre>
+                    </div>
+                    <div class="item cell large-50 html-snippet">
+                        <h3>HTML snippet</h3>
+                        <pre class="box tiny black">&lt;style&gt;
+.djangopalette-dump{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.djangopalette-dump .item{
+    flex: 1 0 20%;
+    max-width: 20%;
+    padding: 8px;
+}
+.djangopalette-dump .item .color{
+    width: 100%;
+    height: 48px;
+}
+&lt;/style&gt;
+&lt;div class="djangopalette-dump"&gt;
+  &lt;div class="item"&gt;
+    &lt;div class="color" style="background-color: #f3f5fb;"&gt;&lt;/div&gt;
+    &lt;p class="code"&gt;#f3f5fb&lt;/p&gt;
+    &lt;p class="name"&gt;whitesmoke&lt;/p&gt;
+  &lt;/div&gt;&lt;div class="item"&gt;
+    &lt;div class="color" style="background-color: #edf8ff;"&gt;&lt;/div&gt;
+    &lt;p class="code"&gt;#edf8ff&lt;/p&gt;
+    &lt;p class="name"&gt;aliceblue&lt;/p&gt;
+  &lt;/div&gt;&lt;div class="item"&gt;
+    &lt;div class="color" style="background-color: #000000;"&gt;&lt;/div&gt;
+    &lt;p class="code"&gt;#000000&lt;/p&gt;
+    &lt;p class="name"&gt;black&lt;/p&gt;
+  &lt;/div&gt;&lt;div class="item"&gt;
+    &lt;div class="color" style="background-color: #38393d;"&gt;&lt;/div&gt;
+    &lt;p class="code"&gt;#38393d&lt;/p&gt;
+    &lt;p class="name"&gt;gray22&lt;/p&gt;
+  &lt;/div&gt;&lt;div class="item"&gt;
+    &lt;div class="color" style="background-color: #ffffff;"&gt;&lt;/div&gt;
+    &lt;p class="code"&gt;#ffffff&lt;/p&gt;
+    &lt;p class="name"&gt;white&lt;/p&gt;
+  &lt;/div&gt;&lt;div class="item"&gt;
+    &lt;div class="color" style="background-color: #0a507c;"&gt;&lt;/div&gt;
+    &lt;p class="code"&gt;#0a507c&lt;/p&gt;
+    &lt;p class="name"&gt;dodgerblue4&lt;/p&gt;
+  &lt;/div&gt;&lt;div class="item"&gt;
+    &lt;div class="color" style="background-color: #b5b8c4;"&gt;&lt;/div&gt;
+    &lt;p class="code"&gt;#b5b8c4&lt;/p&gt;
+    &lt;p class="name"&gt;gray72&lt;/p&gt;
+  &lt;/div&gt;&lt;div class="item"&gt;
+    &lt;div class="color" style="background-color: #022e4b;"&gt;&lt;/div&gt;
+    &lt;p class="code"&gt;#022e4b&lt;/p&gt;
+    &lt;p class="name"&gt;gray18&lt;/p&gt;
+  &lt;/div&gt;&lt;div class="item"&gt;
+    &lt;div class="color" style="background-color: #fefefe;"&gt;&lt;/div&gt;
+    &lt;p class="code"&gt;#fefefe&lt;/p&gt;
+    &lt;p class="name"&gt;white&lt;/p&gt;
+  &lt;/div&gt;&lt;div class="item"&gt;
+    &lt;div class="color" style="background-color: #1689b9;"&gt;&lt;/div&gt;
+    &lt;p class="code"&gt;#1689b9&lt;/p&gt;
+    &lt;p class="name"&gt;dodgerblue3&lt;/p&gt;
+  &lt;/div&gt;&lt;div class="item"&gt;
+    &lt;div class="color" style="background-color: #404040;"&gt;&lt;/div&gt;
+    &lt;p class="code"&gt;#404040&lt;/p&gt;
+    &lt;p class="name"&gt;gray25&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+{% endblock content %}

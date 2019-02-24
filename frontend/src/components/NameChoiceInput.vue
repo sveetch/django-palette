@@ -1,24 +1,34 @@
 <template>
     <div class="form-item">
-        <p>{{ form_index }} - {{ source }}</p>
-        <label v-for="(choice, key) in choices" :key="key" style="display: block">
-            <input type="radio" :value="choice.name" v-model="selected" v-on:change="inputSelection($event, form_index)">{{ key }} {{ choice.name }}
+        <div class="tile" v-bind:style="{ backgroundColor: source }">
+            <span class="code">{{ source }}</span>
+        </div>
 
-            <span v-if="choice.code != 'custom'" style="display: inline-block; width: 20px; height: 20px; border: 1px solid black;" v-bind:style="{ backgroundColor: choice.code }"></span>
+        <label v-for="(choice, key) in choices" :key="key" :class="labelClass(choice)">
+            <input type="radio" :value="choice.name" v-model="selected" v-on:change="inputSelection($event, form_index)">
 
-            <span v-else><input type="text" placeholder="Custom" v-on:input="inputCustomName($event, form_index)"></span>
+            <span class="name">{{ choice.name }}</span>
+
+            <span v-if="choice.code != 'custom'" class="sample" v-bind:style="{ backgroundColor: choice.code }"></span>
+
+            <span v-else class="custom-input">
+                <input type="text" placeholder="Custom"
+                       v-on:focus="inputSelection($event, form_index, 'custom')"
+                       v-on:input="inputCustomName($event, form_index)">
+            </span>
         </label>
+
         <p class="error" v-if="field_name_errors">
             <span v-for="item in field_name_errors">
                 {{ item }}
             </span>
         </p>
+
         <p class="error" v-if="field_color_errors">
             <span v-for="item in field_color_errors">
                 {{ item }}
             </span>
         </p>
-        <hr />
     </div>
 </template>
 
@@ -45,6 +55,21 @@ export default {
 
     methods: {
         //
+        //
+        //
+        labelClass: function (choice) {
+            return (choice.code != "custom") ? "selection" : "custom";
+        },
+
+        //
+        // Update form 'custom' state from typed value and pop it up to
+        // PaletteForm store
+        //
+        enableSelection: function (evt, value) {
+            this.selected = value;
+        },
+
+        //
         // Update form 'custom' state from typed value and pop it up to
         // PaletteForm store
         //
@@ -56,15 +81,20 @@ export default {
                 value: this.custom,
             });
         },
+
         //
         // Update form 'selected' state from typed value and pop it up to
         // PaletteForm store
         //
-        inputSelection: function (evt, form_index) {
+        inputSelection: function (evt, form_index, value) {
+            if(value){
+                this.selected = value;
+            }
+
             this.$store.commit({
                 type: "palette/update_form_selected",
                 key: form_index,
-                value: evt.target.value,
+                value: (value) ? value : evt.target.value,
             });
         },
     }

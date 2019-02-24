@@ -1,0 +1,70 @@
+@import "../mixins/colors";
+@import "../mixins/spaces";
+
+/*
+ *
+ * Sections
+ *
+ */
+////
+/// @group blocks
+////
+
+
+/// Enable blocks classes creation when `blocks` component is imported.
+///
+/// @type Bool
+///
+$include-sv-blocks: $include-sv-classes !default;
+
+@if $include-sv-blocks {
+    .block {
+        &:not(.delegate){
+            @include sv-apply-spaces(map-get($sv-spaces, "normal"));
+
+            @each $name, $definitions in $sv-spaces{
+                &.#{$name}{
+                    @include sv-apply-spaces($definitions, $axis: "vertical");
+                }
+            }
+        }
+
+        //
+        // Delegate spacing to inner element
+        //
+        &.delegate > .inner{
+            @include sv-apply-spaces(map-get($sv-spaces, "normal"));
+
+            @each $name, $definitions in $sv-spaces{
+                &.#{$name}{
+                    @include sv-apply-spaces($definitions, $axis: "vertical");
+                }
+            }
+        }
+
+        //
+        // Unpadded block or inner element
+        //
+        &:not(.delegate).unpadded,
+        &.delegate > .inner.unpadded{
+            padding: 0;
+        }
+
+        &:not(.transparent){
+            //
+            // Default colors
+            //
+            @if $sv-colors-scheme-default != null {
+                @include sv-scheme-colors($sv-colors-scheme-default);
+            }
+            //
+            // Color variants
+            //
+            @each $name, $scheme in $sv-colors-schemes {
+                &.#{$name}{
+                    @include sv-scheme-colors($scheme);
+                }
+            }
+        }
+    }
+}

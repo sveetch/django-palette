@@ -1,11 +1,15 @@
 <template>
-    <div class="output-part">
-        <h2>Outputs</h2>
+    <div class="output-part block">
+        <div class="row">
+            <div class="columns small-12">
+                <h2 class="text-center v-space-short bottom-only">Outputs</h2>
 
-        <div class="fragments" v-if="fragments.length">
-            <div class="item" v-bind:class="item.key" v-for="item in fragments">
-                <h3>{{ item.key }} - {{ item.name }}</h3>
-                <pre>{{ item.content }}</pre>
+                <div class="fragments flex-grid marged" v-if="fragments.length">
+                    <div class="item cell large-50" v-bind:class="item.key" v-for="item in fragments">
+                        <h3>{{ item.name }}</h3>
+                        <pre class="box tiny black">{{ item.content }}</pre>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

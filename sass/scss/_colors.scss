@@ -1,0 +1,209 @@
+@import "util/util";
+
+/*
+ * Colors settings
+ */
+
+// Named colors
+// ---------
+$black: #000000;
+$white: #ffffff;
+$cadetblue: #619eb8;
+$deepskyblue4: #006a8c;
+$deepskyblue5: #006787;
+$dodgerblue1: #1da1f2;
+$dodgerblue3: #0077b5;
+$gray13: #1f2126;
+$gray14: #0e242b;
+$gray31: #455056;
+$gray49: #767e83;
+$gray93: #eceded;
+$lightblue3: #a0c3ce;
+$skyblue1: #7ee4ff;
+$steelblue2: #36b5e3;
+$steelblue4: #3b5998;
+
+$brand-facebook: #3b5998;
+$brand-twitter: #00a0d1;
+$brand-linkedin: #0e76a8;
+
+// Text colors
+// ---------
+$sv-color-text-palette: (
+    black: $black,
+    white: $white,
+    cadetblue: $cadetblue,
+    deepskyblue4: $deepskyblue4,
+    deepskyblue5: $deepskyblue5,
+    dodgerblue1: $dodgerblue1,
+    dodgerblue3: $dodgerblue3,
+    gray13: $gray13,
+    gray14: $gray14,
+    gray31: $gray31,
+    gray49: $gray49,
+    gray93: $gray93,
+    lightblue3: $lightblue3,
+    skyblue1: $skyblue1,
+    steelblue2: $steelblue2,
+    steelblue4: $steelblue4,
+    facebook: $brand-facebook,
+    twitter: $brand-twitter,
+    linkedin: $brand-linkedin,
+);
+
+// Color schemes
+// ---------
+
+$black-color-scheme: (
+    font-color: $white,
+    background: $black,
+);
+
+$white-color-scheme: (
+    font-color: $gray14,
+    background: $white,
+);
+
+$cadetblue-color-scheme: (
+    font-color: $white,
+    background: $cadetblue,
+);
+
+$deepskyblue4-color-scheme: (
+    font-color: $white,
+    background: $deepskyblue4,
+);
+
+$deepskyblue5-color-scheme: (
+    font-color: $white,
+    background: $deepskyblue5,
+);
+
+$dodgerblue1-color-scheme: (
+    font-color: $white,
+    background: $dodgerblue1,
+);
+
+$dodgerblue3-color-scheme: (
+    font-color: $white,
+    background: $dodgerblue3,
+);
+
+$gray13-color-scheme: (
+    font-color: $white,
+    background: $gray13,
+);
+
+$gray14-color-scheme: (
+    font-color: $white,
+    background: $gray14,
+);
+
+$gray31-color-scheme: (
+    font-color: $white,
+    background: $gray31,
+);
+
+$gray49-color-scheme: (
+    font-color: $white,
+    background: $gray49,
+);
+
+$gray93-color-scheme: (
+    font-color: $gray14,
+    background: $gray93,
+);
+
+$lightblue3-color-scheme: (
+    background: $lightblue3,
+);
+
+$skyblue1-color-scheme: (
+    font-color: $white,
+    background: $skyblue1,
+);
+
+$steelblue2-color-scheme: (
+    font-color: $white,
+    background: $steelblue2,
+);
+
+$steelblue4-color-scheme: (
+    font-color: $white,
+    background: $steelblue4,
+);
+
+// Gradients
+$deepskyblue-to-cadetblue-gradient-scheme: (
+    font-color: $white,
+    background: linear-gradient(to right, $deepskyblue4, $cadetblue),
+);
+
+// Hollows
+$hollow-black-color-scheme: (
+    font-color: $black,
+    background: transparent,
+    border: 1px solid $black,
+);
+
+$hollow-white-color-scheme: (
+    font-color: $white,
+    background: transparent,
+    border: 1px solid $white,
+);
+
+// Brands
+$brand-facebook-color-scheme: (
+    font-color: $white,
+    background: $brand-facebook,
+);
+
+$brand-twitter-color-scheme: (
+    font-color: $white,
+    background: $brand-twitter,
+);
+
+$brand-linkedin-color-scheme: (
+    font-color: $white,
+    background: $brand-linkedin,
+);
+
+
+$sv-colors-schemes: (
+    black: $black-color-scheme,
+    white: $white-color-scheme,
+    cadetblue: $cadetblue-color-scheme,
+    deepskyblue4: $deepskyblue4-color-scheme,
+    deepskyblue5: $deepskyblue5-color-scheme,
+    dodgerblue1: $dodgerblue1-color-scheme,
+    dodgerblue3: $dodgerblue3-color-scheme,
+    gray13: $gray13-color-scheme,
+    gray14: $gray14-color-scheme,
+    gray31: $gray31-color-scheme,
+    gray49: $gray49-color-scheme,
+    gray93: $gray93-color-scheme,
+    lightblue3: $lightblue3-color-scheme,
+    skyblue1: $skyblue1-color-scheme,
+    steelblue2: $steelblue2-color-scheme,
+    steelblue4: $steelblue4-color-scheme,
+    deepskyblue-to-cadetblue: $deepskyblue-to-cadetblue-gradient-scheme,
+    hollow-black: $hollow-black-color-scheme,
+    hollow-white: $hollow-white-color-scheme,
+    brand-facebook: $brand-facebook-color-scheme,
+    brand-twitter: $brand-twitter-color-scheme,
+    brand-linkedin: $brand-linkedin-color-scheme,
+);
+
+// Default color scheme
+$sv-colors-scheme-default: $white-color-scheme;
+
+// .underline features
+$sv-underline-colors: $sv-color-text-palette;
+$sv-underline-default-color: $black;
+
+// Horizontal rule
+$sv-hr-colors: $sv-underline-colors;
+$sv-hr-default-color: $sv-underline-default-color;
+
+// Button color scheme
+$sv-button-colors-schemes: $sv-colors-schemes;

@@ -1,0 +1,22 @@
+/*
+ * Browsers fallbacks using Modernizr detection classes
+ */
+
+// Fix issues with browser without flexbox support like IE9
+html.no-flexbox{
+    // Little hack fix for SVG with IE9
+    // We rely on flexbox selector since there are no accurate svg one
+    // WARNING: This kind of fix assume every SVG image are in a container
+    // defining a size, else images will can take 100% page width
+    img[src$=".svg"] {
+        width: 100%;
+    }
+}
+
+// For IE 10 and Edge
+html.no-flexboxlegacy{
+    // Little hack fix for SVG with IE 10 to Edge
+    img[src$=".svg"] {
+        width: 100%;
+    }
+}

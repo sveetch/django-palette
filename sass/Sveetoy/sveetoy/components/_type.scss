@@ -1,0 +1,453 @@
+@import "../mixins/colors";
+@import "../mixins/typography";
+
+/*
+ *
+ * Typography
+ *
+ */
+////
+/// @group typography
+////
+
+
+/// Enable typographic classes creation when `typography` component is
+/// imported.
+///
+/// @type Bool
+///
+$include-sv-typography: $include-sv-classes !default;
+
+
+///
+/// This documentate model for available properties in a thickness scheme.
+///
+/// `size` and `style` are both required properties.
+///
+/// @name Thickness scheme model
+///
+/// @type Map
+///
+/// @group models
+///
+/// @prop {Number} size [null]
+///   Thickness size.
+///
+/// @prop {String} style [null]
+///   Line style according to border style (`solid`, `dotted`, `dashed`).
+///
+$sv-model-thickness: () !default;
+
+
+/// Additional global font weight thinner than `$global-weight-normal`.
+///
+/// @type Number
+///
+/// @example scss
+///   $global-weight-thin: 100;
+///
+$global-weight-thin: null !default;
+
+
+/// Additional global font weight stronger than `$global-weight-bold`.
+///
+/// @type Number
+///
+/// @example scss
+///   $global-weight-strong: 900;
+///
+$global-weight-strong: null !default;
+
+
+/// Enabled text colors.
+///
+/// Each item create a CSS classes `.text-NAME` classes where `NAME` is the
+/// item name.
+///
+/// @type Map
+///
+/// @example scss
+///   $sv-color-text-palette: (
+///       white: #ffffff,
+///       black: #000000,
+///   );
+///
+$sv-color-text-palette: () !default;
+
+
+///
+/// Available `<small>` element sizes.
+///
+/// Each property is size feature.
+///
+/// @type Map
+///
+/// @example scss
+///   $sv-smalls: (
+///       small: 40%,
+///       big: 60%,
+///       large: 80%,
+///   );
+///
+$sv-smalls: () !default;
+
+
+/// Available [`Thickness scheme model`](#models-variable-Thickness scheme model)
+/// items for underline features
+///
+/// If this setting is empty, underline classes will not be created. You must
+/// fill at least a `normal` property.
+///
+/// @type Map
+///
+/// @group underline
+///
+///
+$sv-underline-thickness: () !default;
+
+
+/// Available colors for underline features
+///
+/// @type Map
+///
+/// @group underline
+///
+/// @example scss
+///   $sv-underline-colors: (
+///       white: #ffffff,
+///       black: #000000,
+///   );
+///
+///   // Or inheriting from text colors
+///   $sv-underline-colors: $sv-color-text-palette;
+///
+$sv-underline-colors: () !default;
+
+
+/// Enabled default color value for underline
+///
+/// @type String
+///
+/// @group underline
+///
+$sv-underline-default-color: #000000;
+
+
+/// Available distances for underline features
+///
+/// Distance define space height between a text and its underline.
+///
+/// It should contains a `normal` property name which will be used as
+/// default distance when no distance feature class is used.
+///
+/// @type Map
+///
+/// @group underline
+///
+/// @example scss
+///   $sv-underline-distances: (
+///       far: 2rem,
+///       near: 0.5rem,
+///       normal: 1rem,
+///       sticked: 0,
+///   );
+///
+$sv-underline-distances: () !default;
+
+
+///
+/// Available underline widths.
+///
+/// Each property is a width feature.
+///
+/// It should contains a `normal` property name which will be used as
+/// default value when no width feature class is used.
+///
+/// @type Map
+///
+/// @group underline
+///
+/// @example scss
+///   $sv-underline-widths: (
+///       tiny: 5%,
+///       short: 15%,
+///       normal: 40%,
+///       large: 70%,
+///       full: 100%,
+///   );
+///
+$sv-underline-widths: () !default;
+
+
+/// Available [`Thickness scheme model`](#models-variable-Thickness scheme model)
+/// items for `<hr>` features
+///
+/// You must fill at least a `normal` property.
+///
+/// @type Map
+///
+/// @group hr
+///
+$sv-hr-thickness: () !default;
+
+
+/// Available colors for `<hr>` features
+///
+/// @type Map
+///
+/// @group hr
+///
+/// @example scss
+///   $sv-hr-colors: (
+///       white: #ffffff,
+///       black: #000000,
+///   );
+///
+///   // Or inheriting from text colors
+///   $sv-hr-colors: $sv-color-text-palette;
+///
+$sv-hr-colors: () !default;
+
+
+/// Enabled default color value for `<hr>`
+///
+/// @type String
+///
+/// @group hr
+///
+$sv-hr-default-color: #000000 !default;
+
+
+/// Available distances for `<hr>` features
+///
+/// Distance define space height between a text and its underline.
+///
+/// It should contains a `normal` property name which will be used as
+/// default distance when no distance feature class is used.
+///
+/// @type Map
+///
+/// @group hr
+///
+/// @example scss
+///   $sv-hr-distances: (
+///       far: 2rem,
+///       near: 0.5rem,
+///       default: 1rem,
+///       sticked: 0,
+///   );
+///
+///   // Or inheriting from underline distances
+///   $sv-hr-distances: $sv-underline-distances;
+///
+$sv-hr-distances: () !default;
+
+
+@if $include-sv-typography {
+    // No trailing margin on last paragraph in their container
+    p{
+        &:last-child{
+            margin-bottom: 0;
+        }
+    }
+
+    /*
+    * Transform and decoration
+    */
+    .text-upper{
+        text-transform: uppercase !important;
+    }
+
+    .text-important{
+        text-decoration: underline !important;
+    }
+
+    /*
+    * Various font weights
+    */
+    @if $global-weight-thin{
+        .text-thin{
+            font-weight: $global-weight-thin !important;
+        }
+    }
+
+    .text-normal{
+        font-weight: $global-weight-normal !important;
+    }
+
+    b, .text-bold{
+        font-weight: $global-weight-bold !important;
+    }
+
+    @if $global-weight-strong{
+        strong, .text-strong{
+            font-weight: $global-weight-strong;
+        }
+    }
+
+    //
+    // Text colors
+    //
+    @each $name, $color in $sv-color-text-palette {
+        &.text-#{$name}{
+            color: $color !important;
+        }
+    }
+
+    //
+    // Various <small> modifier
+    //
+    small{
+        @each $name, $size in $sv-smalls {
+            &.#{$name}{
+                font-size: $size;
+            }
+        }
+    }
+
+    //
+    // Heading styles
+    //
+    @include sv-headers(
+        $header-styles,
+        $-zf-zero-breakpoint,
+        $header-font-family,
+        $header-lineheight,
+        $header-margin-bottom
+    );
+
+    //
+    // Underlined element
+    //
+    @if $sv-underline-thickness{
+        .underline{
+            // Base
+            &::after{
+                content: "";
+                display: block;
+
+                @if map-get($sv-underline-distances, "default") {
+                    $distance: map-get($sv-underline-distances, "default");
+                    margin-top: $distance;
+                    margin-left: 0;
+                    margin-right: 0;
+                }
+
+                @if map-get($sv-underline-widths, "normal") {
+                    $width: map-get($sv-underline-widths, "normal");
+                    width: $width;
+                }
+
+                @if map-get($sv-underline-thickness, "normal") {
+                    $thickness: map-get($sv-underline-thickness, "normal");
+                    border: map-get($thickness, "style") $sv-underline-default-color;
+                    border-width: 0 0 map-get($thickness, "size");
+                }
+            }
+
+            // On centered text
+            &.text-center{
+                &::after{
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+            }
+
+            // Border thickness
+            @each $name, $definitions in $sv-underline-thickness {
+                &.#{$name}::after{
+                    border: map-get($definitions, "style") $sv-underline-default-color;
+                    border-width: 0 0 map-get($definitions, "size");
+                }
+            }
+
+            // Border width size
+            @each $name, $size in $sv-underline-widths {
+                &.#{$name}::after{
+                    width: $size;
+                }
+            }
+
+            // Border distance from text
+            @each $name, $distance in $sv-underline-distances {
+                &.#{$name}{
+                    &::after{
+                        margin-top: $distance;
+                        margin-left: 0;
+                        margin-right: 0;
+                    }
+
+                    &.text-center{
+                        &::after{
+                            margin-top: $distance;
+                            margin-left: auto;
+                            margin-right: auto;
+                        }
+                    }
+                }
+            }
+
+            // Border colors
+            @each $name, $color in $sv-underline-colors {
+                &.#{$name}::after{
+                    border-color: $color;
+                }
+            }
+        }
+    }
+
+    //
+    // Horizontal rule
+    //
+    hr{
+        clear: both;
+        height: 0;
+
+        @if map-get($sv-hr-thickness, "normal") {
+            $thickness: map-get($sv-hr-thickness, "normal");
+            border: map-get($thickness, "style") $sv-hr-default-color;
+            border-width: map-get($thickness, "size") 0 0;
+        }
+
+        @if map-get($sv-hr-distances, "default") {
+            $distance: map-get($sv-hr-distances, "default");
+            @if $distance == 0{
+                margin-top: 0;
+                margin-bottom: 0;
+            } @else if $distance > 0{
+                margin-top: $distance;
+                margin-bottom: $distance;
+            }
+        }
+
+        // Border thickness
+        @each $name, $definitions in $sv-hr-thickness {
+            &.#{$name}{
+                border: map-get($definitions, "style") $sv-hr-default-color;
+                border-width: map-get($definitions, "size") 0 0;
+            }
+        }
+
+        // Margin
+        @each $name, $distance in $sv-hr-distances {
+            @if $distance{
+                &.#{$name}{
+                    @if $distance == 0{
+                        margin-top: 0;
+                        margin-bottom: 0;
+                    } @else if $distance > 0{
+                        margin-top: $distance;
+                        margin-bottom: $distance;
+                    }
+                }
+            }
+        }
+
+        // Border colors
+        @each $name, $color in $sv-hr-colors {
+            &.#{$name}{
+                border-color: $color;
+            }
+        }
+    }
+}

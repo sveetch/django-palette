@@ -1,36 +1,42 @@
 <template>
-    <form id="palette-form">
-        <h2>Name them</h2>
+    <div class="palette-part block">
+        <div class="row">
+            <div class="columns small-12">
+                <h2 class="text-center v-space-short bottom-only">Name them</h2>
 
-        <ul class="global error" v-if="global_errors.length">
-            <li v-for="item in global_errors">
-                {{ item }}
-            </li>
-        </ul>
+                <form>
+                    <ul class="global error" v-if="global_errors.length">
+                        <li v-for="item in global_errors">
+                            {{ item }}
+                        </li>
+                    </ul>
 
-        <div class="formset">
-            <name-choice-input v-for="(form_data, form_index) in formset"
-                               :key="form_index"
-                               v-bind:form_index="form_index"
-                               v-bind:source="form_data.source"
-                               v-bind:choices="form_data.choices"
-                               v-bind:initialselected="form_data.selected"
-                               v-bind:errors="form_data.errors">
-            </name-choice-input>
+                    <div class="formset">
+                        <name-choice-input v-for="(form_data, form_index) in formset"
+                                        :key="form_index"
+                                        v-bind:form_index="form_index"
+                                        v-bind:source="form_data.source"
+                                        v-bind:choices="form_data.choices"
+                                        v-bind:initialselected="form_data.selected"
+                                        v-bind:errors="form_data.errors">
+                        </name-choice-input>
+                    </div>
 
-            <!-- <h3>Formset</h3>
-            <pre>{{ formset }}</pre>
-            <hr /> -->
+                    <!-- <h3>Formset</h3>
+                    <pre>{{ formset }}</pre>
+                    <hr /> -->
 
-            <!-- <h3>Payload</h3>
-            <pre>{{ payload }}</pre>
-            <hr /> -->
+                    <!-- <h3>Payload</h3>
+                    <pre>{{ payload }}</pre>
+                    <hr /> -->
+
+                    <div class="holder button-group center">
+                        <button class="button large full" type="button" v-on:click="submitForm">Submit</button>
+                    </div>
+                </form>
+            </div>
         </div>
-
-        <div class="holder buttons">
-            <button type="button" v-on:click="submitForm">Submit</button>
-        </div>
-    </form>
+    </div>
 </template>
 
 

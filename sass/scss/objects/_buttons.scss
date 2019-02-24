@@ -1,0 +1,26 @@
+/*
+* Addons to buttons component
+*/
+
+button,
+.button{
+}
+
+.button-group{
+    // Horizontal alignment to the right
+    &.right{
+        justify-content: flex-end;
+    }
+
+    // Horizontal alignment to the right
+    &.center{
+        justify-content: center;
+    }
+
+    button,
+    .button{
+        &:last-child {
+            margin-bottom: $buttongroup-spacing;
+        }
+    }
+}

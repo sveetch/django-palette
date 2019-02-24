@@ -1,0 +1,21 @@
+///
+/// Shortcut to embed an icomoon font character
+///
+/// @arg {String} $code [null]
+///   Optionnal character to use as content.
+///
+@mixin icomoon-helper($code: null) {
+    font-family: 'icomoon';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    @if $code != null {
+        content: $code;
+    }
+}

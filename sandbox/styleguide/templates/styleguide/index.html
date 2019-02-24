@@ -1,0 +1,203 @@
+{% extends "styleguide/base.html" %}
+
+{% block content %}
+<div class="block">
+    <div class="column row larger text-center">
+        <h1><b>Styleguide</b></h1>
+    </div>
+</div>
+
+{% if styleguide.resolve_error %}
+    <div class="block short">
+        <div class="column row larger">
+            <div class="callout alert">
+                <h2>Error</h2>
+                <p>{{ styleguide.resolve_error|safe }}</p>
+            </div>
+        </div>
+    </div>
+{% else %}
+    {% comment %}<div class="block short">
+        <div class="column row larger">
+            <h2>Manifest JSON datas</h2>
+
+            <hr>
+
+            <pre>{{ styleguide.to_json|safe }}</pre>
+        </div>
+    </div>{% endcomment %}
+
+    <div class="block short">
+        <div class="column row larger">
+            <h2>Color palette</h2>
+
+            <hr>
+
+            <div class="flex-grid marged">
+                {% for k,v in styleguide.palette.items %}
+                    <div class="cell medium-50 large-33 xlarge-20 v-align-between">
+                        <p><em>.bg-{{ k }}</em> :</p>
+                        <p><small>{{ v }}</small></p>
+                        <div class="bg-{{ k }}" style="width: 100%; height: 75px;"></div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="block short">
+        <div class="column row larger">
+            <h2>Typography</h2>
+
+            <hr>
+
+            <h3>Title element</h3>
+            <div class="row larger">
+                <div class="small-12 medium-6 columns">
+                    <div class="demo-result v-space-tiny">
+                        {% for i in "123456"|make_list %}
+                        <h{{ i }}>h{{ i }}</h{{ i }}>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="small-12 medium-6 columns">
+                    <div class="demo-result v-space-tiny">
+                        {% for i in "123456"|make_list %}
+                        <p class="title-{{ i }}">.title-{{ i }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <hr class="thin gray93">
+
+            <h3>Text colors</h3>
+            <div class="demo-result v-space-tiny">
+                {% for k,v in styleguide.text_colors.items %}
+                <p class="text-{{ k }}">.text-{{ k }}</p>
+                {% endfor %}
+            </div>
+
+            <hr class="thin gray93">
+
+            <h3>Font thickness</h3>
+            <div class="demo-result v-space-tiny">
+                {% for k,v in styleguide.text_thickness.items %}
+                <p class="text-{{ k }}">{% if k == 'bold' %}<b>&lt;b&gt;</b>, {% elif k == 'strong' %}<strong>&lt;strong&gt;</strong>, {% endif %}.text-{{ k }}</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+    <div class="block short">
+        <div class="column row larger">
+            <h2>Buttons</h2>
+
+            <hr>
+
+            <h3>Paddings</h3>
+            <div class="demo-result v-space-tiny">
+                <div class="flex-grid marged">
+                    <div class="cell medium-50 large-33 xlarge-25">
+                        <a href="" class="button modest">.modest</a>
+                    </div>
+                    {% for name in styleguide.button_paddings %}
+                    <div class="cell medium-50 large-33 xlarge-25">
+                        <a href="" class="button modest {{ name }}">.modest.{{ name }}</a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <hr class="thin gray93">
+
+            <h3>Colors</h3>
+            <div class="demo-result v-space-tiny">
+                <div class="flex-grid marged">
+                    {% for k,v in styleguide.button_colors.items %}
+                    <div class="cell medium-50 large-33 xlarge-25">
+                        <button class="button {{ k }}">.{{ k }}</button>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="block short">
+        <div class="column row larger">
+            <h2>Flexbox</h2>
+
+            <hr>
+
+            <h3>Available cell sizes</h3>
+            <div class="demo-result">
+                <div class="flex-grid flex-demo">
+                    <div class="cell bg-gray93">
+                        <p>.cell</p>
+                    </div>
+                    {% for k,v in styleguide.flex_grid_sizes.items %}
+                    <div class="cell small-100 medium-{{ k }} bg-gray93">
+                        <p>.cell.small-100.medium-{{ k }}</p>
+                        <p><small>{{ v }}%</small></p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <hr class="thin gray93">
+
+            <h3>Marge around cells</h3>
+            <div class="demo-result">
+                <div class="flex-grid marged flex-demo">
+                    <div class="cell bg-gray93">
+                        <p>.cell</p>
+                    </div>
+                    {% for k,v in styleguide.flex_grid_sizes.items %}
+                    <div class="cell small-100 medium-{{ k }} bg-gray93">
+                        <p>.cell.small-100.medium-{{ k }}</p>
+                        <p><small>{{ v }}%</small></p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="block short">
+        <div class="column row larger">
+            <h2>Blocks</h2>
+            <hr>
+        </div>
+
+        <div class="block">
+            <div class="row">
+                <div class="small-12 columns">
+                    <h2>.block</h2>
+                    {% include 'styleguide/inline_markup.html' %}
+
+                    {% lorem 2 p random %}
+                </div>
+            </div>
+        </div>
+        {% for k,v in styleguide.block_colors.items %}
+        <div class="block {{ k }}">
+            <div class="row">
+                <div class="small-12 columns">
+                    <h2>.block.{{ k }}</h2>
+                    <p><small>{{ v }}</small></p>
+                    {% include 'styleguide/inline_markup.html' %}
+
+                    {% lorem 2 p random %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endif %}
+{% endblock content %}

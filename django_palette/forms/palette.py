@@ -148,7 +148,7 @@ class PaletteItemForm(forms.Form):
 
             if not validate_name(name):
                 raise ValidationError(
-                    _("Invalid color name"),
+                    _("Invalid name"),
                     code="invalid",
                 )
 

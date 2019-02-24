@@ -1,0 +1,139 @@
+@import "../mixins/colors";
+
+/*
+ * Button enhancements
+ */
+////
+/// @group buttons
+////
+
+
+/// Enable buttons classes creation when `buttons` component is imported.
+///
+/// @type Bool
+///
+$include-sv-buttons: $include-sv-classes !default;
+
+
+/// Enabled button sizes for modest feature
+///
+/// Modest button have lesser padding than original button behavior.
+///
+/// Each item is an enabled size for modest feature, so it should accord names
+/// to available ones from original button.
+///
+/// @type Map
+///
+/// @example scss
+///   $sv-button-modests: (
+///       tiny: 5px,
+///       small: 7px,
+///       medium: 8px,
+///       large: 10px,
+///   );
+///
+$sv-button-modests: () !default;
+
+
+///
+/// Enabled color schemes for button in addition to original button
+///
+/// Each property is a named
+/// [`Color scheme model`](#models-variable-Color scheme model).
+///
+/// @type Map
+///
+/// @example scss
+///   $transparent-color-scheme: (
+///       font-color: #000000,
+///       border-color: #000000,
+///       background: transparent,
+///   );
+///
+///   $sv-button-colors-schemes: (
+///       transparent: $transparent-color-scheme,
+///   );
+///
+///   // Or simply components color schemes
+///   $sv-button-colors-schemes: $sv-colors-schemes;
+///
+$sv-button-colors-schemes: () !default;
+
+
+@if $include-sv-buttons {
+    button,
+    .button{
+        //
+        // Explicitely remove all button margins
+        //
+        &.unmarged {
+            margin: 0;
+        }
+
+        //
+        // Make important button
+        //
+        &.important{
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        //
+        // Fullwidth (like '.expand' but keeping padding)
+        //
+        &.full {
+            width: 100%;
+        }
+
+        //
+        // Modest padding
+        //
+        &.modest{
+            $default-padding: map-get($sv-button-modests, "medium");
+            @if $default-padding{
+                padding: $default-padding ($default-padding * 2) $default-padding ($default-padding * 2);
+            }
+
+            @each $name, $padding in $sv-button-modests{
+                &.#{$name}{
+                    @if $default-padding{
+                        padding: $padding ($padding * 2) $padding ($padding * 2);
+                    }
+                }
+            }
+        }
+
+        //
+        // Various color variants from color schemes
+        //
+        @if $sv-button-colors-schemes{
+            @each $name, $scheme in $sv-button-colors-schemes{
+                &.#{$name}{
+                    &:not(.disabled){
+                        @include sv-button-colors($scheme, $apply-border: true);
+
+                        &:hover{
+                            @include sv-button-colors($scheme, $apply-border: true, $prefix: "hover");
+                        }
+                    }
+                    // Enforce colors opposed to avoid framework 'disabled'
+                    // selector to win
+                    &.disabled{
+                        @include sv-button-colors($scheme, $apply-border: true);
+                    }
+                }
+            }
+        }
+    }
+
+    //
+    // Disable bottom margin for last element
+    //
+    div, p, dd, li{
+        button, .button{
+            &:last-child{
+                margin-bottom: 0;
+            }
+        }
+    }
+}

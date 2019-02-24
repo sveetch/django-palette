@@ -105,6 +105,7 @@ TESTS_FIXTURES_DIR = os.path.join('..', 'tests', 'data_fixtures')
 
 # Enabled applications, keep the whitenoise one at the top (before staticfiles)
 INSTALLED_APPS = ('whitenoise.runserver_nostatic',) + INSTALLED_APPS + (
+    'sandbox.utils',
     'django_palette',
 )
 
@@ -132,3 +133,9 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 
 # Template dir
 TEMPLATES[0]['DIRS'] = (os.path.join(BASE_DIR, "templates"),)
+
+# Styleguide stylesheet path
+STYLEGUIDE_MANIFEST_PATH = os.path.join(
+    'css',
+    'styleguide_manifest.css'
+)

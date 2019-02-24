@@ -1,0 +1,222 @@
+@import "util/util";
+
+//
+// SVEETOY SETTINGS FOR FOUNDATION5
+// Here are sample settings with Foundation5 values
+//
+
+// d. Media Query Ranges
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+// This part is a copy of some required Foundation settings used in Sveetoy
+// settings. You should not need to include them depending from your Foundation
+// usage.
+$small-range: (0em, 40em);
+$medium-range: (40.063em, 63.9375em);
+$large-range: (64em, 90em);
+$xlarge-range: (90.063em, 120em);
+$xxlarge-range: (120.063em);
+
+$screen: "only screen";
+
+$small-up: screen;
+$medium-up: unquote("screen and #{breakpoint(medium)}");
+$large-up: unquote("screen and #{breakpoint(large)}");
+$xlarge-up: unquote("screen and #{breakpoint(xlarge)}");
+$xxlarge-up: unquote("screen and #{breakpoint(xxlarge)}");
+
+
+// A0. Sveetoys component enabler
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// Global include switcher
+$include-sv-classes: true;
+
+// Include switcher for every component
+$include-sv-global: $include-sv-classes;
+$include-sv-blocks: $include-sv-classes;
+$include-sv-boxes: $include-sv-classes;
+$include-sv-buttons: $include-sv-classes;
+$include-sv-flex: $include-sv-classes;
+$include-sv-grid: $include-sv-classes;
+$include-sv-lists: $include-sv-classes;
+$include-sv-spaces: $include-sv-classes;
+$include-sv-styleguide: $include-sv-classes;
+$include-sv-tables: $include-sv-classes;
+$include-sv-topbar: $include-sv-classes;
+$include-sv-typography: $include-sv-classes;
+
+
+// A1. Sveetoys Query Ranges
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// Common available breakpoints taken from Foundation breakpoints
+$sv-breakpoints: (
+    small: $small-up,
+    medium: $medium-up,
+    large: $large-up,
+    xlarge: $xlarge-up,
+);
+
+
+// A2. Sveetoys colors
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// NOTE: You should put these color names (not the schemes) at top of your
+// Foundation settings file so they are available for both Foundation and
+// Sveetoy settings
+$white: #ffffff;
+$black: #000000;
+$gray25: #404040;
+
+$white-color-scheme: (
+    font-color: $gray25,
+    background: $white,
+);
+
+$black-color-scheme: (
+    font-color: $white,
+    background: $black,
+);
+
+$sv-colors-scheme-default: $white-color-scheme;
+
+$sv-colors-schemes: (
+    white: $white-color-scheme,
+    black: $black-color-scheme,
+);
+
+$sv-color-text-palette: (
+    white: $white,
+    black: $black,
+);
+
+
+// A3. Sveetoys typography
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// Thickness
+$global-weight-thin: 100;
+$global-weight-strong: 900;
+
+// <small/> sizes
+$sv-smalls: (
+    small: 40%,
+    big: 60%,
+    large: 80%,
+);
+
+// .underline features
+$sv-underline-thickness: (
+    thin: (
+        size: rem-calc(1px),
+        style: solid,
+    ),
+    normal: (
+        size: rem-calc(3px),
+        style: solid,
+    ),
+    bold: (
+        size: rem-calc(5px),
+        style: solid,
+    ),
+);
+$sv-underline-widths: (
+    tiny: 5%,
+    short: 15%,
+    normal: 40%, //default
+    large: 70%,
+    full: 100%,
+);
+$sv-underline-distances: (
+    far: 2rem,
+    near: 0.5rem,
+    normal: 1rem, //default
+    sticked: 0,
+);
+$sv-underline-colors: $sv-color-text-palette;
+$sv-underline-default-color: $black;
+
+// Horizontal rule
+$sv-hr-thickness: $sv-underline-thickness;
+$sv-hr-distances: $sv-underline-distances;
+$sv-hr-colors: $sv-underline-colors;
+$sv-hr-default-color: $sv-underline-default-color;
+
+
+// A4. Sveetoys spaces
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+// Defines default space sizes with their breakpoint values
+$sv-space-tiny: (
+    small: 0.5rem,
+    medium: 0.75rem,
+    large: 1rem,
+    xlarge: 1.5rem,
+);
+$sv-space-short: (
+    small: 1rem,
+    medium: 1.25rem,
+    large: 2rem,
+    xlarge: 2.5rem,
+);
+$sv-space-normal: (
+    small: 1.5rem,
+    medium: 2rem,
+    large: 3rem,
+    xlarge: 4rem,
+);
+$sv-space-large: (
+    small: 2rem,
+    medium: 3rem,
+    large: 4rem,
+    xlarge: 5rem,
+);
+$sv-space-wide: (
+    small: 3rem,
+    medium: 4.5rem,
+    large: 6rem,
+    xlarge: 8rem,
+);
+
+// Space scheme
+$sv-spaces: (
+    tiny: $sv-space-tiny,
+    short: $sv-space-short,
+    normal: $sv-space-normal,
+    large: $sv-space-large,
+    wide: $sv-space-wide,
+);
+
+$sv-spaces-helpers-important: true;
+
+
+// Define button variables using default Foundation values
+$button-tny: rem-calc(10);
+$button-sml: rem-calc(14);
+$button-med: rem-calc(16);
+$button-lrg: rem-calc(18);
+// Use button variables for .modest feature
+$sv-button-modests: (
+    tiny: $button-tny / 2,
+    small: $button-sml / 2,
+    medium: $button-med / 2,
+    large: $button-lrg / 2,
+);
+// Button color scheme
+$sv-button-colors-schemes: $sv-colors-schemes;
+
+
+// A5. Sveetoys Boxes
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+$sv-boxes-thickness: $sv-underline-thickness;
+
+
+// A6. Sveetoys Grid
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+// Larger row width for xlarge screens and more
+$sv-row-larger-width: rem-calc(1328px);
+
+
+// A7. Sveetoys Flexbox
+// - - - - - - - - - - - - - - - - - - - - - - - - -
+// Fleg grid cell sizes
+$sv-flex-grid-sizes: 20 25 33.3333 50 75 100;

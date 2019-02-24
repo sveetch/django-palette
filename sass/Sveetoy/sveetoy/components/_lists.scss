@@ -1,0 +1,50 @@
+@import "../mixins/lists";
+@import "../utils/functions";
+
+/*
+ * Bullet list using arrow icon as bullet
+ */
+
+////
+/// @group lists
+////
+
+
+/// Enable list classes creation when `list` component is imported.
+///
+/// @type Bool
+///
+$include-sv-lists: $include-sv-classes !default;
+
+
+@if $include-sv-lists {
+    ul.arrow{
+        list-style-type: none;
+
+        &:not(.defer){
+            li {
+                position: relative;
+                padding-left: 1.5rem;
+
+                &::before {
+                    @include sv-arrow-bullet();
+                }
+            }
+        }
+        // Defer arrow pseudo element to first direct child element of list items
+        &.defer{
+            li {
+                position: relative;
+
+                & > *:first-child{
+                    position: relative;
+                    padding-left: 2rem;
+
+                    &::before {
+                        @include sv-arrow-bullet($top-position: 0.60rem);
+                    }
+                }
+            }
+        }
+    }
+}

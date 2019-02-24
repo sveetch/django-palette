@@ -1,0 +1,181 @@
+/*
+ * Globals for variables that don't fit in any specific component
+ */
+
+/// Default value for variables which enable components creations like
+/// `$include-sv-grid`, `$include-sv-spaces`, etc..
+///
+/// Default is `true` so every component CSS stuff are created. If you want
+/// to disable some component set their own value to `False`.
+///
+/// @type Bool
+///
+$include-sv-classes: true !default;
+
+
+/// Foundation version to support. Pastly this was used to support both
+/// Foundation 5 and 6 which have different class names to manage.
+///
+/// For now you can ignore this setting since Foundation 5 support has been
+/// dropped.
+///
+/// @type Number
+$sv_foundation_support: 6 !default;
+
+
+///
+/// This documentate model for available properties in a color scheme.
+///
+/// Either `font-color` or `background` are required, every other
+/// properties are optional.
+///
+/// `background` is the only required property and possibly also
+/// `font-color` if `background` is set to `transparent` or `inherit`.
+///
+/// `border` property is the recommended way to define borders but it defines
+/// the same values to every side. If you need to define different values for
+/// different sides, you will need to do it throught `border-color`,
+/// `border-width` and `border-style`.
+///
+/// Note that every properties can have a prefixed version like `hover-****`
+/// to use on hover event from container. This is especially used from some
+/// components such as boxes and buttons.
+///
+/// For consistent naming, we recommend to allways name your color scheme
+/// based on their background color, like `$white-color-scheme` for a scheme
+/// with a white background.
+///
+/// @name Color scheme model
+///
+/// @type Map
+///
+/// @group models
+///
+/// @prop {Color} background [null]
+///   Background to apply.
+///
+/// @prop {Color} font-color [null]
+///   Font color to apply.
+///
+/// @prop {Color} link-color [null]
+///   Enforce font color on link. This does not apply on links with `.button`
+///   class since buttons have their own definition apart.
+///
+/// @prop {Color} link-color-hover [null]
+///   Enforce font color on link hover event. Alike `link-color`, this does
+///   not apply on buttons.
+///
+/// @prop {Color} h1-color [null]
+///   Font color to apply on title level 1 (like `h1` or `.title-1`).
+///
+///   A `false` value should be understood by mixin as "Do not define any
+///   color for this title level" since default behavior is to use font-color
+///   when title level is `null`. This behavior is available for every title
+///   levels.
+///
+/// @prop {Color} h2-color [null]
+///   Font color to apply on title level 2 (like `h2` or `.title-2`).
+///
+/// @prop {Color} h3-color [null]
+///   Font color to apply on title level 3 (like `h3` or `.title-3`).
+///
+/// @prop {Color} h4-color [null]
+///   Font color to apply on title level 4 (like `h4` or `.title-4`).
+///
+/// @prop {Color} h5-color [null]
+///   Font color to apply on title level 5 (like `h5` or `.title-5`).
+///
+/// @prop {Color} h6-color [null]
+///   Font color to apply on title level 6 (like `h6` or `.title-6`).
+///
+/// @prop {Color} border [null]
+///   Border shortand properties to define every values for every sides.
+///
+/// @prop {Color} border-color [null]
+///   Border color to apply.
+///
+/// @prop {Number} border-width [null]
+///   Border width to apply.
+///
+/// @prop {String} border-style [null]
+///   Border style to apply.
+///
+///
+/// @example scss
+///   $white-color-scheme: (
+///       font-color: #000000,
+///       background: #ffffff,
+///   );
+///
+///   $black-color-scheme: (
+///       font-color: #ffffff,
+///       background: #000000,
+///       link-color: #ff0000,
+///       link-color-hover: #ff00ee,
+///       h1-color: #f0f0f0,
+///       h2-color: #e8e8e8,
+///       h3-color: #e7e7e7,
+///       h4-color: #e6e6e6,
+///       h5-color: #e5e5e5,
+///       h6-color: #e6e6e6,
+///       border: 1px solid #ff0000,
+///       border-color: #d0d0d0,
+///       border-width: 2px,
+///       border-style: solid,
+///       border: 1px solid #0000ff,
+///   );
+///
+$sv-model-color-scheme: () !default;
+
+
+/// Default color scheme to use (like on `.block` or
+/// `.box`).
+///
+/// See [`Color scheme model`](#models-variable-Color scheme model) for property definitions.
+///
+/// @type Map
+///
+/// @group colors
+///
+/// @example scss
+///   $sv-colors-scheme-default: $white-color-scheme;
+///
+$sv-colors-scheme-default: null !default;
+
+
+/// Enabled color schemes for component classes creation (like `.block` or
+/// `.box`).
+///
+/// Each property is a named [`Color scheme model`](#models-variable-Color scheme model).
+///
+/// @type Map
+///
+/// @group colors
+///
+/// @example scss
+///   $sv-colors-schemes: (
+///       white: $white-color-scheme,
+///       black: $black-color-scheme,
+///   );
+///
+$sv-colors-schemes: () !default;
+
+
+/// Map of available breakpoints for space features, usually mapped on
+/// Foundation ones.
+///
+/// Each property is a breakpoint.
+///
+/// @type map
+///
+/// @group spaces
+///
+/// @example scss
+///   $sv-breakpoints: (
+///       small: $small-up,
+///       medium: $medium-up,
+///       large: $large-up,
+///       xlarge: $xlarge-up,
+///   );
+///
+$sv-breakpoints: () !default;
