@@ -1,13 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-Try to find all used colors through all given scss/css files or source
-
-Require:
-
-    pip install colorutils
-
+Find color values from sources
 """
-import os, re
+import os
+import re
 
 from pathlib import Path
 
@@ -16,7 +12,7 @@ from colour import Color
 
 class ColorFinder:
     """
-    Color patterns finding in files matching some extensions.
+    Color value patterns finding from given sources (string or files).
     """
     _DEFAULT_EXTENSIONS = ['scss', 'sass', 'css']
     _REG_HEXACODE = re.compile(r'#(?:[a-fA-F0-9]{1,6})\b')
@@ -52,8 +48,8 @@ class ColorFinder:
             source (str): Source string where to search for codes.
 
         Returns:
-            list: List of found codes. Every code are return in lowercase
-                with doubles. Codes are in arbitrary order.
+            list: List of found codes. Every code are return in lowercase.
+                Codes are in arbitrary order.
         """
         found = [item.lower() for item in self._REG_HEXACODE.findall(source)]
         return list(set(found))
@@ -117,8 +113,8 @@ class ColorFinder:
             source (str): Source string where to search for codes.
 
         Returns:
-            list: List of found codes. Every code are return in lowercase
-                with doubles. Codes are in arbitrary order.
+            list: List of found codes. Every code are returned in lowercase.
+                Codes are in arbitrary order.
         """
         found = self.find_hexacode(source)
 

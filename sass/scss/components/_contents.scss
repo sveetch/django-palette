@@ -134,7 +134,7 @@ hr{
                     flex-wrap: wrap;
 
                     label{
-                        @include sv-flex(0, 0);
+                        @include sv-flex(0, 0, calc(33.3333% - #{$cell-gutter * 2}));
                         margin: $cell-gutter;
                         padding: 0.4rem;
                         display: flex;

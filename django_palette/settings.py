@@ -20,8 +20,12 @@ PALETTE_DUMP_FORMATS = OrderedDict([
         "name": _("HTML snippet"),
         "template": "django_palette/dumps/html_snippet.txt",
     }),
-    #("sveetoy-palette", {
-        #"name": _("Sveetoy Sass Palette"),
-        #"template": "django_palette/dumps/sveetoy_palette.txt",
-    #}),
+    ("sveetoy", {
+        "name": _("Sveetoy color schemes"),
+        "template": "django_palette/dumps/sveetoy.txt",
+    }),
+    ("php", {
+        "name": _("PHP array"),
+        "template": "django_palette/dumps/php.txt",
+    }),
 ])

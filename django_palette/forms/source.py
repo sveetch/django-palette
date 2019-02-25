@@ -57,6 +57,7 @@ class SourceForm(forms.Form):
                 if item.startswith("#"):
                     if len(item[1:]) > 3 and len(item[1:]) < 6:
                         length_errors.append(item)
+
             if length_errors:
                 errors = ", ".join(sorted(length_errors))
                 raise ValidationError(

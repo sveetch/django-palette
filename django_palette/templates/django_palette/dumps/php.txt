@@ -1,0 +1,5 @@
+<?php
+$palette = [
+{% for item in palette %}    "{{ item.name }}" => "{{ item.color }}"{% if not forloop.last %},{% endif %}
+{% endfor %}];
+?>

@@ -1,0 +1,23 @@
+// Named colors
+// ---------
+{% for item in palette %}${{ item.name }}: {{ item.color }};{% if not forloop.last %}
+{% endif %}{% endfor %}
+
+// Text colors
+// ---------
+$sv-color-text-palette: (
+    {% for item in palette %}{{ item.name }}: ${{ item.name }},{% if not forloop.last %}
+    {% endif %}{% endfor %}
+);
+
+// Color schemes
+// ---------
+{% for item in palette %}${{ item.name }}-color-scheme: (
+    background: ${{ item.name }},
+);{% if not forloop.last %}
+{% endif %}{% endfor %}
+
+$sv-colors-schemes: (
+    {% for item in palette %}{{ item.name }}: ${{ item.name }}-color-scheme,{% if not forloop.last %}
+    {% endif %}{% endfor %}
+);
