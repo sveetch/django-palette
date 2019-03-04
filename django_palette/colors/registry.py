@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-import io, json
+import io
+import json
+from collections import OrderedDict
 
 from pathlib import Path
 
@@ -16,17 +18,21 @@ class ColorRegistry:
 
         self.map_path = datas_dirpath / "names.json"
 
-        self.name_map, self.hexa_map = {}, {}
+        self.name_map = OrderedDict({})
+        self.hexa_map = OrderedDict({})
 
-    def load(self, path=None):
+    def load(self, names=None, path=None):
         """
-        Load registry and set maps
+        Load registry and set maps from a source.
 
         Keyword args:
-            path (pathlib.Path): Optionnal path object to open instead of
+            names (iterable): Optional names to use directly instead to open a
+                map file.
+            path (pathlib.Path): Optional path object to open instead of
                 default of from ``ColorRegistry.map_path``.
         """
-        names = self.get_registry_file(path or self.map_path)
+        if names is None:
+            names = self.get_registry_file(path or self.map_path)
 
         self.name_map, self.hexa_map = self.get_registry_maps(names)
 
@@ -45,20 +51,20 @@ class ColorRegistry:
 
         return registry_map
 
-    def get_registry_maps(self, items):
+    def get_registry_maps(self, names):
         """
-        From registry items build maps, one indexed on name, another
+        Create registry items maps, one indexed on name, another
         one indexed on color.
 
         Args:
-            items (list): Registry items
+            names (list): Registry items.
 
         Returns:
             tuple: First item is the names map, second item is the colors map.
-                Both are list object.
+                Both are ``collections.OrderedDict``.
         """
-        name_map = items
+        name_map = names
         # Reverse keys/values so map is indexed on hexa
-        hexa_map = list(zip([v for k,v in items], [k for k,v in items]))
+        hexa_map = list(zip([v for k,v in names], [k for k,v in names]))
 
-        return name_map, hexa_map
+        return OrderedDict(name_map), OrderedDict(hexa_map)

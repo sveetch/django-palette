@@ -9,7 +9,7 @@
 
             <span class="name">{{ choice.name }}</span>
 
-            <span v-if="choice.code != 'custom'" class="sample" v-bind:style="{ backgroundColor: choice.code }"></span>
+            <span v-if="choice.code != 'custom'" class="sample" v-bind:title="choice.code" v-bind:style="{ backgroundColor: choice.code }"></span>
 
             <span v-else class="custom-input">
                 <input type="text" placeholder="Custom"

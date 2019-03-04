@@ -17,22 +17,23 @@ class SourceForm(forms.Form):
     )
 
     def __init__(self, *args, **kwargs):
-        self.colors = None
+        self.colors = {}
 
         super(SourceForm, self).__init__(*args, **kwargs)
 
-    def store_colors(self, palette):
+    def store_colors(self, store, palette):
         """
-        Stored named colors from a registry
-        """
-        colors = {}
+        Store found name suggestion for palette colors.
 
+        It should be almost ready to store multiple color name suggestions
+        from different registry.
+        """
         for k,v in palette.items():
-            if k not in colors:
-                colors[k] = []
-            colors[k].append(v)
+            if k not in store:
+                store[k] = []
+            store[k].append(v)
 
-        return colors
+        return store
 
     def clean_source(self):
         """
@@ -66,11 +67,16 @@ class SourceForm(forms.Form):
                     code='invalid',
                 )
 
+            ## TODO: Temporary for debug, will remove old algo
+            ## New API with old algorith
+            #old_namer = ColorNames(enable_modifier=False, avoid_twice=False)
+            #old_namer.load()
+            # New API with new algorith
             namer = ColorNames()
             namer.load()
-            # Store named colors from registry
-            self.colors = self.store_colors(namer.batch_names(colors))
-
+            # Update color store from registry
+            #self.colors = self.store_colors(self.colors, old_namer.batch(colors))
+            self.colors = self.store_colors(self.colors, namer.batch(colors))
 
         return source
 

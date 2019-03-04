@@ -116,3 +116,20 @@ def test_toCssRGB(hexa, rgb_int, rgb_float):
     """
     # Compare attempt integers to converted float to int
     assert rgb_int == toCssRGB(rgb_float)
+
+
+@pytest.mark.parametrize("hexa", [
+    "#000000",
+    "#ffffff",
+    "#ff0000",
+    "#4267b2",
+    "#fce3e3",
+    "#fdffdf",
+    "#8938aa",
+    "#53a93f",
+])
+def test_color_longhex(hexa):
+    """
+    Test Color long hexadecimal is correct
+    """
+    assert hexa == Color(hexa).hex_l
