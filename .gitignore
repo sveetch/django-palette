@@ -15,8 +15,9 @@ db.sqlite3
 __pycache__/
 *.py[cod]
 
-# Site media
+# Site media and builded statics
 /data/
+/sandbox/static
 
 # Settings
 local.py
@@ -50,6 +51,3 @@ node_modules
 
 # Exported strings & generated translation templates
 *.pot
-
-# Frontend dummy tests
-frontend/src/toasts

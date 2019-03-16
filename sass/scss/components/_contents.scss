@@ -18,12 +18,91 @@ hr{
 
     width: 100%;
 
+    // Automatically alternate block scheme
+    .block{
+        position: relative;
+
+        &.auto-alt{
+            &::after{
+                @include css-triangle(1.5rem, $white, down);
+                position: absolute;
+                left: calc(50% - 0.75rem);
+                bottom: -1.5rem;
+                z-index: 40;
+            }
+
+            &:nth-child(even){
+                @include sv-scheme-colors($gray75-color-scheme);
+
+                &::after{
+                    @include css-triangle(1.5rem, $gray75, down);
+                }
+            }
+
+            &:last-child{
+                &::after{
+                    display: none;
+                }
+            }
+        }
+    }
+
+    .holder{
+        &.button-group{
+            margin-top: 2rem;
+
+            button,
+            .button{
+                &.full{
+                    max-width: 44rem;
+                }
+            }
+        }
+    }
+
+    // Share error styles
+    .error{
+        margin-bottom: 0.875rem;
+        font-size: 0.875rem;
+        padding: 0.4rem;
+        color: $white;
+        background: $tomato3;
+
+        // For listed global level errors
+        &.global{
+            background: transparent;
+            margin-left: 0.5rem;
+            margin-right: 0.5rem;
+            padding: 0;
+            list-style-type: none;
+
+            li{
+                padding: 0.4rem;
+                background: $tomato3;
+
+                & + li{
+                    margin-top: 0.5rem;
+                }
+            }
+        }
+    }
+
     // Source part
     .source-part{
         form{
             margin-left: auto;
             margin-right: auto;
             max-width: 45rem;
+
+            .holder{
+                &.textarea{
+                    textarea{
+                        font-family: $font-family-monospace;
+                        font-size: 0.9rem;
+                        min-height: 20vh;
+                    }
+                }
+            }
         }
     }
 
@@ -37,7 +116,9 @@ hr{
             & > .form-item{
                 @include sv-flex($width: calc(20% - #{$cell-gutter * 2}));
                 margin: $cell-gutter;
+                background: $white;
                 border: 1px solid $black;
+                border-radius: $extra-radius;
 
                 .tile{
                     display: block;
@@ -45,6 +126,8 @@ hr{
                     width: 100%;
                     height: 8rem;
                     border-bottom: 1px solid $black;
+                    border-top-left-radius: $extra-radius;
+                    border-top-right-radius: $extra-radius;
 
                     .code{
                         display: block;
@@ -55,14 +138,12 @@ hr{
                         color: $white;
                         padding: 0.3rem 0.4rem;
                         line-height: 1;
-                        border-radius: 0.2rem;
+                        border-radius: $extra-radius;
                     }
                 }
 
                 .error{
-                    font-size: 0.875rem;
-                    padding: 0.4rem;
-                    color: red;
+                    margin: 0;
                 }
 
                 label{
@@ -107,6 +188,7 @@ hr{
                                 margin: 0;
                                 width: 100%;
                                 height: 2rem;
+                                border-bottom-right-radius: $extra-radius;
                             }
                         }
                     }
@@ -134,20 +216,33 @@ hr{
                     flex-wrap: wrap;
 
                     label{
-                        @include sv-flex(0, 0, calc(33.3333% - #{$cell-gutter * 2}));
+                        @include sv-flex(0, 0, calc(50% - #{$cell-gutter * 2}));
+                        @include sv-scheme-colors($gray75-color-scheme);
                         margin: $cell-gutter;
-                        padding: 0.4rem;
+                        padding: 0.8rem;
                         display: flex;
                         flex-direction: row;
                         flex-wrap: wrap;
                         align-items: center;
                         line-height: 1.1;
-                        border: 1px solid rgba($black, 0.8);
+                        border-radius: $extra-radius;
 
                         input{
                             margin: 0 0.3rem 0 0;
                         }
                     }
+                }
+            }
+        }
+    }
+
+    // Output part
+    .output-part{
+        .fragments{
+            .cell{
+                pre{
+                    height: 25rem;
+                    overflow: auto;
                 }
             }
         }

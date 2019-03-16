@@ -44,6 +44,16 @@ $header-lineheight: 1.1;
 $paragraph-lineheight: 1.3;
 $list-lineheight: $paragraph-lineheight;
 
+// 11. Button
+// ----------
+
+$button-sizes: (
+  tiny: 0.75rem,
+  small: 0.85rem,
+  default: 1rem,
+  large: 1.25rem,
+);
+
 
 ///
 /// Sveetoy parts
@@ -183,4 +193,5 @@ $sv-flex-grid-sizes: 20 25 30 33.3333 40 50 60 75 100;
 
 // C1. Site specific variables
 // - - - - - - - - - - - - - - - - - - - - - - - - -
-
+// A shared tiny radius without to apply it everywhere with $global-radius
+$extra-radius: 0.25rem;

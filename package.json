@@ -1,6 +1,6 @@
 {
   "name": "django-palette-frontend",
-  "version": "0.1.0",
+  "version": "0.6.0",
   "description": "django-palette frontend",
   "author": "David THENON <sveetch@gmail.com>",
   "private": true,

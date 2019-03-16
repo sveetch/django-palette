@@ -12,8 +12,9 @@ help:
 	@echo "Please use \`make <target>' where <target> is one of"
 	@echo
 	@echo "  install             -- to install this project with virtualenv and Pip with everything for development"
+	@echo "  create-var-dirs     -- to create required directory structures for non commited files to build (css/db/etc..)"
 	@echo ""
-	@echo "  clean               -- to clean EVERYTHING"
+	@echo "  clean               -- to clean EVERYTHING (Warning)"
 	@echo "  clean-pycache       -- to remove all __pycache__, this is recursive from current directory"
 	@echo "  clean-install       -- to clean Python side installation"
 	@echo "  clean-frontend      -- to clean Frontend side installation"
@@ -56,8 +57,13 @@ venv:
 	$(PIP) install --upgrade setuptools
 .PHONY: venv
 
-migrate:
+create-var-dirs:
 	@mkdir -p data/db
+	@mkdir -p data/static/css
+	@mkdir -p sandbox/static/css
+.PHONY: create-var-dirs
+
+migrate:
 	@DJANGO_SECRET_KEY=$(DEMO_DJANGO_SECRET_KEY) \
 	$(DJANGO_MANAGE) migrate
 .PHONY: migrate
@@ -67,19 +73,17 @@ superuser:
 	$(DJANGO_MANAGE) createsuperuser
 .PHONY: superuser
 
-install: venv
+install: venv create-var-dirs
 	$(PIP) install -e .[dev]
 	npm install
 	${MAKE} migrate
 .PHONY: install
 
 sass:
-	@mkdir -p data/static/css
 	$(BOUSSOLE) compile --config boussole.json
 .PHONY: sass
 
 watch-sass:
-	@mkdir -p data/static/css
 	$(BOUSSOLE) watch --config boussole.json
 .PHONY: watch-sass
 

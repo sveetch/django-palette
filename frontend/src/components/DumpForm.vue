@@ -1,8 +1,8 @@
 <template>
-    <div class="dump-part block">
+    <div class="dump-part block auto-alt">
         <div class="row">
             <div class="columns small-12">
-                <h2 class="text-center v-space-short bottom-only">Select output formats</h2>
+                <h2 class="text-center v-space-short bottom-only">3. Select formats</h2>
 
                 <form>
                     <ul class="global error" v-if="global_errors.length || palette_errors.length">
@@ -29,7 +29,7 @@
                     </div>
 
                     <div class="holder button-group center">
-                        <button class="button large full" type="button" v-on:click="submitForm">Submit</button>
+                        <button class="button important full" type="button" v-on:click="submitForm">Submit</button>
                     </div>
                 </form>
             </div>

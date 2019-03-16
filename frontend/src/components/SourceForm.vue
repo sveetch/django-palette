@@ -1,8 +1,8 @@
 <template>
-    <div class="source-part block">
+    <div class="source-part block auto-alt">
         <div class="row">
             <div class="columns small-12">
-                <h2 class="text-center v-space-short bottom-only">Fill your colors</h2>
+                <h2 class="text-center v-space-short bottom-only">1. Fill your colors</h2>
                 <form>
                     <ul class="global error" v-if="global_errors.length">
                         <li v-for="item in global_errors">
@@ -11,7 +11,6 @@
                     </ul>
 
                     <div class="holder textarea">
-                        <p class="v-divider-tiny">Paste some hexadecimal codes</p>
                         <textarea v-model="source" placeholder="Give me some source" required></textarea>
                         <p class="error" v-if="source_errors.length">
                             <span v-for="item in source_errors">
@@ -21,8 +20,8 @@
                     </div>
 
                     <div class="holder button-group right">
-                        <button class="button hollow alert" type="button" v-on:click="resetForm">Reset</button>
-                        <button class="button" type="button" v-on:click="submitForm">Submit</button>
+                        <button class="button important hollow alert" type="button" v-on:click="resetForm">Reset</button>
+                        <button class="button important" type="button" v-on:click="submitForm">Submit</button>
                     </div>
                 </form>
             </div>

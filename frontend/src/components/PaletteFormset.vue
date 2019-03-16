@@ -1,8 +1,8 @@
 <template>
-    <div class="palette-part block">
+    <div class="palette-part block auto-alt">
         <div class="row">
             <div class="columns small-12">
-                <h2 class="text-center v-space-short bottom-only">Name them</h2>
+                <h2 class="text-center v-space-short bottom-only">2. Name them</h2>
 
                 <form>
                     <ul class="global error" v-if="global_errors.length">
@@ -31,7 +31,7 @@
                     <hr /> -->
 
                     <div class="holder button-group center">
-                        <button class="button large full" type="button" v-on:click="submitForm">Submit</button>
+                        <button class="button important full" type="button" v-on:click="submitForm">Submit</button>
                     </div>
                 </form>
             </div>

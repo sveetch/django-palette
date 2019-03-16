@@ -6,192 +6,107 @@
 
 // Named colors
 // ---------
-$black: #000000;
 $white: #ffffff;
-$cadetblue: #619eb8;
-$deepskyblue4: #006a8c;
-$deepskyblue5: #006787;
-$dodgerblue1: #1da1f2;
-$dodgerblue3: #0077b5;
-$gray13: #1f2126;
-$gray14: #0e242b;
-$gray31: #455056;
-$gray49: #767e83;
-$gray93: #eceded;
-$lightblue3: #a0c3ce;
-$skyblue1: #7ee4ff;
-$steelblue2: #36b5e3;
-$steelblue4: #3b5998;
-
-$brand-facebook: #3b5998;
-$brand-twitter: #00a0d1;
-$brand-linkedin: #0e76a8;
+$gray99: #fefefe;
+$black: #000000;
+$aliceblue: #edf8ff;
+$gray75: #f3f5fb;
+$gray50: #b5b8c4;
+$gray25: #38393d;
+$dodgerblue3: #1689b9;
+$dodgerblue4: #0a507c;
+$midnightblue: #022e4b;
+$seagreen3: #3adb76;
+$tomato3: #cc4b37;
+$darkorange1: #f77f00;
 
 // Text colors
 // ---------
 $sv-color-text-palette: (
-    black: $black,
     white: $white,
-    cadetblue: $cadetblue,
-    deepskyblue4: $deepskyblue4,
-    deepskyblue5: $deepskyblue5,
-    dodgerblue1: $dodgerblue1,
+    seagreen3: $seagreen3,
+    tomato3: $tomato3,
+    aliceblue: $aliceblue,
+    gray50: $gray50,
+    gray25: $gray25,
+    black: $black,
     dodgerblue3: $dodgerblue3,
-    gray13: $gray13,
-    gray14: $gray14,
-    gray31: $gray31,
-    gray49: $gray49,
-    gray93: $gray93,
-    lightblue3: $lightblue3,
-    skyblue1: $skyblue1,
-    steelblue2: $steelblue2,
-    steelblue4: $steelblue4,
-    facebook: $brand-facebook,
-    twitter: $brand-twitter,
-    linkedin: $brand-linkedin,
+    dodgerblue4: $dodgerblue4,
+    gray75: $gray75,
+    darkorange1: $darkorange1,
+    gray99: $gray99,
+    midnightblue: $midnightblue,
 );
 
 // Color schemes
 // ---------
-
+$white-color-scheme: (
+    font-color: $gray25,
+    background: $white,
+);
+$gray99-color-scheme: (
+    font-color: $gray25,
+    background: $gray99,
+    border-color: $gray50,
+    border-width: 1px,
+    border-style: solid,
+);
+$gray25-color-scheme: (
+    font-color: $gray75,
+    background: $gray25,
+);
 $black-color-scheme: (
     font-color: $white,
     background: $black,
 );
-
-$white-color-scheme: (
-    font-color: $gray14,
-    background: $white,
+$gray75-color-scheme: (
+    font-color: $gray25,
+    background: $gray75,
 );
-
-$cadetblue-color-scheme: (
-    font-color: $white,
-    background: $cadetblue,
+$aliceblue-color-scheme: (
+    font-color: $dodgerblue4,
+    background: $aliceblue,
 );
-
-$deepskyblue4-color-scheme: (
-    font-color: $white,
-    background: $deepskyblue4,
+$gray50-color-scheme: (
+    background: $gray50,
 );
-
-$deepskyblue5-color-scheme: (
-    font-color: $white,
-    background: $deepskyblue5,
-);
-
-$dodgerblue1-color-scheme: (
-    font-color: $white,
-    background: $dodgerblue1,
-);
-
 $dodgerblue3-color-scheme: (
     font-color: $white,
     background: $dodgerblue3,
 );
-
-$gray13-color-scheme: (
+$dodgerblue4-color-scheme: (
+    font-color: $aliceblue,
+    background: $dodgerblue4,
+);
+$midnightblue-color-scheme: (
+    font-color: $aliceblue,
+    background: $midnightblue,
+);
+$seagreen3-color-scheme: (
+    background: $seagreen3,
+);
+$tomato3-color-scheme: (
     font-color: $white,
-    background: $gray13,
+    background: $tomato3,
 );
-
-$gray14-color-scheme: (
-    font-color: $white,
-    background: $gray14,
+$darkorange1-color-scheme: (
+    background: $darkorange1,
 );
-
-$gray31-color-scheme: (
-    font-color: $white,
-    background: $gray31,
-);
-
-$gray49-color-scheme: (
-    font-color: $white,
-    background: $gray49,
-);
-
-$gray93-color-scheme: (
-    font-color: $gray14,
-    background: $gray93,
-);
-
-$lightblue3-color-scheme: (
-    background: $lightblue3,
-);
-
-$skyblue1-color-scheme: (
-    font-color: $white,
-    background: $skyblue1,
-);
-
-$steelblue2-color-scheme: (
-    font-color: $white,
-    background: $steelblue2,
-);
-
-$steelblue4-color-scheme: (
-    font-color: $white,
-    background: $steelblue4,
-);
-
-// Gradients
-$deepskyblue-to-cadetblue-gradient-scheme: (
-    font-color: $white,
-    background: linear-gradient(to right, $deepskyblue4, $cadetblue),
-);
-
-// Hollows
-$hollow-black-color-scheme: (
-    font-color: $black,
-    background: transparent,
-    border: 1px solid $black,
-);
-
-$hollow-white-color-scheme: (
-    font-color: $white,
-    background: transparent,
-    border: 1px solid $white,
-);
-
-// Brands
-$brand-facebook-color-scheme: (
-    font-color: $white,
-    background: $brand-facebook,
-);
-
-$brand-twitter-color-scheme: (
-    font-color: $white,
-    background: $brand-twitter,
-);
-
-$brand-linkedin-color-scheme: (
-    font-color: $white,
-    background: $brand-linkedin,
-);
-
 
 $sv-colors-schemes: (
-    black: $black-color-scheme,
     white: $white-color-scheme,
-    cadetblue: $cadetblue-color-scheme,
-    deepskyblue4: $deepskyblue4-color-scheme,
-    deepskyblue5: $deepskyblue5-color-scheme,
-    dodgerblue1: $dodgerblue1-color-scheme,
+    gray99: $gray99-color-scheme,
+    gray75: $gray75-color-scheme,
+    gray50: $gray50-color-scheme,
+    gray25: $gray25-color-scheme,
+    black: $black-color-scheme,
+    tomato3: $tomato3-color-scheme,
+    darkorange1: $darkorange1-color-scheme,
+    seagreen3: $seagreen3-color-scheme,
+    aliceblue: $aliceblue-color-scheme,
     dodgerblue3: $dodgerblue3-color-scheme,
-    gray13: $gray13-color-scheme,
-    gray14: $gray14-color-scheme,
-    gray31: $gray31-color-scheme,
-    gray49: $gray49-color-scheme,
-    gray93: $gray93-color-scheme,
-    lightblue3: $lightblue3-color-scheme,
-    skyblue1: $skyblue1-color-scheme,
-    steelblue2: $steelblue2-color-scheme,
-    steelblue4: $steelblue4-color-scheme,
-    deepskyblue-to-cadetblue: $deepskyblue-to-cadetblue-gradient-scheme,
-    hollow-black: $hollow-black-color-scheme,
-    hollow-white: $hollow-white-color-scheme,
-    brand-facebook: $brand-facebook-color-scheme,
-    brand-twitter: $brand-twitter-color-scheme,
-    brand-linkedin: $brand-linkedin-color-scheme,
+    dodgerblue4: $dodgerblue4-color-scheme,
+    midnightblue: $midnightblue-color-scheme,
 );
 
 // Default color scheme
@@ -207,3 +122,12 @@ $sv-hr-default-color: $sv-underline-default-color;
 
 // Button color scheme
 $sv-button-colors-schemes: $sv-colors-schemes;
+
+// Rewrite Foundation primary color to fit to palette
+$foundation-palette: (
+  primary: $dodgerblue3,
+  secondary: #767676,
+  success: $seagreen3,
+  warning: $darkorange1,
+  alert: $tomato3,
+);

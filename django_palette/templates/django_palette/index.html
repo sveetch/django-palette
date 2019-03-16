@@ -1,5 +1,30 @@
 {% extends "django_palette/base.html" %}
 
 {% block content %}
+<div id="intro" class="block aliceblue">
+    <div class="row column">
+        <div class="flex-grid">
+            <div class="cell medium-50 large-25 box tiny transparent">
+                <h2 class="title-4">1. Fill your colors</h2>
+                <p>Past any type of source that contains hexadecimal codes like <b>#ffffff</b>.</p>
+                <p>Each color code will be examined to find a corresponding name.</p>
+            </div>
+            <div class="cell medium-50 large-25 box tiny transparent">
+                <h2 class="title-4">2. Name them</h2>
+                <p>Select a name for each color, use the "Custom" value to input a manual name.</p>
+                <p>To the right of each proposed name you can see its original color.</p>
+            </div>
+            <div class="cell medium-50 large-25 box tiny transparent">
+                <h2 class="title-4">3. Select formats</h2>
+                <p>Select formats you want to output for your named colors.</p>
+            </div>
+            <div class="cell medium-50 large-25 box tiny transparent">
+                <h2 class="title-4">4. Output</h2>
+                <p>Copy output contents you want to save.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div id="app"></div>
 {% endblock content %}
