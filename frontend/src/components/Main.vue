@@ -2,7 +2,7 @@
     <div class="app-root">
         <SourceForm v-if="$store.getters.getOpenedParts.includes('source')"></SourceForm>
         <PaletteForm v-if="$store.getters.getOpenedParts.includes('palette')"></PaletteForm>
-        <DumpForm v-if="$store.getters.getOpenedParts.includes('dump')"></DumpForm>
+        <FormatsForm v-if="$store.getters.getOpenedParts.includes('formats')"></FormatsForm>
         <Output v-if="$store.getters.getOpenedParts.includes('output')"></Output>
     </div>
 </template>
@@ -11,7 +11,7 @@
 <script>
 import SourceForm from "./SourceForm.vue";
 import PaletteForm from "./PaletteFormset.vue";
-import DumpForm from "./DumpForm.vue";
+import FormatsForm from "./FormatsForm.vue";
 import Output from "./Output.vue";
 
 export default {
@@ -19,7 +19,7 @@ export default {
     components: {
         SourceForm,
         PaletteForm,
-        DumpForm,
+        FormatsForm,
         Output
     },
     created() {

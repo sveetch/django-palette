@@ -1,5 +1,5 @@
 <template>
-    <div class="dump-part block auto-alt" id="part-dump">
+    <div class="formats-part block auto-alt" id="part-formats">
         <div class="row">
             <div class="columns small-12">
                 <h2 class="text-center v-space-short bottom-only">3. Select formats</h2>
@@ -40,28 +40,27 @@
 
 <script>
 export default {
-    name: "dump-part",
+    name: "formats-part",
     data() {
         return {};
     },
     destroyed: function () {
         this.$store.dispatch({
-            type: "dump/resetErrors"
+            type: "formats/resetErrors"
         });
-        // TODO: Reset selections
     },
     computed: {
         global_errors: function () {
-            return this.$store.state.dump.errors["_global"];
+            return this.$store.state.formats.errors["_global"];
         },
         palette_errors: function () {
-            return this.$store.state.dump.errors["palette"];
+            return this.$store.state.formats.errors["palette"];
         },
         formats_errors: function () {
-            return this.$store.state.dump.errors["formats"];
+            return this.$store.state.formats.errors["formats"];
         },
         available_formats: function () {
-            return this.$store.state.dump.available_formats;
+            return this.$store.state.formats.available_formats;
         },
     },
     methods: {
@@ -71,7 +70,7 @@ export default {
         //
         changeChoice: function (evt, input_index) {
             this.$store.commit({
-                type: "dump/update_enabled_formats",
+                type: "formats/update_enabled_formats",
                 key: evt.target.value,
                 checked: evt.target.checked,
             });
@@ -82,7 +81,7 @@ export default {
         //
         submitForm: function () {
             this.$store.dispatch({
-                type: "dump/sendForm",
+                type: "formats/sendForm",
             });
         }
     }

@@ -86,7 +86,7 @@ class PaletteItemFormSet(forms.BaseFormSet):
     """
     def save(self, *args, **kwargs):
         return {
-            "dump_formats": DUMP_FORMATS_CHOICES,
+            "formats": DUMP_FORMATS_CHOICES,
             "palette": [f.save() for f in self.forms],
         }
 

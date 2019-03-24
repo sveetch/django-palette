@@ -10,9 +10,9 @@ const state = {
     errors: build_error_initials(ALLOWED_FIELDNAMES),
     // Palette data
     palette: {},
-    // Available dump formats
+    // Available formats
     available_formats: [],
-    // Enabled dump formats from checkboxes
+    // Enabled formats from checkboxes
     enabled_formats: []
 };
 
@@ -28,29 +28,22 @@ const actions = {
         commit({
             type: "boot_states",
             palette: payload.data.palette,
-            available_formats: payload.data.dump_formats,
+            available_formats: payload.data.formats,
         });
     },
 
-    // Reset dump form states
+    // Reset formats form states
     resetErrors ({ commit }, payload){
         commit({
             type: "reset_errors"
         });
     },
 
-    // Perform dump POST request to backend
+    // Perform formats POST request to backend
     sendForm ({ commit, dispatch }, payload){
         dispatch({
             type: "resetErrors"
         });
-
-        // Enable again current part to ensure following parts are destroyed
-        dispatch({
-            type: "enablePart",
-            name: "dump",
-            noscroll: true,
-        }, { root: true });
 
         // Post with axios instance
         this._vm.axios.post("/dump/", {
@@ -59,13 +52,13 @@ const actions = {
         })
         .then(
             response => {
-                console.log("Post request succeed from dump store");
+                console.log("Post request succeed from formats store");
                 dispatch({
                     type: "output/receive",
                     fragments: response.data.data,
                 }, { root: true });
 
-                // Enable dump part
+                // Enable formats part
                 dispatch({
                     type: "enablePart",
                     name: "output",
@@ -78,7 +71,7 @@ const actions = {
                     type: "error_logger",
                     fields: ALLOWED_FIELDNAMES,
                     errorObject: error,
-                    module: "dump"
+                    module: "formats"
                 }, { root: true });
             }
         );

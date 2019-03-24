@@ -87,14 +87,14 @@ const actions = {
 
                 // Transmit returned name proposals from given source
                 dispatch({
-                    type: "dump/receive",
+                    type: "formats/receive",
                     data: response.data.data,
                 }, { root: true });
 
-                // Enable dump part
+                // Enable formats part
                 dispatch({
                     type: "enablePart",
-                    name: "dump",
+                    name: "formats",
                 }, { root: true });
             }
         )

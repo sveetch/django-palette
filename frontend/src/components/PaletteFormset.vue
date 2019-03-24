@@ -22,14 +22,6 @@
                         </name-choice-input>
                     </div>
 
-                    <!-- <h3>Formset</h3>
-                    <pre>{{ formset }}</pre>
-                    <hr /> -->
-
-                    <!-- <h3>Payload</h3>
-                    <pre>{{ payload }}</pre>
-                    <hr /> -->
-
                     <div class="holder button-group center">
                         <button class="button important full" type="button" v-on:click="submitForm">Submit</button>
                     </div>

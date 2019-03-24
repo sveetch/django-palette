@@ -5,7 +5,7 @@ import VueScrollTo from "vue-scrollto"
 import { build_error_initials } from "../utils/forms.js"
 import source from "./modules/source"
 import palette from "./modules/palette"
-import dump from "./modules/dump"
+import formats from "./modules/formats"
 import output from "./modules/output"
 
 
@@ -19,14 +19,14 @@ export default new Vuex.Store({
     modules: {
         source,
         palette,
-        dump,
+        formats,
         output
     },
 
     // Where stored datas will live
     state: {
         // Full ordered parts path
-        available_parts: ["source", "palette", "dump", "output"],
+        available_parts: ["source", "palette", "formats", "output"],
         // Current active application parts
         opened_parts: [],
     },

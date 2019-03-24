@@ -89,7 +89,7 @@ export default {
                 let container = document.querySelector("#" + this.itemContainerId(this.activated_item.key));
                 container.classList.remove("active");
                 clearInterval(this.activated_interval_id);
-            }, 1000)
+            }, 500)
         }
     }
 };
