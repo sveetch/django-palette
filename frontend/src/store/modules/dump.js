@@ -45,6 +45,13 @@ const actions = {
             type: "resetErrors"
         });
 
+        // Enable again current part to ensure following parts are destroyed
+        dispatch({
+            type: "enablePart",
+            name: "dump",
+            noscroll: true,
+        }, { root: true });
+
         // Post with axios instance
         this._vm.axios.post("/dump/", {
             palette: state.palette,
@@ -59,9 +66,9 @@ const actions = {
                 }, { root: true });
 
                 // Enable dump part
-                commit({
-                    type: "enable_component_parts",
-                    parts: ["output"],
+                dispatch({
+                    type: "enablePart",
+                    name: "output",
                 }, { root: true });
             }
         )
@@ -86,6 +93,7 @@ const mutations = {
     boot_states (state, payload) {
         state.palette = payload.palette;
         state.available_formats = payload.available_formats;
+        state.enabled_formats = [];
     },
 
     //

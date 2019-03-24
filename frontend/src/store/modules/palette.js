@@ -66,6 +66,14 @@ const actions = {
             type: "resetErrors"
         });
 
+        // Enable again current part to ensure following parts are destroyed
+        dispatch({
+            type: "enablePart",
+            name: "palette",
+            noscroll: true,
+        }, { root: true });
+
+        // Update store state which store data to submit
         commit({
             type: "update_sended_data",
             data: payload.data,
@@ -84,9 +92,9 @@ const actions = {
                 }, { root: true });
 
                 // Enable dump part
-                commit({
-                    type: "enable_component_parts",
-                    parts: ["dump"],
+                dispatch({
+                    type: "enablePart",
+                    name: "dump",
                 }, { root: true });
             }
         )

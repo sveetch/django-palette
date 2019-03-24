@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import VueScrollTo from "vue-scrollto"
 
 import { build_error_initials } from "../utils/forms.js"
 import source from "./modules/source"
@@ -9,7 +10,6 @@ import output from "./modules/output"
 
 
 Vue.use(Vuex);
-
 
 export default new Vuex.Store({
     // Enable vuex strict mode on development
@@ -25,15 +25,13 @@ export default new Vuex.Store({
 
     // Where stored datas will live
     state: {
-        // Current active application parts, order does not matter
-        // TODO: Pretty complicated for nothing, we could instead simply use a
-        // boolean state for each part since it won't be more than three, would
-        // results in a more simple way to enable/disable parts with actions
-        // like 'gotoPart("palette")' or 'backtoPart("source")'
+        // Full ordered parts path
+        available_parts: ["source", "palette", "dump", "output"],
+        // Current active application parts
         opened_parts: [],
     },
 
-    // Alike share computed properties
+    // Shared computed properties
     getters: {
         // Return current active app parts
         getOpenedParts (state, getters) {
@@ -41,7 +39,7 @@ export default new Vuex.Store({
         }
     },
 
-    // Actions are in charge to perform job which provoke mutation
+    // Actions are in charge to perform tasks which provoke mutations
     actions: {
         //
         // Common HTTP error logger.
@@ -115,23 +113,40 @@ export default new Vuex.Store({
                 console.log("Error", errorObject.message);
             }
         },
-    },
 
-    // The only way to update store states
-    mutations: {
-        // Manage components parts
-        enable_component_parts (state, payload) {
-            for (let key in payload.parts) {
-                let part = payload.parts[key];
-                if(!state.opened_parts.includes(part)) {
-                    state.opened_parts.push(part);
-                }
+        //
+        enablePart({ commit, dispatch }, { name, noscroll }){
+            commit({
+                type: "enable_part",
+                name: name
+            });
+
+            if(!noscroll){
+                dispatch({
+                    type: "scrolltoPart",
+                    name: name,
+                });
             }
         },
-        disable_component_parts (state, payload) {
-            for (let key in payload.parts) {
-                state.opened_parts = state.opened_parts.filter(item => item !== payload.parts[key]);
-            }
+
+        // Enable parts and scroll to the last part
+        scrolltoPart (state, { name }) {
+            let target = "part-" + name;
+            // Element does not exist yet, so wait for next tick to
+            // perform scroll
+            Vue.nextTick(function () {
+                VueScrollTo.scrollTo(document.getElementById(target));
+            });
+        },
+    },
+
+    // State mutations
+    mutations: {
+        // Enable components parts
+        enable_part (state, { name }) {
+            let index = state.available_parts.lastIndexOf(name);
+            let parts = state.available_parts.slice(0, index+1);
+            state.opened_parts = parts;
         },
     }
 });

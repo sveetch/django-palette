@@ -1,5 +1,5 @@
 <template>
-    <div class="dump-part block auto-alt">
+    <div class="dump-part block auto-alt" id="part-dump">
         <div class="row">
             <div class="columns small-12">
                 <h2 class="text-center v-space-short bottom-only">3. Select formats</h2>
@@ -42,9 +42,13 @@
 export default {
     name: "dump-part",
     data() {
-        return {
-            selected_formats: [],
-        };
+        return {};
+    },
+    destroyed: function () {
+        this.$store.dispatch({
+            type: "dump/resetErrors"
+        });
+        // TODO: Reset selections
     },
     computed: {
         global_errors: function () {

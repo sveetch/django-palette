@@ -30,6 +30,13 @@ const actions = {
             type: "resetErrors"
         });
 
+        // Enable again current part to ensure following parts are destroyed
+        dispatch({
+            type: "enablePart",
+            name: "source",
+            noscroll: true,
+        }, { root: true });
+
         // Post with axios instance
         this._vm.axios.post("/source/", {
             source: payload.source
@@ -39,24 +46,23 @@ const actions = {
                 console.log("Post request succeed from store");
 
                 // Transmit returned name proposals from given source
+                // TODO: Reset Palette name choice inputs
                 dispatch({
                     type: "palette/receiveProposals",
                     data: response.data.data,
                 }, { root: true });
-
-                // Enable palette part
-                commit({
-                    type: "enable_component_parts",
-                    parts: ["palette"],
+                dispatch({
+                    type: "enablePart",
+                    name: "palette",
                 }, { root: true });
             }
         )
         .catch(
             error => {
                 // Back to source form part
-                commit({
-                    type: "disable_component_parts",
-                    parts: ["palette"],
+                dispatch({
+                    type: "enablePart",
+                    name: "source",
                 }, { root: true });
 
                 dispatch({

@@ -240,9 +240,38 @@ hr{
     .output-part{
         .fragments{
             .cell{
-                pre{
-                    height: 25rem;
-                    overflow: auto;
+                margin-top: 1rem;
+
+                &.active{
+                    .content{
+                        button{
+                            @include sv-scheme-colors($seagreen3-color-scheme);
+                        }
+                    }
+                }
+
+                .content{
+                    position: relative;
+
+                    button{
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        text-transform: uppercase;
+                        font-size: 0.6rem;
+                        font-weight: bold;
+                        border-bottom-right-radius: $extra-radius;
+                    }
+
+                    pre{
+                        padding-top: 1.6rem;
+                        height: 25rem;
+                        overflow: auto;
+                    }
+                }
+
+                textarea{
+                    display: none;
                 }
             }
         }

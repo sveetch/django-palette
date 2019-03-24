@@ -1,6 +1,6 @@
 {
   "name": "django-palette-frontend",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "django-palette frontend",
   "author": "David THENON <sveetch@gmail.com>",
   "private": true,
@@ -14,6 +14,7 @@
     "vue": "^2.5.21",
     "vue-axios": "^2.1.4",
     "vue-cookie": "^1.1.4",
+    "vue-scrollto": "^2.14.0",
     "vuex": "^3.0.1"
   },
   "devDependencies": {

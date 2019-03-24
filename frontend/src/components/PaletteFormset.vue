@@ -1,5 +1,5 @@
 <template>
-    <div class="palette-part block auto-alt">
+    <div class="palette-part block auto-alt" id="part-palette">
         <div class="row">
             <div class="columns small-12">
                 <h2 class="text-center v-space-short bottom-only">2. Name them</h2>
@@ -53,7 +53,11 @@ export default {
     data() {
         return {};
     },
-
+    destroyed: function () {
+        this.$store.dispatch({
+            type: "palette/resetErrors"
+        });
+    },
     computed: {
         global_errors: function () {
             return this.$store.state.palette.errors["_global"];

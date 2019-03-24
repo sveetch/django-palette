@@ -1,5 +1,5 @@
 <template>
-    <div class="source-part block auto-alt">
+    <div class="source-part block auto-alt" id="part-source">
         <div class="row">
             <div class="columns small-12">
                 <h2 class="text-center v-space-short bottom-only">1. Fill your colors</h2>

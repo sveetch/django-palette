@@ -23,10 +23,11 @@ export default {
         Output
     },
     created() {
-        // Allways starts with source form
-        this.$store.commit({
-            type: "enable_component_parts",
-            parts: ["source"]
+        // Allways starts on source form
+        this.$store.dispatch({
+            type: "enablePart",
+            name: "source",
+            noscroll: true,
         });
     }
 };
