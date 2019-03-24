@@ -348,5 +348,5 @@ def test_results(data, expected_palette):
 
     results = formset.save()
 
-    assert (len(results["dump_formats"]) > 0) == True
+    assert (len(results["formats"]) > 0) == True
     assert expected_palette == results["palette"]

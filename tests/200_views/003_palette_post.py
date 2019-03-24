@@ -99,6 +99,6 @@ def test_post_success(client, data, expected_palette):
 
     content_json = json.loads(response.content.decode('utf-8'))
 
-    assert (len(content_json["data"]["dump_formats"]) > 0) == True
+    assert (len(content_json["data"]["formats"]) > 0) == True
 
     assert content_json["data"]["palette"] == expected_palette

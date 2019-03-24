@@ -16,7 +16,7 @@ class ColorRegistry:
     def __init__(self):
         datas_dirpath = Path(__file__).parent / "datas"
 
-        self.map_path = datas_dirpath / "names.json"
+        self.map_path = datas_dirpath / "default.json"
 
         self.name_map = OrderedDict({})
         self.hexa_map = OrderedDict({})
