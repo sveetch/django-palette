@@ -1,3 +1,4 @@
+from django.conf import settings
 from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
@@ -18,8 +19,19 @@ class SourceForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         self.colors = {}
+        self.registries = self.get_registries()
 
         super(SourceForm, self).__init__(*args, **kwargs)
+
+    def get_registries(self, *args, **kwargs):
+        namers = []
+
+        for name, path in settings.PALETTE_AVAILABLE_REGISTRIES:
+            namer = ColorNames()
+            namer.load(path=path)
+            namers.append(namer)
+
+        return namers
 
     def store_colors(self, store, palette):
         """
@@ -28,7 +40,7 @@ class SourceForm(forms.Form):
         It should be almost ready to store multiple color name suggestions
         from different registry.
         """
-        for k,v in palette.items():
+        for k, v in palette.items():
             if k not in store:
                 store[k] = []
             store[k].append(v)
@@ -67,16 +79,10 @@ class SourceForm(forms.Form):
                     code='invalid',
                 )
 
-            ## TODO: Temporary for debug, will remove old algo
-            ## New API with old algorith
-            #old_namer = ColorNames(enable_modifier=False, avoid_twice=False)
-            #old_namer.load()
-            # New API with new algorith
-            namer = ColorNames()
-            namer.load()
-            # Update color store from registry
-            #self.colors = self.store_colors(self.colors, old_namer.batch(colors))
-            self.colors = self.store_colors(self.colors, namer.batch(colors))
+            # Update color store from registries
+            for namer_registry in self.registries:
+                self.colors = self.store_colors(self.colors,
+                                                namer_registry.batch(colors))
 
         return source
 

@@ -1,14 +1,9 @@
 # -*- coding: utf-8 -*-
-import json
-import os
-import re
-from collections import OrderedDict
-from pathlib import Path
 from string import ascii_lowercase, digits
 
 from colour import Color
 
-from django_palette.colors import toColourRGB, toCssRGB
+from django_palette.colors import toCssRGB
 from django_palette.colors.registry import ColorRegistry
 from django_palette.colors.dumper import ColorDump
 
@@ -64,8 +59,8 @@ class ColorNames(ColorDump, ColorRegistry):
     """
     def __init__(self, *args, **kwargs):
         self.enable_modifier = kwargs.pop("enable_modifier", True)
-        self.grey_bonus = kwargs.pop("grey_bonus", 30000) # Around 15%
-        self.grey_malus = kwargs.pop("grey_malus", 15000) # Around 7.5%
+        self.grey_bonus = kwargs.pop("grey_bonus", 30000)  # Around 15%
+        self.grey_malus = kwargs.pop("grey_malus", 15000)  # Around 7.5%
         self.avoid_twice = kwargs.pop("avoid_twice", True)
 
         super().__init__(*args, **kwargs)
@@ -135,8 +130,8 @@ class ColorNames(ColorDump, ColorRegistry):
 
         # Compute RGB values difference between searched and confronted
         diff = (abs(searched_red - r) * 256) + \
-                (abs(searched_green - g) * 256) + \
-                (abs(searched_blue - b) * 256)
+               (abs(searched_green - g) * 256) + \
+               (abs(searched_blue - b) * 256)
 
         bonus = False
         malus = False
@@ -262,7 +257,6 @@ class ColorNames(ColorDump, ColorRegistry):
             if exact_match:
                 self.store_used_color(*exact_match)
                 matchs[code] = exact_match
-                #continue
 
         # Then nearest match for every other values
         for code in hexas:

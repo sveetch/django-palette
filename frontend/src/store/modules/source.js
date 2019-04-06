@@ -9,7 +9,9 @@ const state = {
     // Form errors
     errors: build_error_initials(ALLOWED_FIELDNAMES),
     // Extracted colors from posted source
-    colors: {}
+    colors: {},
+    // Flag to indicate if form is working on submited data or not
+    working: false,
 };
 
 
@@ -26,6 +28,9 @@ const actions = {
 
     // Perform source POST request to backend
     sendForm ({ commit, dispatch }, payload){
+        commit({
+            type: "disable_submit"
+        });
         dispatch({
             type: "resetErrors"
         });
@@ -44,6 +49,9 @@ const actions = {
         .then(
             response => {
                 console.log("Post request succeed from store");
+                commit({
+                    type: "enable_submit"
+                });
 
                 // Transmit returned name proposals from given source
                 // TODO: Reset Palette name choice inputs
@@ -59,6 +67,9 @@ const actions = {
         )
         .catch(
             error => {
+                commit({
+                    type: "enable_submit"
+                });
                 // Back to source form part
                 dispatch({
                     type: "enablePart",
@@ -98,7 +109,16 @@ const mutations = {
                 }
             }
         }
-    }
+    },
+
+    // Manage form availability
+    enable_submit (state, payload) {
+        state.working = false;
+    },
+    disable_submit (state, payload) {
+        state.working = true;
+    },
+
 };
 
 

@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.template import RequestContext, loader
+from django.template import loader
 
 
 def build_dump(key, data, opts=None, extra_context={}):

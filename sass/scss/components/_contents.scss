@@ -102,6 +102,17 @@ hr{
                         min-height: 20vh;
                     }
                 }
+                // Put spinner just before first button instead of horizontal
+                // center
+                &.button-group{
+                    &.disabled{
+                        button:first-child{
+                            &::after {
+                                @include circle-spinner($position-left: -3rem);
+                            }
+                        }
+                    }
+                }
             }
         }
     }

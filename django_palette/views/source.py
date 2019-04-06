@@ -13,11 +13,6 @@ class IndexView(TemplateView):
     """
     template_name = "django_palette/index.html"
 
-    #def get_context_data(self, **kwargs):
-        #context = super().get_context_data(**kwargs)
-        #context["form"] = SourceForm()
-        #return context
-
 
 class SourceFormView(JsonFormPost, FormMixin, View):
     """

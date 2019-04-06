@@ -15,5 +15,5 @@ PALETTEITEM_BASE_CHOICES = [
 
 # Enabled dump format choices
 DUMP_FORMATS_CHOICES = [
-    (k, v["name"]) for k,v in settings.PALETTE_DUMP_FORMATS.items()
+    (k, v["name"]) for k, v in settings.PALETTE_DUMP_FORMATS.items()
 ]

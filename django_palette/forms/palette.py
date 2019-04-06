@@ -1,14 +1,12 @@
-import json
 import re
 
 from django import forms
 from django.core.exceptions import ValidationError
-from django.forms import formset_factory, BaseFormSet
 from django.utils.translation import ugettext_lazy as _
 
 from django_palette.colors.naming import validate_name
 
-from ..choices import PALETTEITEM_BASE_CHOICES, DUMP_FORMATS_CHOICES
+from ..choices import DUMP_FORMATS_CHOICES
 
 HEXADECIMAL_REGEX = re.compile(r"^#(?:[0-9a-fA-F]{3}){1,2}$")
 

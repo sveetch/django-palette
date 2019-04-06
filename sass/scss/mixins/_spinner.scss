@@ -1,0 +1,44 @@
+///
+/// Pure simple CSS spinner which produce a bold circle turning around
+///
+/// Require to be used inside a pseudo selector 'before' or 'event' and container
+/// defines "position: relative"
+///
+/// Preset position behavior is to center horizontaly and verticaly, be aware
+/// that once you give another value for 'size', 'position-top' or
+/// 'position-left' you need to perform center calculation yourself
+/// 'position-top' and 'position-left'.
+///
+@keyframes circle_spinner_keyframes {
+  to {transform: rotate(360deg);}
+}
+
+@mixin circle-spinner(
+    $size: 2rem,
+    $thickness: 2px,
+    $active-color: #333,
+    $unactive-color: #ccc,
+    $position-top: calc(50% - 1rem),
+    $position-left: calc(50% - 1rem),
+    $position-right: null,
+    $position-bottom: null,
+    $margin: null,
+    $time: .6s,
+) {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    cursor: default;
+    width: $size;
+    height: $size;
+    margin: $margin;
+    border-radius: 50%;
+    border: $thickness solid $unactive-color;
+    border-top-color: $active-color;
+    animation: circle_spinner_keyframes $time linear infinite;
+
+    top: $position-top;
+    left: $position-left;
+    right: $position-right;
+    bottom: $position-bottom;
+};

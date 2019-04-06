@@ -1,3 +1,4 @@
+import os
 from collections import OrderedDict
 
 from django.utils.translation import ugettext_lazy as _
@@ -29,3 +30,25 @@ PALETTE_DUMP_FORMATS = OrderedDict([
         "template": "django_palette/dumps/php.txt",
     }),
 ])
+
+
+# Available registries, order does matter
+PALETTE_AVAILABLE_REGISTRIES = [
+    # Legacy one, Based on CSS color name standard. Have a clean grey
+    # names structure.
+    ("Web names", os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                               "colors/datas", "default.json")),
+
+    # A very large palette (~4160) with great variety
+    # Disabled because involves longer time
+    # ("Dulux", os.path.join(os.path.dirname(os.path.abspath(__file__)),
+    #                        "colors/datas", "dulux.json")),
+
+    # Short (~120 names) but bring some new vocabulary, lacks of greys
+    ("Crayola", os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                             "colors/datas", "crayola.json")),
+
+    # A big palette (~950)
+    ("Xkcd", os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                          "colors/datas", "xkcd.json")),
+]

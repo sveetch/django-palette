@@ -1,6 +1,8 @@
 import pytest
 import json
+import os
 
+import django_palette
 from django_palette.forms.source import SourceForm
 
 
@@ -89,32 +91,56 @@ def test_error_message(data, expected):
     (
         {"source": "#F0F0F0"},
         {
-            "#f0f0f0": [("gray94", "#f0f0f0")],
+            "#f0f0f0": [
+                ("grey94", "#f0f0f0"),
+                ('white', '#ffffff')
+            ],
         },
     ),
     # multiple color values
     (
         {"source": "#F0F0F0\n#FF0000\n#000000"},
         {
-            "#f0f0f0": [("gray94", "#f0f0f0")],
-            "#ff0000": [("red1", "#ff0000")],
-            "#000000": [("black", "#000000")],
+            "#f0f0f0": [
+                ("grey94", "#f0f0f0"),
+                ('white', '#ffffff')
+            ],
+            "#ff0000": [
+                ('red1', '#ff0000'),
+                ('scarlet', '#fc2847')
+            ],
+            "#000000": [
+                ('black', '#000000'),
+                ('black', '#000000')
+            ],
         },
     ),
     # multiple color values with duplications
     (
         {"source": "#F0F0F0\n#FF0000\n#F0F0F0\n#FF0000\n#000000"},
         {
-            "#f0f0f0": [("gray94", "#f0f0f0")],
-            "#ff0000": [("red1", "#ff0000")],
-            "#000000": [("black", "#000000")]
+            "#f0f0f0": [
+                ("grey94", "#f0f0f0"),
+                ('white', '#ffffff')
+            ],
+            "#ff0000": [
+                ('red1', '#ff0000'),
+                ('scarlet', '#fc2847')
+            ],
+            "#000000": [
+                ('black', '#000000'),
+                ('black', '#000000')
+            ]
         },
     ),
 ])
-def test_results(data, expected):
+def test_results(testsettings, settings, data, expected):
     """
     test returned success results
     """
+    # Mock available registries for a lighter list
+    settings.PALETTE_AVAILABLE_REGISTRIES = testsettings.available_registries
+
     f = SourceForm(data)
     f.is_valid()
 

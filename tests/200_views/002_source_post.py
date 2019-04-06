@@ -60,16 +60,28 @@ def test_post_error(client, data, expected):
     (
         {"source": "#F0F0F0\n#FF0000\n#F0F0F0\n#FF0000\n#000000"},
         {
-            "#f0f0f0": [["gray94", "#f0f0f0"]],
-            "#000000": [["black", "#000000"]],
-            "#ff0000": [["red1", "#ff0000"]],
+            "#f0f0f0": [
+                ["grey94", "#f0f0f0"],
+                ['white', '#ffffff']
+            ],
+            "#ff0000": [
+                ['red1', '#ff0000'],
+                ['scarlet', '#fc2847']
+            ],
+            "#000000": [
+                ['black', '#000000'],
+                ['black', '#000000']
+            ]
         },
     ),
 ])
-def test_post_success(client, data, expected):
+def test_post_success(testsettings, settings, client, data, expected):
     """
     On success, source post view should return JSON with computed named colors
     """
+    # Mock available registries for a lighter list
+    settings.PALETTE_AVAILABLE_REGISTRIES = testsettings.available_registries
+
     url = reverse("django_palette:source-post")
 
     response = client.post(

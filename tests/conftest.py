@@ -29,6 +29,16 @@ class FixturesSettingsTestMixin(object):
         self.colors_dir = 'colors'
         self.colors_path = os.path.join(self.fixtures_path, self.colors_dir)
 
+        # Ligther list for available registries
+        self.available_registries = [
+            ("Web names", os.path.join(
+                os.path.dirname(os.path.abspath(django_palette.__file__)
+            ), "colors/datas", "default.json")),
+            ("Crayola", os.path.join(
+                os.path.dirname(os.path.abspath(django_palette.__file__)
+            ), "colors/datas", "crayola.json")),
+        ]
+
 
 @pytest.fixture(scope="module")
 def testsettings():

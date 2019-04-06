@@ -155,7 +155,7 @@
 
     #assert json.loads(result.output) == json.loads("""{
     #"#fafafa": [
-        #"gray98",
+        #"grey98",
         #"#fafafa"
     #],
     #"#8461a1": [
@@ -183,11 +183,11 @@
         #"#bdb76b"
     #],
     #"#222": [
-        #"gray13",
+        #"grey13",
         #"#212121"
     #],
     #"#6676a2": [
-        #"slategray4",
+        #"slategrey4",
         #"#6c7b8b"
     #],
     #"#00ff00": [

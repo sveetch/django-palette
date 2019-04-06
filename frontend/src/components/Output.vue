@@ -47,18 +47,6 @@ export default {
 
         //
         // Copy output content to clipboard
-        // TODO: Output format are not reseted
-        //
-        // Reproducing:
-        //
-        // * Go to "3. Select formats" step;
-        // * Dont select any entry
-        // * Error is raised on this step;
-        // * Go back to step 1, reset, submit;
-        // * Step 2 and 3 are hided;
-        // * Error is raised on step 1;
-        // * Fill correctly step1 and proceed to reach again step 3;
-        // * Previous error is still here;
         //
         copyText (evt, item) {
             // Create temporary hided textarea element to contain content

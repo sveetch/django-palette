@@ -19,9 +19,9 @@
                         </p>
                     </div>
 
-                    <div class="holder button-group right">
-                        <button class="button important hollow alert" type="button" v-on:click="resetForm">Reset</button>
-                        <button class="button important" type="button" v-on:click="submitForm">Submit</button>
+                    <div class="holder button-group right" v-bind:class="working_state_class">
+                        <button class="button important hollow alert" type="button" v-on:click="resetForm" :disabled="submit_disabled">Reset</button>
+                        <button class="button important" type="button" v-on:click="submitForm" :disabled="submit_disabled">Submit</button>
                     </div>
                 </form>
             </div>
@@ -45,6 +45,12 @@ export default {
         },
         source_errors: function () {
             return this.$store.state.source.errors["source"];
+        },
+        working_state_class: function () {
+            return (this.$store.state.source.working) ? "disabled" : "available";
+        },
+        submit_disabled: function () {
+            return this.$store.state.source.working;
         },
     },
     methods: {

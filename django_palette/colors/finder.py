@@ -2,7 +2,6 @@
 """
 Find color values from sources
 """
-import os
 import re
 
 from pathlib import Path

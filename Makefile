@@ -101,7 +101,7 @@ run:
 .PHONY: run
 
 flake:
-	$(FLAKE) --show-source djangocodemirror
+	$(FLAKE) --show-source django_palette
 .PHONY: flake
 
 tests:

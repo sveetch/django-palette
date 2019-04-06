@@ -10,11 +10,11 @@ from django_palette.colors.naming import ColorNames
 
 # Lightweight registry for tests
 DUMMY_REGISTRY = [
-    ("gray83", "#d4d4d4"),
-    ("gray25", "#404040"),
-    ("gray22", "#383838"),
-    ("gray13", "#212121"),
-    ("gray14", "#242424"),
+    ("grey83", "#d4d4d4"),
+    ("grey25", "#404040"),
+    ("grey22", "#383838"),
+    ("grey13", "#212121"),
+    ("grey14", "#242424"),
     ("white", "#ffffff"),
     ("red1", "#ff0000"),
     ("red2", "#ee0000"),
@@ -71,7 +71,7 @@ def test_is_grey(rgb, expected):
     ),
     (
         "#404040",
-        ("gray25", "#404040"),
+        ("grey25", "#404040"),
     ),
     (
         "#404041",
@@ -116,8 +116,8 @@ def test_job_exact_match(hexa, expected):
     (
         [
             ("red1", "#ff0000"),
-            ("gray22", "#383838"),
-            ("gray13", "#212121"),
+            ("grey22", "#383838"),
+            ("grey13", "#212121"),
         ],
         ("white", "#ffffff"),
         1,
@@ -144,17 +144,17 @@ def test_store_used_color(pasts, current, expected):
         [],
         ("white", "#ffffff"),
     ),
-    # gray94 near white
+    # grey94 near white
     (
         "#f0f0f0",
         [],
         ("white", "#ffffff"),
     ),
-    # cyan near gray14
+    # cyan near grey14
     (
         "#0e242b",
         [],
-        ("gray14", "#242424"),
+        ("grey14", "#242424"),
     ),
     # lemon green near yellowgreen
     (
@@ -168,13 +168,13 @@ def test_store_used_color(pasts, current, expected):
         [],
         ("brown3", "#cd3333"),
     ),
-    # gray94 near white, but white is ignored
+    # grey94 near white, but white is ignored
     (
         "#f0f0f0",
         ["#ffffff"],
-        ("gray83", "#d4d4d4"),
+        ("grey83", "#d4d4d4"),
     ),
-    # gray94 near white, but white and gray83 are ignored
+    # grey94 near white, but white and grey83 are ignored
     (
         "#f0f0f0",
         ["#ffffff", "#d4d4d4"],
@@ -222,29 +222,29 @@ def test_job_nearest_match(hexa, ignored, expected):
     (
         [
             ("red1", "#ff0000"),
-            ("gray13", "#212121"),
+            ("grey13", "#212121"),
         ],
         "#393939",
-        ("gray22", "#383838"),
+        ("grey22", "#383838"),
     ),
-    # Would expect for gray22 but it has allready been used, so fallback to
-    # gray25
+    # Would expect for grey22 but it has allready been used, so fallback to
+    # grey25
     (
         [
             ("red1", "#ff0000"),
-            ("gray22", "#383838"),
-            ("gray13", "#212121"),
+            ("grey22", "#383838"),
+            ("grey13", "#212121"),
         ],
         "#393939",
-        ("gray25", "#404040"),
+        ("grey25", "#404040"),
     ),
     # Very nearest color is red1 but has allready be used, so fallback to
     # red2
     (
         [
             ("red1", "#ff0000"),
-            ("gray22", "#383838"),
-            ("gray13", "#212121"),
+            ("grey22", "#383838"),
+            ("grey13", "#212121"),
         ],
         "#ff0001",
         ("red2", "#ee0000"),
@@ -289,7 +289,7 @@ def test_find_basic(pasts, current, expected):
     ),
     (
         "#505050",
-        ("gray31", "#4f4f4f"),
+        ("grey31", "#4f4f4f"),
     ),
     (
         "#40b59b",
@@ -336,9 +336,9 @@ def test_find_accuracy(color, expected):
     (
         ["#013b61", "#191970", "#17436a"],
         {
-            "#013b61": ("gray22", "#383838"),
+            "#013b61": ("grey22", "#383838"),
             "#191970": ("midnightblue", "#191970"),
-            "#17436a": ("gray25", "#404040"),
+            "#17436a": ("grey25", "#404040"),
         }
     ),
 ])
@@ -370,13 +370,13 @@ def test_batch_names_basic(colors, expected):
         {
             "#000000": ("black", "#000000"),
             "#ffffff": ("white", "#ffffff"),
-            "#404040": ("gray25", "#404040"),
-            "#fefefe": ("gray99", "#fcfcfc"),
+            "#404040": ("grey25", "#404040"),
+            "#fefefe": ("grey99", "#fcfcfc"),
             "#022e4b": ("midnightblue", "#191970"),
             "#0a507c": ("dodgerblue4", "#104e8b"),
             "#1689b9": ("dodgerblue3", "#1874cd"),
             "#edf8ff": ("aliceblue", "#f0f8ff"),
-            "#38393d": ("darkslategray", "#2f4f4f"),
+            "#38393d": ("darkslategrey", "#2f4f4f"),
             "#b5b8c4": ("lightcyan3", "#b4cdcd"),
             "#f3f5fb": ("mintcream", "#f5fffa"),
         }
@@ -397,7 +397,7 @@ def test_batch_names_basic(colors, expected):
             "#59758d": ("lightskyblue4", "#607b8b"),
             "#7db828": ("yellowgreen", "#9acd32"),
             "#cb432b": ("brown3", "#cd3333"),
-            "#e0e0e0": ("gray88", "#e0e0e0"),
+            "#e0e0e0": ("grey88", "#e0e0e0"),
             "#ecebe9": ("snow2", "#eee9e9"),
         }
     ),

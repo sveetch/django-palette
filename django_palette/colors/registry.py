@@ -14,9 +14,9 @@ class ColorRegistry:
     given to ``load`` method.
     """
     def __init__(self):
-        datas_dirpath = Path(__file__).parent / "datas"
+        self.basedir = Path(__file__).parent / "datas"
 
-        self.map_path = datas_dirpath / "default.json"
+        self.map_path = self.basedir / "default.json"
 
         self.name_map = OrderedDict({})
         self.hexa_map = OrderedDict({})
@@ -29,7 +29,7 @@ class ColorRegistry:
             names (iterable): Optional names to use directly instead to open a
                 map file.
             path (pathlib.Path): Optional path object to open instead of
-                default of from ``ColorRegistry.map_path``.
+                default one from ``ColorRegistry.map_path``.
         """
         if names is None:
             names = self.get_registry_file(path or self.map_path)
@@ -65,6 +65,6 @@ class ColorRegistry:
         """
         name_map = names
         # Reverse keys/values so map is indexed on hexa
-        hexa_map = list(zip([v for k,v in names], [k for k,v in names]))
+        hexa_map = list(zip([v for k, v in names], [k for k, v in names]))
 
         return OrderedDict(name_map), OrderedDict(hexa_map)
