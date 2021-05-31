@@ -130,7 +130,11 @@
 /// @arg {String} $prefix [null]
 ///   If not null will prefix the property names to search.
 ///
-@mixin sv-button-colors($scheme, $apply-border: false, $prefix: null) {
+/// @arg {Bool} $include-hover [false]
+///   If set to `true`, border properties for prefix "hover" will be 
+///   automatically added.
+///
+@mixin sv-button-colors($scheme, $apply-border: false, $prefix: null, $include-hover: false) {
     $props-prefix: "";
 
     @if $prefix{
@@ -149,7 +153,13 @@
     }
 
     @if $apply-border{
-        @include sv-apply-border($scheme);
+        @include sv-apply-border($scheme, $prefix: $prefix);
+    }
+
+    @if $include-hover{
+        &:hover{
+            @include sv-button-colors($scheme, $apply-border: $apply-border, $prefix: "hover");
+        }
     }
 }
 

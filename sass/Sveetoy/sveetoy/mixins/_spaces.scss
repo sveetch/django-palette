@@ -63,7 +63,7 @@
             @error "Given space definition must contain at least the '#{$default}' key";
         }
 
-        // Default size comes from 'small'
+        // Default size name comes from '$default' value
         @if index($sides, "start"){
             #{$prop}-#{$space-start}: map-get($definitions, $default) $important-mark;
         }

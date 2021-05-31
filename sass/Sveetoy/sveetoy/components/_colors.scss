@@ -37,7 +37,7 @@ $sv-color-background-palette: $sv-colors-schemes !default;
         $hover-background: map-get($scheme, "hover-background");
 
         @if $background{
-            &.bg-#{$name}{
+            .bg-#{$name}{
                 background: $background !important;
 
                 @if $hover-background{
