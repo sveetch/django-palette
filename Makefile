@@ -13,16 +13,19 @@ help:
 	@echo
 	@echo "  install             -- to install this project with virtualenv and Pip with everything for development"
 	@echo "  create-var-dirs     -- to create required directory structures for non commited files to build (css/db/etc..)"
-	@echo ""
+	@echo
 	@echo "  clean               -- to clean EVERYTHING (Warning)"
 	@echo "  clean-pycache       -- to remove all __pycache__, this is recursive from current directory"
 	@echo "  clean-install       -- to clean Python side installation"
 	@echo "  clean-frontend      -- to clean Frontend side installation"
 	@echo "  clean-data          -- to clean data (uploaded medias, database, etc..)"
-	@echo ""
+	@echo
 	@echo "  frontend            -- to build frontend into app static dir"
 	@echo "  watch-frontend      -- to launch webpack in watch mode to rebuild frontend on each change"
-	@echo ""
+	@echo
+	@echo "  css                  -- to build CSS with Boussole from Sass sources"
+	@echo "  watch-sass           -- to launch Boussole watch mode to rebuild CSS from Sass sources"
+	@echo
 	@echo "  run                 -- to run Django development server"
 	@echo "  migrate             -- to apply demo database migrations"
 	@echo "  superuser           -- to create a superuser for Django admin"
@@ -44,7 +47,7 @@ clean-frontend:
 .PHONY: clean-frontend
 
 clean-data:
-	rm -Rf data
+	rm -Rf var
 .PHONY: clean-data
 
 clean: clean-install clean-frontend clean-pycache clean-data
@@ -58,8 +61,8 @@ venv:
 .PHONY: venv
 
 create-var-dirs:
-	@mkdir -p data/db
-	@mkdir -p data/static/css
+	@mkdir -p var/db
+	@mkdir -p var/static/css
 	@mkdir -p sandbox/static/css
 .PHONY: create-var-dirs
 
@@ -79,9 +82,14 @@ install: venv create-var-dirs
 	${MAKE} migrate
 .PHONY: install
 
-sass:
+production:
+	@mkdir -p etc
+	$(PIP) install gunicorn==20.1.0 setproctitle==1.2.2
+.PHONY: production
+
+css:
 	$(BOUSSOLE) compile --config boussole.json
-.PHONY: sass
+.PHONY: css
 
 watch-sass:
 	$(BOUSSOLE) watch --config boussole.json

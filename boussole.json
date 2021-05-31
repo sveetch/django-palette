@@ -1,7 +1,7 @@
 {
     "SOURCES_PATH": "sass/scss",
     "LIBRARY_PATHS": [
-        "sass/foundation6",
+        "sass/foundation",
         "sass/Sveetoy"
     ],
     "TARGET_PATH": "sandbox/static/css",

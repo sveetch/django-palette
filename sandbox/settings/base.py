@@ -10,7 +10,7 @@ BASE_DIR = os.path.join(
     os.path.dirname(os.path.abspath(__file__)),
     "..",
 )
-DATA_DIR = os.path.join(BASE_DIR, "..", "data")
+VAR_DIR = os.path.join(BASE_DIR, "..", "var")
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -68,7 +68,7 @@ DATABASES = {
     # Development default database engine use sqlite3
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(DATA_DIR, 'db', 'db.sqlite3'),
+        'NAME': os.path.join(VAR_DIR, 'db', 'db.sqlite3'),
     }
 }
 MIGRATION_MODULES = {}
@@ -118,7 +118,7 @@ MIDDLEWARE = add_to_tuple(MIDDLEWARE,
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
-MEDIA_ROOT = os.path.join(DATA_DIR, "media")
+MEDIA_ROOT = os.path.join(VAR_DIR, "media")
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -127,7 +127,7 @@ MEDIA_URL = '/media/'
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
-STATIC_ROOT = os.path.join(DATA_DIR, "static")
+STATIC_ROOT = os.path.join(VAR_DIR, "static")
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 
