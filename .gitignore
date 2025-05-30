@@ -16,8 +16,11 @@ __pycache__/
 *.py[cod]
 
 # Site media and builded statics
-/data/
+/var/
 /sandbox/static
+
+# Production stuff
+/run/
 
 # Settings
 local.py

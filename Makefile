@@ -83,8 +83,10 @@ install: venv create-var-dirs
 .PHONY: install
 
 production:
-	@mkdir -p etc
-	$(PIP) install gunicorn==20.1.0 setproctitle==1.2.2
+	$(PIP) install -r deployment/production_requirements.txt
+	@mkdir -p run
+	@mkdir -p var/logs
+	$(DJANGO_MANAGE) collectstatic
 .PHONY: production
 
 css:
