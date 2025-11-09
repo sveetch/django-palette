@@ -3,7 +3,7 @@ A Django app to create a palette of named colors from given source.
 Requires
 ********
 
-* Python >= 3.4;
+* Python == 3.8;
 * Django>=2.0,<2.1;
 * colour==0.1.5;
 * whitenoise>=4.0,<5.0 (for sandbox);
